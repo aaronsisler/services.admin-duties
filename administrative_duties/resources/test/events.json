@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Monday event 1",
+    "day_of_week": 1,
+    "organizer": "Tami Richards"
+  },
+  {
+    "name": "Monday event 2",
+    "day_of_week": 1,
+    "organizer": "Janet Jetson"
+  },
+  {
+    "name": "Tuesday event 1",
+    "day_of_week": 2,
+    "organizer": "Tami Richards"
+  }
+]
