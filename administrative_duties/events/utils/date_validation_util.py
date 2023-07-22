@@ -7,7 +7,6 @@ logger = logging.getLogger()
 
 def validate_year(year):
     is_valid_year_type: bool = (isinstance(year, int))
-    logger.info(is_valid_year_type)
 
     if not is_valid_year_type:
         logger.error("Input year is not valid: %s", year)
@@ -27,7 +26,6 @@ def validate_year(year):
 
 def validate_month(month):
     is_valid_month_type: bool = (isinstance(month, int))
-    logger.info(is_valid_month_type)
 
     if not is_valid_month_type:
         logger.error("Input month is not valid: %s", month)
