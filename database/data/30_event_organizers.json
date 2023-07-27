@@ -1,0 +1,16 @@
+[
+  {
+    "client_id": { "S": "body-kinect-wellness" },
+    "organizer_id": { "S": "tami-richards" },
+    "name": { "S": "Tami Richards" },
+    "create_date": { "S": "2023-07-26" },
+    "last_updated_date": { "S": "2023-07-26" }
+  },
+  {
+    "client_id": { "S": "body-kinect-wellness" },
+    "organizer_id": { "S": "jane-jetson" },
+    "name": { "S": "Jane Jetson" },
+    "create_date": { "S": "2023-07-26" },
+    "last_updated_date": { "S": "2023-07-26" }
+  }
+]

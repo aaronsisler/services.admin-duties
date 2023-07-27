@@ -17,6 +17,7 @@ services:
     entrypoint: /bin/sh -c
     volumes:
       - "./init-scripts:/init-scripts"
+      - "./data:/data"
     command: >
       '
        for script_name in /init-scripts/*.sh; do
