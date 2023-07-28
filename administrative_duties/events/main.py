@@ -4,7 +4,7 @@ from datetime import timedelta
 
 from administrative_duties.events.utils import csv_generator
 from administrative_duties.events.utils.csv_data_factory import CsvDataFactory
-from dao.events_dao import EventsDao
+from daos.events_dao import EventsDao
 from models.calendar_event import CalendarEvent
 from utils import date_factory_util, date_validation_util
 
@@ -51,7 +51,7 @@ for date in dates:
             calendar_event.start_date = date.strftime("%Y-%m-%d")
             calendar_event.end_date = date.strftime("%Y-%m-%d")
             calendar_event.event = event
-            
+
             calendar_event.venue_name = "Body Kinect"
             calendar_events.append(calendar_event)
 

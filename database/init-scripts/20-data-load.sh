@@ -10,12 +10,10 @@ aws dynamodb batch-write-item \
   --endpoint-url=http://dynamo-db-local:8000 \
   --request-items file:///data/20_locations.json
 
-# aws dynamodb batch-write-item \
-#   --endpoint-url=http://dynamo-db-local:8000 \
-#   --table-name EVENT_ORGANIZER \
-#   --request-items file:///data/30_event_organizers.json
+aws dynamodb batch-write-item \
+  --endpoint-url=http://dynamo-db-local:8000 \
+  --request-items file:///data/30_event_organizers.json
 
-# aws dynamodb batch-write-item \
-#   --endpoint-url=http://dynamo-db-local:8000 \
-#   --table-name EVENT \
-#   --request-items file:///data/40_events.json
+aws dynamodb batch-write-item \
+  --endpoint-url=http://dynamo-db-local:8000 \
+  --request-items file:///data/40_events.json

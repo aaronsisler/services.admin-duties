@@ -1,7 +1,12 @@
-class EventOrganizer:
-    client_id: str
-    organizer_id: str
+class EventDto:
+    name: str
     organizer_name: str
+    category: str
+    description: str
+    day_of_week: int
+    start_time: str
+    duration_time: str
+    end_time: str
 
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)

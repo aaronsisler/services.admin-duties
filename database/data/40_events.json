@@ -1,12 +1,52 @@
-[
-  {
-    "client_id": { "S": "body-kinect-wellness" },
-    "event_id": { "S": "body-kinect-wellness-center" },
-    "name": { "S": "Monday Event 1" },
-    "organizer_id": { "S": "" },
-    "category": { "S": "Category: Yoga" },
-    "description": { "S": "I am the Monday Event 1 description" },
-    "create_date": { "S": "2023-07-26" },
-    "last_updated_date": { "S": "2023-07-26" }
-  }
-]
+{
+  "EVENT": [
+    {
+      "PutRequest": {
+        "Item": {
+          "client_id": { "S": "body-kinect-wellness" },
+          "event_id": { "S": "event-monday-1" },
+          "name": { "S": "Monday Event 1" },
+          "category": { "S": "Category: Yoga" },
+          "description": { "S": "I am the Monday Event 1 description" },
+          "day_of_week": { "N": "1" },
+          "start_time": { "S": "14:00" },
+          "duration_time": { "N": "60" },
+          "create_date": { "S": "2023-07-26" },
+          "last_updated_date": { "S": "2023-07-26" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "client_id": { "S": "body-kinect-wellness" },
+          "event_id": { "S": "event-monday-2" },
+          "name": { "S": "Monday Event 2" },
+          "category": { "S": "Category: Yoga" },
+          "description": { "S": "I am the Monday Event 2 description" },
+          "day_of_week": { "N": "1" },
+          "start_time": { "S": "14:30" },
+          "duration_time": { "N": "45" },
+          "create_date": { "S": "2023-07-26" },
+          "last_updated_date": { "S": "2023-07-26" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "client_id": { "S": "body-kinect-wellness" },
+          "event_id": { "S": "event-tuesday-2" },
+          "name": { "S": "Tuesday Event 1" },
+          "category": { "S": "Category: Yoga" },
+          "description": { "S": "I am the Tuesday Event 1 description" },
+          "day_of_week": { "N": "2" },
+          "start_time": { "S": "13:00" },
+          "duration_time": { "N": "30" },
+          "create_date": { "S": "2023-07-26" },
+          "last_updated_date": { "S": "2023-07-26" }
+        }
+      }
+    }
+  ]
+}
