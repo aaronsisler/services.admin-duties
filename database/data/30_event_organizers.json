@@ -12,11 +12,11 @@
           "name": {
             "S": "Tami Richards"
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -33,11 +33,11 @@
           "name": {
             "S": "Ryin Santana"
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -54,11 +54,11 @@
           "name": {
             "S": "Hope Ashby"
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -75,11 +75,11 @@
           "name": {
             "S": "Toni Midgett"
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -96,11 +96,11 @@
           "name": {
             "S": "Terri"
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -117,11 +117,11 @@
           "name": {
             "S": "Guest Instructor"
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }

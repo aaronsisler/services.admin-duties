@@ -27,11 +27,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -63,11 +63,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -99,11 +99,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -135,11 +135,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -171,11 +171,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -207,11 +207,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -243,11 +243,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -279,11 +279,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -315,11 +315,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }
@@ -351,11 +351,11 @@
           "duration_time": {
             "N": 60
           },
-          "create_date": {
-            "S": "2023-07-26"
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_date": {
-            "S": "2023-07-26"
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
           }
         }
       }

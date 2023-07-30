@@ -3,11 +3,21 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": { "S": "body-kinect-wellness" },
-          "location_id": { "S": "body-kinect-wellness-center" },
-          "name": { "S": "Body Kinect Wellness Center" },
-          "create_date": { "S": "2023-07-26" },
-          "last_updated_date": { "S": "2023-07-26" }
+          "client_id": {
+            "S": "body-kinect-wellness"
+          },
+          "location_id": {
+            "S": "body-kinect-wellness-center"
+          },
+          "name": {
+            "S": "Body Kinect Wellness Center"
+          },
+          "create_datetime": {
+            "S": "2023-07-26, 07:31:21"
+          },
+          "last_updated_datetime": {
+            "S": "2023-07-26, 07:31:21"
+          }
         }
       }
     }
