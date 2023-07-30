@@ -11,8 +11,8 @@ class OrchestrationService:
 
 # Workflow
 # Validate the inputs
-# Year
-# Month
+# DONE Year
+# DONE Month
 # ClientId exists
 # Fetch all active events
 # Fetch valid workshops for given year and month
