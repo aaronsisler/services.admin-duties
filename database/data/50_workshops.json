@@ -1,0 +1,43 @@
+{
+  "WORKSHOP": [
+    {
+      "PutRequest": {
+        "Item": {
+          "client_id": {
+            "S": "body-kinect-wellness"
+          },
+          "event_id": {
+            "S": "restorative-journey-workshop"
+          },
+          "name": {
+            "S": "Restorative Journey Workshop"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": ""
+          },
+          "workshop_date": {
+            "S": "20230817"
+          },
+          "start_time": {
+            "S": "11:00"
+          },
+          "duration_time": {
+            "N": 90
+          },
+          "cost": {
+            "N": 20
+          },
+          "create_date": {
+            "S": "2023-07-26"
+          },
+          "last_updated_date": {
+            "S": "2023-07-26"
+          }
+        }
+      }
+    }
+  ]
+}

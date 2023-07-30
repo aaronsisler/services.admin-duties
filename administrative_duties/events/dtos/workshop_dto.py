@@ -1,9 +1,9 @@
-class EventDto:
+class WorkshopDto:
     name: str
     organizer_name: str
     category: str
     description: str
-    day_of_week: int
+    workshop_date: str
     start_time: str
     duration_time: str
     cost: int
