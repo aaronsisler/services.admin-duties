@@ -5,7 +5,7 @@
 Start the Docker containers
 
 ```bash
-docker compose -f ./database/docker-compose.local.yml up -d
+docker compose -f ./docker-compose.local.yml up -d
 ```
 
 List out the tables created
@@ -18,7 +18,7 @@ aws --endpoint-url http://localhost:8000 dynamodb list-tables
 Stop the Docker containers
 
 ```bash
-docker compose -f ./database/docker-compose.local.yml down
+docker compose -f ./docker-compose.local.yml down
 ```
 
 ## Task List
