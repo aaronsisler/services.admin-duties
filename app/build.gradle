@@ -1,15 +1,17 @@
 plugins {
-    id("groovy") 
+    id("groovy")
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.0.2"
     id("io.micronaut.aot") version "4.0.2"
+    id "io.freefair.lombok" version "8.1.0"
 }
 
 version = "0.1"
 group = "com.ebsolutions"
 
 repositories {
-    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+    maven {
+        url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
         mavenContent { snapshotsOnly() }
     }
     mavenCentral()
@@ -41,8 +43,8 @@ micronaut {
         annotations("com.ebsolutions.*")
     }
     aot {
-    // Please review carefully the optimizations enabled below
-    // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+        // Please review carefully the optimizations enabled below
+        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
         optimizeServiceLoading = false
         convertYamlToJava = false
         precomputeOperations = true
