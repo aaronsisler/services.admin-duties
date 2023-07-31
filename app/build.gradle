@@ -27,7 +27,7 @@ dependencies {
 
 
 application {
-    mainClass.set("com.ebsolutions.Application")
+    mainClass.set("com.ebsolutions.AdminDutiesApplication")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("17")

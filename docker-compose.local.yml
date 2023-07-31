@@ -25,9 +25,9 @@ services:
        done
       '
 
-  lambda:
+  application:
     depends_on:
       - dynamo-db-local
-    build: ./administrative_duties/events/
+    build: ./app/gradlew dockerBuild
     ports:
-      - 9000:8080
+      - 8080:8080
