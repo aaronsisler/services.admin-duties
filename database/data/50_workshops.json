@@ -3,10 +3,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "workshopId": {
             "S": "restorative-journey-workshop"
           },
           "name": {
@@ -18,22 +18,22 @@
           "description": {
             "S": ""
           },
-          "workshop_date": {
+          "workshopDate": {
             "S": "20230817"
           },
-          "start_time": {
+          "startTime": {
             "S": "11:00"
           },
-          "duration_time": {
+          "duration": {
             "N": 90
           },
           "cost": {
             "N": 20
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }

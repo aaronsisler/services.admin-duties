@@ -3,19 +3,19 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "location_id": {
+          "locationId": {
             "S": "body-kinect-wellness-center"
           },
           "name": {
             "S": "Body Kinect Wellness Center"
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }

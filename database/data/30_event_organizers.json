@@ -3,19 +3,19 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "organizer_id": {
+          "organizerId": {
             "S": "tami-richards"
           },
           "name": {
             "S": "Tami Richards"
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -24,19 +24,19 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "organizer_id": {
+          "organizerId": {
             "S": "ryin-santana"
           },
           "name": {
             "S": "Ryin Santana"
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -45,19 +45,19 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "organizer_id": {
+          "organizerId": {
             "S": "hope-ashby"
           },
           "name": {
             "S": "Hope Ashby"
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -66,19 +66,19 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "organizer_id": {
+          "organizerId": {
             "S": "toni-midgett"
           },
           "name": {
             "S": "Toni Midgett"
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -87,19 +87,19 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "organizer_id": {
+          "organizerId": {
             "S": "terri"
           },
           "name": {
             "S": "Terri"
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -108,19 +108,19 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "organizer_id": {
+          "organizerId": {
             "S": "guest-instructor"
           },
           "name": {
             "S": "Guest Instructor"
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }

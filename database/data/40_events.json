@@ -3,10 +3,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "yoga-for-everybody"
           },
           "name": {
@@ -18,19 +18,19 @@
           "description": {
             "S": "Our Saturday class is suitable for all yoga levels and for all ages. Come move, stretch, balance, relax and have fun."
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 6
           },
-          "start_time": {
+          "startTime": {
             "S": "0830"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -39,10 +39,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "Ability full body fitness cardio strength class"
           },
           "name": {
@@ -54,19 +54,19 @@
           "description": {
             "S": "This class allows you to exercise from a chair or in standing. Join our full body strength and cardio training class. Get stronger and more flexible as you have fun."
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 2
           },
-          "start_time": {
+          "startTime": {
             "S": "0900"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -75,10 +75,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "Evening flow and restore"
           },
           "name": {
@@ -90,19 +90,19 @@
           "description": {
             "S": "Join us for this evening class. Unwind after a long day. Come move and stretch your body, working out all the kinks and stresses of the day. End with relaxing and restoring poses. Suitable for everyone."
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 1
           },
-          "start_time": {
+          "startTime": {
             "S": "1900"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -111,10 +111,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "Men's yoga"
           },
           "name": {
@@ -126,19 +126,19 @@
           "description": {
             "S": "Come create community. Work on your flexibility, balance within the comfort of your mens yoga class. great class for those starting out and who want to keep healthy during the winter months."
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 4
           },
-          "start_time": {
+          "startTime": {
             "S": "1000"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -147,10 +147,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "Chair yoga"
           },
           "name": {
@@ -162,19 +162,19 @@
           "description": {
             "S": "This class is suitable for everyone. Within this class, our asanas are performed in a chair or in standing. Emphasis is on range of motion, stretching, strengthening, balance and breath work."
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 1
           },
-          "start_time": {
+          "startTime": {
             "S": "1030"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -183,10 +183,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "Foundational yoga"
           },
           "name": {
@@ -198,19 +198,19 @@
           "description": {
             "S": "This class is appropriate for beginners and advanced yogis who want to assure they are learning yoga that aligns with the physical. mental and emotional bodies within themselves. Come learn from the ground up what the asanas feel like within your body. Our instructor will guide you throughout the class."
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 3
           },
-          "start_time": {
+          "startTime": {
             "S": "0900"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -219,10 +219,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "Yin yoga"
           },
           "name": {
@@ -234,19 +234,19 @@
           "description": {
             "S": "Yin Yoga is a practice that is suitable for anyone who wants to go deeper into their stretch and soft tissue. Works on the meridian system to help balance out health and well being while going deeper into your own practice."
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 2
           },
-          "start_time": {
+          "startTime": {
             "S": "1730"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -255,10 +255,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "Vinyasa for everybody"
           },
           "name": {
@@ -270,19 +270,19 @@
           "description": {
             "S": "This class is suitable for everybody. Movement is so important for our bodies. Movement increases our metabolism, works on our immune system, stretches our fascia and muscles. Learn asanas and put them together with breath and movement for a full body experience."
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 3
           },
-          "start_time": {
+          "startTime": {
             "S": "1800"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -291,10 +291,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "Wellness book club"
           },
           "name": {
@@ -306,19 +306,19 @@
           "description": {
             "S": "Gather with Body Kinect Community and discuss wellness. Books vary month to month. Recommend having book but not a necessity. Reach out to find out about our current read!"
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 1
           },
-          "start_time": {
+          "startTime": {
             "S": "1500"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
@@ -327,10 +327,10 @@
     {
       "PutRequest": {
         "Item": {
-          "client_id": {
+          "clientId": {
             "S": "body-kinect-wellness"
           },
-          "event_id": {
+          "eventId": {
             "S": "earlybird-flow"
           },
           "name": {
@@ -342,19 +342,19 @@
           "description": {
             "S": "Join us for this morning class and jump start your day! Come move and stretch your body, priming yourself for what the day may bring. End with relaxing and restoring poses. Suitable for everyone."
           },
-          "day_of_week": {
+          "dayOfWeek": {
             "N": 5
           },
-          "start_time": {
+          "startTime": {
             "S": "0730"
           },
-          "duration_time": {
+          "duration": {
             "N": 60
           },
-          "create_datetime": {
+          "createdOn": {
             "S": "2023-07-26, 07:31:21"
           },
-          "last_updated_datetime": {
+          "lastUpdatedOn": {
             "S": "2023-07-26, 07:31:21"
           }
         }
