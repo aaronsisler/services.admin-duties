@@ -24,3 +24,10 @@ services:
          sh $$script_name
        done
       '
+
+  application:
+    depends_on:
+      - dynamo-db-local
+    build: ./app/
+    ports:
+      - 8080:8080

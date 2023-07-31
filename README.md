@@ -10,9 +10,20 @@ docker compose -f ./docker-compose.local.yml up -d
 
 List out the tables created
 
+**Note** There is an alias assumed if using the `awslocal` command below. The alias assumes you have set the following:
+
+```
+awslocal=aws --endpoint-url http://localhost:8000
+```
+
 ```bash
-aws dynamodb list-tables
-aws --endpoint-url http://localhost:8000 dynamodb list-tables
+awslocal dynamodb list-tables
+```
+
+List out data in a table
+
+```bash
+awslocal dynamodb scan --table-name CLIENT
 ```
 
 Stop the Docker containers
@@ -27,8 +38,9 @@ docker compose -f ./docker-compose.local.yml down
 * DONE: Data scripts: Setup event organizers
 * DONE: Data scripts: Setup events
 * DONE: Data scripts: Setup workshops
-* Mock up CSV generator workflow using new DDB items
-* Handler works and can call correct services
+* Get Database Abstract working
+* Get Local DDB config working
+* Get C-U-D working for Client
 
 ## TODO
 
