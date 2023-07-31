@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.ebsolutions.AdminDutiesApplicationSpec" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-07-31T12:06:53" hostname="aarons-mbp.lan" time="0.084">
+<testsuite name="com.ebsolutions.AdminDutiesApplicationSpec" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-07-31T13:26:16" hostname="aarons-mbp.lan" time="0.08">
   <properties/>
-  <testcase name="test it works" classname="com.ebsolutions.AdminDutiesApplicationSpec" time="0.084"/>
-  <system-out><![CDATA[08:06:52.726 [Test worker] INFO  i.m.c.DefaultApplicationContext$RuntimeConfiguredEnvironment - Established active environments: [test]
+  <testcase name="test it works" classname="com.ebsolutions.AdminDutiesApplicationSpec" time="0.08"/>
+  <system-out><![CDATA[09:26:15.487 [Test worker] INFO  i.m.c.DefaultApplicationContext$RuntimeConfiguredEnvironment - Established active environments: [test]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
