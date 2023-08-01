@@ -27,9 +27,7 @@ public class ClientController {
     @Post(value = "/")
     public HttpResponse<?> postClient(@Valid @Body Client client) {
         try {
-            clientDao.create(client);
-
-            return noContent();
+            return ok(clientDao.create(client));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }
@@ -39,8 +37,7 @@ public class ClientController {
     public HttpResponse<?> updateClient(@Valid @Body Client client) {
         try {
             if (StringValidator.isBlank(client.getClientId())
-                    || LocalDateValidator.isBeforeNow(client.getCreatedOn())
-                    || LocalDateValidator.isBeforeNow(client.getLastUpdatedOn())
+                    || !LocalDateValidator.isBeforeNow(client.getCreatedOn())
             ) {
                 return badRequest();
             }

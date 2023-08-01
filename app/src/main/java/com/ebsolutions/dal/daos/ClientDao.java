@@ -54,7 +54,7 @@ public class ClientDao {
         }
     }
 
-    public void create(Client client) {
+    public Client create(Client client) {
         try {
             LocalDateTime now = LocalDateTime.now();
             ClientDto clientDto = ClientDto.builder()
@@ -64,6 +64,13 @@ public class ClientDao {
                     .lastUpdatedOn(now)
                     .build();
             clientTable.updateItem(clientDto);
+
+            return Client.builder()
+                    .clientId(clientDto.getClientId())
+                    .name(clientDto.getName())
+                    .createdOn(clientDto.getCreatedOn())
+                    .lastUpdatedOn(clientDto.getLastUpdatedOn())
+                    .build();
         } catch (DynamoDbException dbe) {
             log.error("ERROR::ClientDao::{}", this.getClass().getEnclosingMethod().getName(), dbe);
             throw new DataProcessingException("Error in ClientDao", dbe);
