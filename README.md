@@ -40,7 +40,12 @@ docker compose -f ./docker-compose.local.yml down
 * DONE: Data scripts: Setup workshops
 * DONE: Database Abstract working
 * DONE: Local DDB config working
-* Get C-U-D working for Client
+* DONE: Get C-U-D working for Client
+* CRUD working for Location
+* CRUD working for Organizer
+* CRUD working for Event
+* CRUD working for Workshop
+* Flush out orchestration service
 * Set DDB config to work
 
 ## TODO
