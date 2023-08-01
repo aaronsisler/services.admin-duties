@@ -1,0 +1,25 @@
+{
+  "LOCATION": [
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "name": {
+            "S": "Body Kinect Wellness Center"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    }
+  ]
+}

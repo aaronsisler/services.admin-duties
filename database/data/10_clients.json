@@ -1,0 +1,22 @@
+{
+  "CLIENT": [
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "name": {
+            "S": "Body Kinect Wellness"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    }
+  ]
+}

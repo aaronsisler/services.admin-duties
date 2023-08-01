@@ -1,0 +1,130 @@
+{
+  "EVENT_ORGANIZER": [
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "organizerId": {
+            "S": "tami-richards"
+          },
+          "name": {
+            "S": "Tami Richards"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "organizerId": {
+            "S": "ryin-santana"
+          },
+          "name": {
+            "S": "Ryin Santana"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "organizerId": {
+            "S": "hope-ashby"
+          },
+          "name": {
+            "S": "Hope Ashby"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "organizerId": {
+            "S": "toni-midgett"
+          },
+          "name": {
+            "S": "Toni Midgett"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "organizerId": {
+            "S": "terri"
+          },
+          "name": {
+            "S": "Terri"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "organizerId": {
+            "S": "guest-instructor"
+          },
+          "name": {
+            "S": "Guest Instructor"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    }
+  ]
+}

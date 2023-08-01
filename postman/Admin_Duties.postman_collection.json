@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "8d385d0f-6a25-494d-afe1-71941f8d6dc6",
+		"name": "Admin_Duties",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28844535"
+	},
+	"item": [
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Data",
+					"item": [
+						{
+							"name": "Client",
+							"item": [
+								{
+									"name": "Get-Client-Tester",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"taco\": \"panda\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{admin_duties_url}}/data/client/{{admin_duties_client_id}}",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"client",
+												"{{admin_duties_client_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete-Client-Tester",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{admin_duties_url}}/data/client/{{admin_duties_client_id}}",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"client",
+												"{{admin_duties_client_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create-Client-Tester",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let responseData = pm.response.json();",
+													"",
+													"if(responseData.clientId) {",
+													"  pm.environment.set(\"admin_duties_client_id\", responseData.clientId);",
+													"}",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"John's Pizza\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{admin_duties_url}}/data/client",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"client"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Client-Tester",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"clientId\": \"{{admin_duties_client_id}}\",\n    \"name\": \"Bob's Pizza\",\n    \"createdOn\": \"2023-08-01T11:14:25.318775\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{admin_duties_url}}/data/client",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"client"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Location",
+							"item": [
+								{
+									"name": "Get-Location-Tester",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{admin_duties_url}}/data/client/{{admin_duties_client_id}}/location/{{admin_duties_location_id}}",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"client",
+												"{{admin_duties_client_id}}",
+												"location",
+												"{{admin_duties_location_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete-Location-Tester",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{admin_duties_url}}/data/client/{{admin_duties_client_id}}/location/{{admin_duties_location_id}}",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"client",
+												"{{admin_duties_client_id}}",
+												"location",
+												"{{admin_duties_location_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create-Location-Tester",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let responseData = pm.response.json();",
+													"",
+													"if(responseData.locationId) {",
+													"  pm.environment.set(\"admin_duties_location_id\", responseData.locationId);",
+													"}",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"clientId\": \"{{admin_duties_client_id}}\",\n    \"name\": \"John's Pizza House\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{admin_duties_url}}/data/client/{{admin_duties_client_id}}/location",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"client",
+												"{{admin_duties_client_id}}",
+												"location"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Client-Tester",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"clientId\": \"{{admin_duties_client_id}}\",\n    \"locationId\": \"{{admin_duties_location_id}}\",\n    \"name\": \"Bob's Pizza House\",\n    \"createdOn\": \"2023-08-01T11:14:25.318775\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{admin_duties_url}}/data/client/{{admin_duties_client_id}}/location",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"client",
+												"{{admin_duties_client_id}}",
+												"location"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Health",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"taco\": \"panda\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{admin_duties_url}}/health",
+							"host": [
+								"{{admin_duties_url}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
