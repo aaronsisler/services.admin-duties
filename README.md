@@ -38,9 +38,10 @@ docker compose -f ./docker-compose.local.yml down
 * DONE: Data scripts: Setup event organizers
 * DONE: Data scripts: Setup events
 * DONE: Data scripts: Setup workshops
-* Get Database Abstract working
-* Get Local DDB config working
+* DONE: Database Abstract working
+* DONE: Local DDB config working
 * Get C-U-D working for Client
+* Set DDB config to work
 
 ## TODO
 

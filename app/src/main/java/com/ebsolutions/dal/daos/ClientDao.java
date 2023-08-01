@@ -1,10 +1,8 @@
 package com.ebsolutions.dal.daos;
 
-import com.ebsolutions.DataRetrievalException;
 import com.ebsolutions.config.DatabaseTables;
-import com.ebsolutions.config.DynamoDbEnhancedClientFactory;
-import com.ebsolutions.config.DynamoDbEnhancedClientLocalFactory;
 import com.ebsolutions.dal.dtos.ClientDto;
+import com.ebsolutions.exceptions.DataRetrievalException;
 import io.micronaut.context.annotation.Prototype;
 import lombok.extern.slf4j.Slf4j;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
@@ -16,11 +14,11 @@ import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 @Slf4j
 @Prototype
 public class ClientDao {
+
     private DynamoDbEnhancedClient enhancedClient;
 
-    public ClientDao() {
-        DynamoDbEnhancedClientFactory dynamoDbEnhancedClientFactory = new DynamoDbEnhancedClientLocalFactory();
-        this.enhancedClient = dynamoDbEnhancedClientFactory.create();
+    public ClientDao(DynamoDbEnhancedClient enhancedClient) {
+        this.enhancedClient = enhancedClient;
     }
 
     public ClientDto get(String clientId) {
@@ -33,6 +31,7 @@ public class ClientDao {
             log.error("Error in ClientDao", dbe);
             throw new DataRetrievalException("Error in ClientDao", dbe);
         } catch (Exception e) {
+            log.error("Error in ClientDao", e);
             throw new DataRetrievalException("Error in ClientDao", e);
         }
     }

@@ -1,8 +1,8 @@
 package com.ebsolutions.controllers.data;
 
-import com.ebsolutions.DataRetrievalException;
 import com.ebsolutions.dal.daos.ClientDao;
 import com.ebsolutions.dal.dtos.ClientDto;
+import com.ebsolutions.exceptions.DataRetrievalException;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;

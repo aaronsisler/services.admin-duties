@@ -1,4 +1,4 @@
-package com.ebsolutions;
+package com.ebsolutions.exceptions;
 
 public class DataRetrievalException extends RuntimeException {
     private static final long serialVersionUID = 1L;
