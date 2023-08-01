@@ -2,12 +2,15 @@ package com.ebsolutions.controllers.data;
 
 import com.ebsolutions.dal.daos.ClientDao;
 import com.ebsolutions.dal.dtos.ClientDto;
-import com.ebsolutions.exceptions.DataRetrievalException;
+import com.ebsolutions.exceptions.DataProcessingException;
+import com.ebsolutions.models.Client;
+import com.ebsolutions.validators.LocalDateValidator;
+import com.ebsolutions.validators.StringValidator;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.PathVariable;
+import io.micronaut.http.annotation.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 
 import static io.micronaut.http.HttpResponse.*;
@@ -21,13 +24,52 @@ public class ClientController {
         this.clientDao = clientDao;
     }
 
-    @Get(value = "/{clientId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getClient(@PathVariable String clientId) {
+    @Post(value = "/")
+    public HttpResponse<?> postClient(@Valid @Body Client client) {
         try {
-            ClientDto clientDto = clientDao.get(clientId);
+            clientDao.create(client);
+
+            return noContent();
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
+    }
+
+    @Put(value = "/")
+    public HttpResponse<?> updateClient(@Valid @Body Client client) {
+        try {
+            if (StringValidator.isBlank(client.getClientId())
+                    || LocalDateValidator.isBeforeNow(client.getCreatedOn())
+                    || LocalDateValidator.isBeforeNow(client.getLastUpdatedOn())
+            ) {
+                return badRequest();
+            }
+            clientDao.update(client);
+
+            return noContent();
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
+    }
+
+    @Get(value = "/{clientId}", produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<?> getClient(@NotBlank @PathVariable String clientId) {
+        try {
+            ClientDto clientDto = clientDao.read(clientId);
 
             return clientDto != null ? ok(clientDto) : noContent();
-        } catch (DataRetrievalException dbe) {
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
+    }
+
+    @Delete(value = "/{clientId}")
+    public HttpResponse<?> deleteClient(@NotBlank @PathVariable String clientId) {
+        try {
+            clientDao.delete(clientId);
+
+            return noContent();
+        } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }
     }

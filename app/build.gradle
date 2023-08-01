@@ -24,15 +24,14 @@ dependencies {
     // These lombok must stay at the top for ordering issues
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     runtimeOnly("ch.qos.logback:logback-classic")
-
-//    implementation("io.micronaut.aws:micronaut-aws-sdk-v2")
     implementation platform('software.amazon.awssdk:bom:2.20.56')
 
     // Micronaut dependencies
+    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation("io.micronaut.validation:micronaut-validation")
 
     // AWS Dependencies
-//    implementation 'software.amazon.awssdk:dynamodb'
     implementation 'software.amazon.awssdk:dynamodb-enhanced'
 
     // Testing dependencies
