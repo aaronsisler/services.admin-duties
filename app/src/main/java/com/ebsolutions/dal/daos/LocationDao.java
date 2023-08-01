@@ -1,9 +1,9 @@
 package com.ebsolutions.dal.daos;
 
 import com.ebsolutions.config.DatabaseTables;
-import com.ebsolutions.dal.dtos.ClientDto;
+import com.ebsolutions.dal.dtos.LocationDto;
 import com.ebsolutions.exceptions.DataProcessingException;
-import com.ebsolutions.models.Client;
+import com.ebsolutions.models.Location;
 import com.ebsolutions.utils.UniqueIdGenerator;
 import io.micronaut.context.annotation.Prototype;
 import lombok.extern.slf4j.Slf4j;
@@ -17,23 +17,23 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @Prototype
-public class ClientDao {
+public class LocationDao {
 
     private DynamoDbEnhancedClient enhancedClient;
-    private DynamoDbTable<ClientDto> clientTable;
+    private DynamoDbTable<LocationDto> locationTable;
 
-    public ClientDao(DynamoDbEnhancedClient enhancedClient) {
+    public LocationDao(DynamoDbEnhancedClient enhancedClient) {
         this.enhancedClient = enhancedClient;
-        this.clientTable = this.enhancedClient.table(DatabaseTables.CLIENT, TableSchema.fromBean(ClientDto.class));
+        this.locationTable = this.enhancedClient.table(DatabaseTables.LOCATION, TableSchema.fromBean(LocationDto.class));
     }
 
-    public ClientDto read(String clientId) {
+    public LocationDto read(String clientId, String locationId) {
         try {
-            Key key = Key.builder().partitionValue(clientId).build();
+            Key key = Key.builder().partitionValue(clientId).sortValue(locationId).build();
 
-            ClientDto clientDto = clientTable.getItem(key);
+            LocationDto locationDto = locationTable.getItem(key);
 
-            return clientDto;
+            return locationDto;
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
@@ -43,11 +43,12 @@ public class ClientDao {
         }
     }
 
-    public void delete(String clientId) {
+    public void delete(String clientId, String locationId) {
         try {
-            Key key = Key.builder().partitionValue(clientId).build();
+            Key key = Key.builder().partitionValue(clientId).sortValue(locationId).build();
 
-            clientTable.deleteItem(key);
+            locationTable.deleteItem(key);
+
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
@@ -57,24 +58,25 @@ public class ClientDao {
         }
     }
 
-    public Client create(Client client) {
+    public Location create(Location location) {
         try {
             LocalDateTime now = LocalDateTime.now();
-
-            ClientDto clientDto = ClientDto.builder()
-                    .clientId(UniqueIdGenerator.generate())
-                    .name(client.getName())
+            LocationDto locationDto = LocationDto.builder()
+                    .clientId(location.getClientId())
+                    .locationId(UniqueIdGenerator.generate())
+                    .name(location.getName())
                     .createdOn(now)
                     .lastUpdatedOn(now)
                     .build();
 
-            clientTable.updateItem(clientDto);
+            locationTable.updateItem(locationDto);
 
-            return Client.builder()
-                    .clientId(clientDto.getClientId())
-                    .name(clientDto.getName())
-                    .createdOn(clientDto.getCreatedOn())
-                    .lastUpdatedOn(clientDto.getLastUpdatedOn())
+            return Location.builder()
+                    .clientId(locationDto.getClientId())
+                    .locationId(locationDto.getLocationId())
+                    .name(locationDto.getName())
+                    .createdOn(locationDto.getCreatedOn())
+                    .lastUpdatedOn(locationDto.getLastUpdatedOn())
                     .build();
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
@@ -88,18 +90,20 @@ public class ClientDao {
     /**
      * This will replace the entire database object with the input client
      *
-     * @param client the object to replace the current database object
+     * @param location the object to replace the current database object
      */
-    public void update(Client client) {
+    public void update(Location location) {
         try {
-            ClientDto clientDto = ClientDto.builder()
-                    .clientId(client.getClientId())
-                    .name(client.getName())
-                    .createdOn(client.getCreatedOn())
+            LocationDto locationDto = LocationDto.builder()
+                    .clientId(location.getClientId())
+                    .locationId(location.getLocationId())
+                    .name(location.getName())
+                    .createdOn(location.getCreatedOn())
                     .lastUpdatedOn(LocalDateTime.now())
                     .build();
 
-            clientTable.putItem(clientDto);
+            locationTable.putItem(locationDto);
+
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);

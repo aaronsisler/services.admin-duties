@@ -15,8 +15,8 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortK
 @AllArgsConstructor
 @NoArgsConstructor
 public class LocationDto extends DatabaseDto {
-    @Getter(onMethod_ = @DynamoDbSortKey)
     @NonNull
+    @Getter(onMethod_ = @DynamoDbSortKey)
     private String locationId;
     @NonNull
     private String name;
