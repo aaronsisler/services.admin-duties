@@ -14,8 +14,11 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortK
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventOrganizerDto extends DatabaseDto {
+public class OrganizerDto extends DatabaseDto {
     @Getter(onMethod_ = @DynamoDbSortKey)
     @NonNull
-    private String eventOrganizerId;
+    private String organizerId;
+    @NonNull
+    private String name;
+
 }

@@ -12,7 +12,7 @@ aws dynamodb batch-write-item \
 
 aws dynamodb batch-write-item \
   --endpoint-url=http://dynamo-db-local:8000 \
-  --request-items file:///data/30_event_organizers.json
+  --request-items file:///data/30_organizers.json
 
 aws dynamodb batch-write-item \
   --endpoint-url=http://dynamo-db-local:8000 \

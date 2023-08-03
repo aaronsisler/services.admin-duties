@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import static io.micronaut.http.HttpResponse.*;
 
 @Slf4j
-@Controller("/data/client/{clientId}/location")
+@Controller("/data/client/{clientId}/locations")
 public class LocationController {
     private final LocationDao locationDao;
 
@@ -25,10 +25,9 @@ public class LocationController {
     }
 
     @Post(value = "/")
-    public HttpResponse<?> postClient(@PathVariable @NotBlank String clientId, @Valid @Body Location location) {
+    public HttpResponse<?> postLocation(@NotBlank @PathVariable String clientId, @Valid @Body Location location) {
         try {
-            if (StringValidator.isBlank(location.getClientId())
-                    || !clientId.matches(location.getClientId())) {
+            if (!clientId.matches(location.getClientId())) {
                 return badRequest();
             }
             ;
@@ -39,9 +38,9 @@ public class LocationController {
     }
 
     @Put(value = "/")
-    public HttpResponse<?> updateLocation(@PathVariable @NotBlank String clientId, @Valid @Body Location location) {
+    public HttpResponse<?> putLocation(@NotBlank @PathVariable String clientId, @Valid @Body Location location) {
         try {
-            if (StringValidator.isBlank(location.getClientId())
+            if (!clientId.matches(location.getClientId())
                     || StringValidator.isBlank(location.getLocationId())
                     || !LocalDateValidator.isBeforeNow(location.getCreatedOn())
             ) {
@@ -56,7 +55,7 @@ public class LocationController {
     }
 
     @Get(value = "/{locationId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getLocation(@PathVariable @NotBlank String clientId, @NotBlank @PathVariable String locationId) {
+    public HttpResponse<?> getLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
         try {
             LocationDto locationDto = locationDao.read(clientId, locationId);
 
@@ -67,7 +66,7 @@ public class LocationController {
     }
 
     @Delete(value = "/{locationId}")
-    public HttpResponse<?> deleteLocation(@PathVariable @NotBlank String clientId, @NotBlank @PathVariable String locationId) {
+    public HttpResponse<?> deleteLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
         try {
             locationDao.delete(clientId, locationId);
 

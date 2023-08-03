@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
-public class Location {
+public class Organizer {
     @NotBlank
     private String clientId;
-    private String locationId;
+    private String organizerId;
     @NotBlank
     private String name;
     private LocalDateTime createdOn;

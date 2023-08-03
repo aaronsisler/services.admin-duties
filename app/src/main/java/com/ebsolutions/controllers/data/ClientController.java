@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import static io.micronaut.http.HttpResponse.*;
 
 @Slf4j
-@Controller("/data/client")
+@Controller("/data/clients")
 public class ClientController {
     private final ClientDao clientDao;
 
@@ -34,7 +34,7 @@ public class ClientController {
     }
 
     @Put(value = "/")
-    public HttpResponse<?> updateClient(@Valid @Body Client client) {
+    public HttpResponse<?> putClient(@Valid @Body Client client) {
         try {
             if (StringValidator.isBlank(client.getClientId())
                     || !LocalDateValidator.isBeforeNow(client.getCreatedOn())
