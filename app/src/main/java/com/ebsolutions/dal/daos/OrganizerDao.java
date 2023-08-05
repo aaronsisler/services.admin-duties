@@ -27,18 +27,26 @@ public class OrganizerDao {
         this.organizerTable = this.enhancedClient.table(DatabaseTables.ORGANIZER, TableSchema.fromBean(OrganizerDto.class));
     }
 
-    public OrganizerDto read(String clientId, String organizerId) {
+    public Organizer read(String clientId, String organizerId) {
         try {
             Key key = Key.builder().partitionValue(clientId).sortValue(organizerId).build();
 
             OrganizerDto organizerDto = organizerTable.getItem(key);
 
-            return organizerDto;
+            return organizerDto == null
+                    ? null
+                    : Organizer.builder()
+                    .clientId(organizerDto.getClientId())
+                    .organizerId(organizerDto.getOrganizerId())
+                    .name(organizerDto.getName())
+                    .createdOn(organizerDto.getCreatedOn())
+                    .lastUpdatedOn(organizerDto.getLastUpdatedOn())
+                    .build();
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
         }
     }
@@ -50,10 +58,10 @@ public class OrganizerDao {
             organizerTable.deleteItem(key);
 
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
         }
     }
@@ -79,10 +87,10 @@ public class OrganizerDao {
                     .lastUpdatedOn(organizerDto.getLastUpdatedOn())
                     .build();
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
         }
     }
@@ -105,10 +113,10 @@ public class OrganizerDao {
             organizerTable.putItem(organizerDto);
 
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
         }
     }

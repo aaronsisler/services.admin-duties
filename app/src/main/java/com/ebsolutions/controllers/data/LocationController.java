@@ -1,7 +1,6 @@
 package com.ebsolutions.controllers.data;
 
 import com.ebsolutions.dal.daos.LocationDao;
-import com.ebsolutions.dal.dtos.LocationDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Location;
 import com.ebsolutions.validators.LocalDateValidator;
@@ -30,7 +29,7 @@ public class LocationController {
             if (!clientId.matches(location.getClientId())) {
                 return badRequest();
             }
-            ;
+
             return ok(locationDao.create(location));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
@@ -57,9 +56,9 @@ public class LocationController {
     @Get(value = "/{locationId}", produces = MediaType.APPLICATION_JSON)
     public HttpResponse<?> getLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
         try {
-            LocationDto locationDto = locationDao.read(clientId, locationId);
+            Location location = locationDao.read(clientId, locationId);
 
-            return locationDto != null ? ok(locationDto) : noContent();
+            return location != null ? ok(location) : noContent();
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

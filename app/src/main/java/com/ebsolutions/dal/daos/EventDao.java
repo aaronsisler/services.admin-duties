@@ -1,9 +1,9 @@
 package com.ebsolutions.dal.daos;
 
 import com.ebsolutions.config.DatabaseTables;
-import com.ebsolutions.dal.dtos.ClientDto;
+import com.ebsolutions.dal.dtos.EventDto;
 import com.ebsolutions.exceptions.DataProcessingException;
-import com.ebsolutions.models.Client;
+import com.ebsolutions.models.Event;
 import com.ebsolutions.utils.UniqueIdGenerator;
 import io.micronaut.context.annotation.Prototype;
 import lombok.extern.slf4j.Slf4j;
@@ -17,30 +17,30 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @Prototype
-public class ClientDao {
+public class EventDao {
 
     private DynamoDbEnhancedClient enhancedClient;
-    private DynamoDbTable<ClientDto> clientTable;
+    private DynamoDbTable<EventDto> eventTable;
 
-    public ClientDao(DynamoDbEnhancedClient enhancedClient) {
+    public EventDao(DynamoDbEnhancedClient enhancedClient) {
         this.enhancedClient = enhancedClient;
-        this.clientTable = this.enhancedClient.table(DatabaseTables.CLIENT, TableSchema.fromBean(ClientDto.class));
+        this.eventTable = this.enhancedClient.table(DatabaseTables.EVENT, TableSchema.fromBean(EventDto.class));
     }
 
-    public Client read(String clientId) {
+    public Event read(String clientId, String eventId) {
         try {
-            Key key = Key.builder().partitionValue(clientId).build();
+            Key key = Key.builder().partitionValue(clientId).sortValue(eventId).build();
 
-            ClientDto clientDto = clientTable.getItem(key);
-            log.info("You are here", clientDto);
+            EventDto eventDto = eventTable.getItem(key);
 
-            return clientDto == null
+            return eventDto == null
                     ? null
-                    : Client.builder()
-                    .clientId(clientDto.getClientId())
-                    .name(clientDto.getName())
-                    .createdOn(clientDto.getCreatedOn())
-                    .lastUpdatedOn(clientDto.getLastUpdatedOn())
+                    : Event.builder()
+                    .clientId(eventDto.getClientId())
+                    .eventId(eventDto.getEventId())
+                    .name(eventDto.getName())
+                    .createdOn(eventDto.getCreatedOn())
+                    .lastUpdatedOn(eventDto.getLastUpdatedOn())
                     .build();
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
@@ -51,11 +51,12 @@ public class ClientDao {
         }
     }
 
-    public void delete(String clientId) {
+    public void delete(String clientId, String eventId) {
         try {
-            Key key = Key.builder().partitionValue(clientId).build();
+            Key key = Key.builder().partitionValue(clientId).sortValue(eventId).build();
 
-            clientTable.deleteItem(key);
+            eventTable.deleteItem(key);
+
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
@@ -65,24 +66,25 @@ public class ClientDao {
         }
     }
 
-    public Client create(Client client) {
+    public Event create(Event event) {
         try {
             LocalDateTime now = LocalDateTime.now();
-
-            ClientDto clientDto = ClientDto.builder()
-                    .clientId(UniqueIdGenerator.generate())
-                    .name(client.getName())
+            EventDto eventDto = EventDto.builder()
+                    .clientId(event.getClientId())
+                    .eventId(UniqueIdGenerator.generate())
+                    .name(event.getName())
                     .createdOn(now)
                     .lastUpdatedOn(now)
                     .build();
 
-            clientTable.updateItem(clientDto);
+            eventTable.updateItem(eventDto);
 
-            return Client.builder()
-                    .clientId(clientDto.getClientId())
-                    .name(clientDto.getName())
-                    .createdOn(clientDto.getCreatedOn())
-                    .lastUpdatedOn(clientDto.getLastUpdatedOn())
+            return Event.builder()
+                    .clientId(eventDto.getClientId())
+                    .eventId(eventDto.getEventId())
+                    .name(eventDto.getName())
+                    .createdOn(eventDto.getCreatedOn())
+                    .lastUpdatedOn(eventDto.getLastUpdatedOn())
                     .build();
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
@@ -96,18 +98,20 @@ public class ClientDao {
     /**
      * This will replace the entire database object with the input client
      *
-     * @param client the object to replace the current database object
+     * @param event the object to replace the current database object
      */
-    public void update(Client client) {
+    public void update(Event event) {
         try {
-            ClientDto clientDto = ClientDto.builder()
-                    .clientId(client.getClientId())
-                    .name(client.getName())
-                    .createdOn(client.getCreatedOn())
+            EventDto eventDto = EventDto.builder()
+                    .clientId(event.getClientId())
+                    .eventId(event.getEventId())
+                    .name(event.getName())
+                    .createdOn(event.getCreatedOn())
                     .lastUpdatedOn(LocalDateTime.now())
                     .build();
 
-            clientTable.putItem(clientDto);
+            eventTable.putItem(eventDto);
+
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);

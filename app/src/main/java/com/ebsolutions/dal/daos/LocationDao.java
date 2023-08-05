@@ -27,18 +27,26 @@ public class LocationDao {
         this.locationTable = this.enhancedClient.table(DatabaseTables.LOCATION, TableSchema.fromBean(LocationDto.class));
     }
 
-    public LocationDto read(String clientId, String locationId) {
+    public Location read(String clientId, String locationId) {
         try {
             Key key = Key.builder().partitionValue(clientId).sortValue(locationId).build();
 
             LocationDto locationDto = locationTable.getItem(key);
 
-            return locationDto;
+            return locationDto == null
+                    ? null
+                    : Location.builder()
+                    .clientId(locationDto.getClientId())
+                    .locationId(locationDto.getLocationId())
+                    .name(locationDto.getName())
+                    .createdOn(locationDto.getCreatedOn())
+                    .lastUpdatedOn(locationDto.getLastUpdatedOn())
+                    .build();
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
         }
     }
@@ -50,10 +58,10 @@ public class LocationDao {
             locationTable.deleteItem(key);
 
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
         }
     }
@@ -79,10 +87,10 @@ public class LocationDao {
                     .lastUpdatedOn(locationDto.getLastUpdatedOn())
                     .build();
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
         }
     }
@@ -105,10 +113,10 @@ public class LocationDao {
             locationTable.putItem(locationDto);
 
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
         }
     }

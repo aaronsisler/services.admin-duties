@@ -1,7 +1,6 @@
 package com.ebsolutions.controllers.data;
 
 import com.ebsolutions.dal.daos.OrganizerDao;
-import com.ebsolutions.dal.dtos.OrganizerDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Organizer;
 import com.ebsolutions.validators.LocalDateValidator;
@@ -57,9 +56,9 @@ public class OrganizerController {
     @Get(value = "/{organizerId}", produces = MediaType.APPLICATION_JSON)
     public HttpResponse<?> getOrganizer(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String organizerId) {
         try {
-            OrganizerDto organizerDto = organizerDao.read(clientId, organizerId);
+            Organizer organizer = organizerDao.read(clientId, organizerId);
 
-            return organizerDto != null ? ok(organizerDto) : noContent();
+            return organizer != null ? ok(organizer) : noContent();
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

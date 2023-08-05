@@ -1,7 +1,6 @@
 package com.ebsolutions.controllers.data;
 
 import com.ebsolutions.dal.daos.ClientDao;
-import com.ebsolutions.dal.dtos.ClientDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Client;
 import com.ebsolutions.validators.LocalDateValidator;
@@ -52,9 +51,9 @@ public class ClientController {
     @Get(value = "/{clientId}", produces = MediaType.APPLICATION_JSON)
     public HttpResponse<?> getClient(@NotBlank @PathVariable String clientId) {
         try {
-            ClientDto clientDto = clientDao.read(clientId);
+            Client client = clientDao.read(clientId);
 
-            return clientDto != null ? ok(clientDto) : noContent();
+            return client != null ? ok(client) : noContent();
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }
