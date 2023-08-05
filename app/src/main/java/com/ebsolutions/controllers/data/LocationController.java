@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import static io.micronaut.http.HttpResponse.*;
 
 @Slf4j
-@Controller("/data/client/{clientId}/locations")
+@Controller("/data/clients/{clientId}/locations")
 public class LocationController {
     private final LocationDao locationDao;
 
