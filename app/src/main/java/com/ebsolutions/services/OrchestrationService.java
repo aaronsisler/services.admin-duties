@@ -1,14 +1,30 @@
 package com.ebsolutions.services;
 
+import com.ebsolutions.models.CsvRequest;
 import io.micronaut.context.annotation.Prototype;
 import lombok.extern.slf4j.Slf4j;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Prototype
 public class OrchestrationService {
-    public void createCsv(String trackingId) {
+    public void createCsv(CsvRequest csvRequest) {
+        LocalDate startOfMonth = LocalDate.of(csvRequest.getYear(), csvRequest.getMonth(), 1);
+        LocalDate startOfNextMonth = startOfMonth.plusMonths(1);
 
+        startOfMonth.datesUntil(startOfNextMonth).forEach(this::processDate);
+
+        List<String> things = new ArrayList<>();
+        things.add("Taco");
     }
+
+    private void processDate(LocalDate localDate) {
+        log.info("Date Loop :: DayOfYear-> {} :: DayOfWeek -> {}", localDate.getDayOfMonth(), localDate.getDayOfWeek());
+    }
+
 //Workflow
 //Validate the inputs
 //DONE Year
