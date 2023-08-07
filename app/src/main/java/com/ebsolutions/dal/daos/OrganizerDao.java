@@ -11,9 +11,12 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
+import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Prototype
@@ -42,6 +45,32 @@ public class OrganizerDao {
                     .createdOn(organizerDto.getCreatedOn())
                     .lastUpdatedOn(organizerDto.getLastUpdatedOn())
                     .build();
+        } catch (DynamoDbException dbe) {
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
+            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
+        } catch (Exception e) {
+            log.error("ERROR::{}", this.getClass().getName(), e);
+            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+        }
+    }
+
+    public List<Organizer> readAll(String clientId) {
+        try {
+            Key key = Key.builder().partitionValue(clientId).build();
+            QueryConditional queryConditional = QueryConditional.keyEqualTo(key);
+            List<OrganizerDto> organizerDtos = organizerTable.query(queryConditional).items().stream().collect(Collectors.toList());
+
+            return organizerDtos.stream()
+                    .map(organizerDto ->
+                            Organizer.builder()
+                                    .clientId(organizerDto.getClientId())
+                                    .organizerId(organizerDto.getOrganizerId())
+                                    .name(organizerDto.getName())
+                                    .createdOn(organizerDto.getCreatedOn())
+                                    .lastUpdatedOn(organizerDto.getLastUpdatedOn())
+                                    .build()
+                    ).collect(Collectors.toList());
+
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);

@@ -204,6 +204,26 @@
 									"response": []
 								},
 								{
+									"name": "Get-Locations-Tester",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{admin_duties_url}}/data/clients/{{admin_duties_client_id}}/locations",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"clients",
+												"{{admin_duties_client_id}}",
+												"locations"
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "Update-Client-Tester",
 									"request": {
 										"method": "PUT",
@@ -328,6 +348,26 @@
 												"{{admin_duties_client_id}}",
 												"organizers",
 												"{{admin_duties_organizer_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get-Organizers-Tester",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{admin_duties_url}}/data/clients/{{admin_duties_client_id}}/organizers",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"clients",
+												"{{admin_duties_client_id}}",
+												"organizers"
 											]
 										}
 									},
@@ -464,6 +504,26 @@
 									"response": []
 								},
 								{
+									"name": "Get-Events-Tester",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{admin_duties_url}}/data/clients/{{admin_duties_client_id}}/events",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"clients",
+												"{{admin_duties_client_id}}",
+												"events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "Update-Event-Tester",
 									"request": {
 										"method": "PUT",
@@ -541,6 +601,23 @@
 							],
 							"path": [
 								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CSV",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{admin_duties_url}}/csv",
+							"host": [
+								"{{admin_duties_url}}"
+							],
+							"path": [
+								"csv"
 							]
 						}
 					},

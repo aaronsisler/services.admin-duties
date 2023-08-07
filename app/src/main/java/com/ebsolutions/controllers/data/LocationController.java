@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import static io.micronaut.http.HttpResponse.*;
 
 @Slf4j
@@ -21,6 +23,28 @@ public class LocationController {
 
     public LocationController(LocationDao locationDao) {
         this.locationDao = locationDao;
+    }
+
+    @Get(value = "/{locationId}", produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<?> getLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
+        try {
+            Location location = locationDao.read(clientId, locationId);
+
+            return location != null ? ok(location) : noContent();
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
+    }
+
+    @Get(value = "/", produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<?> getLocations(@NotBlank @PathVariable String clientId) {
+        try {
+            List<Location> locations = locationDao.readAll(clientId);
+
+            return locations.size() > 0 ? ok(locations) : noContent();
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
     }
 
     @Post(value = "/")
@@ -53,16 +77,6 @@ public class LocationController {
         }
     }
 
-    @Get(value = "/{locationId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
-        try {
-            Location location = locationDao.read(clientId, locationId);
-
-            return location != null ? ok(location) : noContent();
-        } catch (DataProcessingException dbe) {
-            return serverError(dbe);
-        }
-    }
 
     @Delete(value = "/{locationId}")
     public HttpResponse<?> deleteLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {

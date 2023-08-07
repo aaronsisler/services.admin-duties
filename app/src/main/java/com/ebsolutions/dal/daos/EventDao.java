@@ -11,10 +11,13 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
+import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Prototype
@@ -50,6 +53,39 @@ public class EventDao {
                     .createdOn(eventDto.getCreatedOn())
                     .lastUpdatedOn(eventDto.getLastUpdatedOn())
                     .build();
+        } catch (DynamoDbException dbe) {
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
+            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
+        } catch (Exception e) {
+            log.error("ERROR::{}", this.getClass().getName(), e);
+            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+        }
+    }
+
+    public List<Event> readAll(String clientId) {
+        try {
+            Key key = Key.builder().partitionValue(clientId).build();
+            QueryConditional queryConditional = QueryConditional.keyEqualTo(key);
+            List<EventDto> eventDtos = eventTable.query(queryConditional).items().stream().collect(Collectors.toList());
+
+            return eventDtos.stream()
+                    .map(eventDto ->
+                            Event.builder()
+                                    .clientId(eventDto.getClientId())
+                                    .eventId(eventDto.getEventId())
+                                    .locationId(eventDto.getLocationId())
+                                    .organizerId(eventDto.getOrganizerId())
+                                    .name(eventDto.getName())
+                                    .category(eventDto.getCategory())
+                                    .description(eventDto.getDescription())
+                                    .dayOfWeek(DayOfWeek.of(eventDto.getDayOfWeek()))
+                                    .startTime(eventDto.getStartTime())
+                                    .duration(eventDto.getDuration())
+                                    .createdOn(eventDto.getCreatedOn())
+                                    .lastUpdatedOn(eventDto.getLastUpdatedOn())
+                                    .build()
+                    ).collect(Collectors.toList());
+
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);

@@ -44,10 +44,11 @@ docker compose -f ./docker-compose.local.yml down
 * DONE: CRUD working for Location
 * DONE: CRUD working for Organizer
 * DONE: CRUD working for Event
-* Figure out the readAll of Events and push to other controllers
+* DONE: Figure out the readAll of Events and push to other controllers
+* DONE: Create CSV controller and call base Orc service
+* Flush out Orc service
+* Figure out how Workshops fit into Orc Service
 * CRUD working for Workshop
-* Create CSV controller and call base orchestration service
-* Flush out orchestration service
 * Set DDB config to work
 
 ## TODO

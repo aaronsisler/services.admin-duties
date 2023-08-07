@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import static io.micronaut.http.HttpResponse.*;
 
 @Slf4j
@@ -21,6 +23,28 @@ public class OrganizerController {
 
     public OrganizerController(OrganizerDao organizerDao) {
         this.organizerDao = organizerDao;
+    }
+
+    @Get(value = "/{organizerId}", produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<?> getOrganizer(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String organizerId) {
+        try {
+            Organizer organizer = organizerDao.read(clientId, organizerId);
+
+            return organizer != null ? ok(organizer) : noContent();
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
+    }
+
+    @Get(value = "/", produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<?> getOrganizers(@NotBlank @PathVariable String clientId) {
+        try {
+            List<Organizer> organizers = organizerDao.readAll(clientId);
+
+            return organizers.size() > 0 ? ok(organizers) : noContent();
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
     }
 
     @Post(value = "/")
@@ -53,16 +77,6 @@ public class OrganizerController {
         }
     }
 
-    @Get(value = "/{organizerId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getOrganizer(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String organizerId) {
-        try {
-            Organizer organizer = organizerDao.read(clientId, organizerId);
-
-            return organizer != null ? ok(organizer) : noContent();
-        } catch (DataProcessingException dbe) {
-            return serverError(dbe);
-        }
-    }
 
     @Delete(value = "/{organizerId}")
     public HttpResponse<?> deleteOrganizer(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String organizerId) {
