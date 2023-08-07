@@ -42,10 +42,11 @@ docker compose -f ./docker-compose.local.yml down
 * DONE: Local DDB config working
 * DONE: Get C-U-D working for Client
 * DONE: CRUD working for Location
-* CRUD working for Organizer
-* CRUD working for Event
+* DONE: CRUD working for Organizer
+* DONE: CRUD working for Event
 * Figure out the readAll of Events and push to other controllers
 * CRUD working for Workshop
+* Create CSV controller and call base orchestration service
 * Flush out orchestration service
 * Set DDB config to work
 

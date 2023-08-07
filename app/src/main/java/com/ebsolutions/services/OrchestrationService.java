@@ -1,6 +1,14 @@
 package com.ebsolutions.services;
 
+import io.micronaut.context.annotation.Prototype;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Prototype
 public class OrchestrationService {
+    public void createCsv(String trackingId) {
+
+    }
 //Workflow
 //Validate the inputs
 //DONE Year
