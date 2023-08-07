@@ -1,5 +1,6 @@
 package com.ebsolutions.models;
 
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,8 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.sql.Time;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Builder
 @Data
@@ -17,20 +19,22 @@ import java.time.LocalDateTime;
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
-public class Event {
+public class Event extends Object {
     @NotBlank
     private String clientId;
     private String eventId;
+    @NotBlank
+    private String locationId;
+    @NotBlank
+    private String organizerId;
     @NotBlank
     private String name;
     private String category;
     @NotBlank
     private String description;
-    @NotBlank
-    private byte dayOfWeek;
-    @NotBlank
-    private Time startTime;
-    @NotBlank
+    @NonNull
+    private DayOfWeek dayOfWeek;
+    private LocalTime startTime;
     private short duration;
     private LocalDateTime createdOn;
     private LocalDateTime lastUpdatedOn;

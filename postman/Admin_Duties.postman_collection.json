@@ -60,21 +60,9 @@
 								},
 								{
 									"name": "Get-Client-Tester",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
 									"request": {
 										"method": "GET",
 										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"taco\": \"panda\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
 										"url": {
 											"raw": "{{admin_duties_url}}/data/clients/{{admin_duties_client_id}}",
 											"host": [
@@ -390,6 +378,136 @@
 												"{{admin_duties_client_id}}",
 												"organizers",
 												"{{admin_duties_organizer_id}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Event",
+							"item": [
+								{
+									"name": "Create-Event-Tester",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let responseData = pm.response.json();",
+													"",
+													"if(responseData.eventId) {",
+													"  pm.environment.set(\"admin_duties_event_id\", responseData.eventId);",
+													"}",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"clientId\": \"{{admin_duties_client_id}}\",\n    \"locationId\": \"{{admin_duties_location_id}}\",\n    \"organizerId\": \"{{admin_duties_organizer_id}}\",\n    \"name\": \"Learn to make a pizza\",\n    \"category\": \"Lessons\",\n    \"description\": \"We will learn to make pizza with our fine chefs!\",\n    \"dayOfWeek\": \"TUESDAY\",\n    \"startTime\": \"11:30:00\",\n    \"duration\": 75\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{admin_duties_url}}/data/clients/{{admin_duties_client_id}}/events",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"clients",
+												"{{admin_duties_client_id}}",
+												"events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get-Event-Tester",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{admin_duties_url}}/data/clients/{{admin_duties_client_id}}/events/{{admin_duties_event_id}}",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"clients",
+												"{{admin_duties_client_id}}",
+												"events",
+												"{{admin_duties_event_id}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Event-Tester",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"clientId\": \"{{admin_duties_client_id}}\",\n    \"locationId\": \"{{admin_duties_location_id}}\",\n    \"organizerId\": \"{{admin_duties_organizer_id}}\",\n    \"eventId\": \"{{admin_duties_event_id}}\",\n    \"name\": \"Learn to make a pizza!\",\n    \"category\": \"Lessons\",\n    \"description\": \"We will learn to make pizza with our fine chefs!\",\n    \"dayOfWeek\": \"TUESDAY\",\n    \"startTime\": \"11:30:00\",\n    \"duration\": 75,\n    \"createdOn\": \"2023-08-06T21:41:46.046207\",\n    \"lastUpdatedOn\": \"2023-08-06T21:41:46.046207\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{admin_duties_url}}/data/clients/{{admin_duties_client_id}}/events",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"clients",
+												"{{admin_duties_client_id}}",
+												"events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete-Event-Tester",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{admin_duties_url}}/data/clients/{{admin_duties_client_id}}/events/{{admin_duties_event_id}}",
+											"host": [
+												"{{admin_duties_url}}"
+											],
+											"path": [
+												"data",
+												"clients",
+												"{{admin_duties_client_id}}",
+												"events",
+												"{{admin_duties_event_id}}"
 											]
 										}
 									},

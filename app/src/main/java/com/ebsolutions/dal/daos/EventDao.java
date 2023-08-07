@@ -13,6 +13,7 @@ import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -38,7 +39,14 @@ public class EventDao {
                     : Event.builder()
                     .clientId(eventDto.getClientId())
                     .eventId(eventDto.getEventId())
+                    .locationId(eventDto.getLocationId())
+                    .organizerId(eventDto.getOrganizerId())
                     .name(eventDto.getName())
+                    .category(eventDto.getCategory())
+                    .description(eventDto.getDescription())
+                    .dayOfWeek(DayOfWeek.of(eventDto.getDayOfWeek()))
+                    .startTime(eventDto.getStartTime())
+                    .duration(eventDto.getDuration())
                     .createdOn(eventDto.getCreatedOn())
                     .lastUpdatedOn(eventDto.getLastUpdatedOn())
                     .build();
@@ -72,7 +80,14 @@ public class EventDao {
             EventDto eventDto = EventDto.builder()
                     .clientId(event.getClientId())
                     .eventId(UniqueIdGenerator.generate())
+                    .locationId(event.getLocationId())
+                    .organizerId(event.getOrganizerId())
                     .name(event.getName())
+                    .category(event.getCategory())
+                    .description(event.getDescription())
+                    .dayOfWeek(event.getDayOfWeek().getValue())
+                    .startTime(event.getStartTime())
+                    .duration(event.getDuration())
                     .createdOn(now)
                     .lastUpdatedOn(now)
                     .build();
@@ -82,7 +97,14 @@ public class EventDao {
             return Event.builder()
                     .clientId(eventDto.getClientId())
                     .eventId(eventDto.getEventId())
+                    .locationId(eventDto.getLocationId())
+                    .organizerId(eventDto.getOrganizerId())
                     .name(eventDto.getName())
+                    .category(eventDto.getCategory())
+                    .description(eventDto.getDescription())
+                    .dayOfWeek(DayOfWeek.of(eventDto.getDayOfWeek()))
+                    .startTime(eventDto.getStartTime())
+                    .duration(eventDto.getDuration())
                     .createdOn(eventDto.getCreatedOn())
                     .lastUpdatedOn(eventDto.getLastUpdatedOn())
                     .build();
@@ -105,7 +127,14 @@ public class EventDao {
             EventDto eventDto = EventDto.builder()
                     .clientId(event.getClientId())
                     .eventId(event.getEventId())
+                    .locationId(event.getLocationId())
+                    .organizerId(event.getOrganizerId())
                     .name(event.getName())
+                    .category(event.getCategory())
+                    .description(event.getDescription())
+                    .dayOfWeek(event.getDayOfWeek().getValue())
+                    .startTime(event.getStartTime())
+                    .duration(event.getDuration())
                     .createdOn(event.getCreatedOn())
                     .lastUpdatedOn(LocalDateTime.now())
                     .build();

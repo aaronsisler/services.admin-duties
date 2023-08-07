@@ -3,7 +3,9 @@ package com.ebsolutions.controllers.data;
 import com.ebsolutions.dal.daos.EventDao;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Event;
+import com.ebsolutions.models.RequestMethod;
 import com.ebsolutions.validators.LocalDateValidator;
+import com.ebsolutions.validators.RequestValidator;
 import com.ebsolutions.validators.StringValidator;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
@@ -26,7 +28,8 @@ public class EventController {
     @Post(value = "/")
     public HttpResponse<?> postEvent(@NotBlank @PathVariable String clientId, @Valid @Body Event event) {
         try {
-            if (!clientId.matches(event.getClientId())) {
+            if (!clientId.matches(event.getClientId())
+                    || !RequestValidator.isEventValid(RequestMethod.POST, event)) {
                 return badRequest();
             }
 

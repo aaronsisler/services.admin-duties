@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 @Data
 @DynamoDbBean
@@ -21,14 +21,15 @@ public class EventDto extends DatabaseDto {
     @Getter(onMethod_ = @DynamoDbSortKey)
     private String eventId;
     @NonNull
+    private String locationId;
+    @NonNull
+    private String organizerId;
+    @NonNull
     private String name;
     private String category;
     @NonNull
     private String description;
-    @NonNull
-    private byte dayOfWeek;
-    @NonNull
-    private Time startTime;
-    @NonNull
+    private int dayOfWeek;
+    private LocalTime startTime;
     private short duration;
 }

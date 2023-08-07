@@ -32,7 +32,6 @@ public class ClientDao {
             Key key = Key.builder().partitionValue(clientId).build();
 
             ClientDto clientDto = clientTable.getItem(key);
-            log.info("You are here", clientDto);
 
             return clientDto == null
                     ? null
