@@ -9,6 +9,12 @@
           "eventId": {
             "S": "yoga-for-everybody"
           },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
           "name": {
             "S": "Yoga for everybody"
           },
@@ -44,6 +50,12 @@
           },
           "eventId": {
             "S": "Ability full body fitness cardio strength class"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
           },
           "name": {
             "S": "Ability full body fitness cardio strength class"
@@ -81,6 +93,12 @@
           "eventId": {
             "S": "Evening flow and restore"
           },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
           "name": {
             "S": "Evening flow and restore"
           },
@@ -116,6 +134,12 @@
           },
           "eventId": {
             "S": "Men's yoga"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
           },
           "name": {
             "S": "Men's yoga"
@@ -153,6 +177,12 @@
           "eventId": {
             "S": "Chair yoga"
           },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
           "name": {
             "S": "Chair yoga"
           },
@@ -188,6 +218,12 @@
           },
           "eventId": {
             "S": "Foundational yoga"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
           },
           "name": {
             "S": "Foundational yoga"
@@ -225,6 +261,12 @@
           "eventId": {
             "S": "Yin yoga"
           },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
           "name": {
             "S": "Yin yoga"
           },
@@ -260,6 +302,12 @@
           },
           "eventId": {
             "S": "Vinyasa for everybody"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
           },
           "name": {
             "S": "Vinyasa for everybody"
@@ -297,6 +345,12 @@
           "eventId": {
             "S": "Wellness book club"
           },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
           "name": {
             "S": "Wellness book club"
           },
@@ -332,6 +386,12 @@
           },
           "eventId": {
             "S": "earlybird-flow"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
           },
           "name": {
             "S": "Earlybird Flow"

@@ -12,6 +12,8 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
 import jakarta.validation.Valid;
 
+import java.io.IOException;
+
 import static io.micronaut.http.HttpResponse.*;
 
 @Controller("/csv")
@@ -38,6 +40,8 @@ public class CsvController {
             return accepted().body(CsvResponse.builder().trackingId(trackingId).build());
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
+        } catch (IOException ioe) {
+            return serverError(ioe);
         }
     }
 }

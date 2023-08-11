@@ -6,6 +6,8 @@ import com.ebsolutions.models.*;
 import io.micronaut.context.annotation.Prototype;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -37,7 +39,7 @@ public class OrchestrationService {
         this.csvDao = csvDao;
     }
 
-    public void createCsv(CsvRequest csvRequest) {
+    public void createCsv(CsvRequest csvRequest) throws IOException {
         LocalDate startOfMonth = LocalDate.of(csvRequest.getYear(), csvRequest.getMonth(), 1);
         LocalDate startOfNextMonth = startOfMonth.plusMonths(1);
 
@@ -48,13 +50,9 @@ public class OrchestrationService {
             throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()));
         }
 
-        log.info("csvRequest: {}", csvRequest);
         this.locations = this.locationDao.readAll(csvRequest.getClientId());
-        log.info("locations: {}", this.locations);
         this.organizers = this.organizerDao.readAll(csvRequest.getClientId());
-        log.info("organizers: {}", this.organizers);
         this.events = this.eventDao.readAll(csvRequest.getClientId());
-        log.info("events: {}", this.events);
         this.processEvents();
 
         try {
@@ -66,28 +64,25 @@ public class OrchestrationService {
 
         this.processLocations();
         this.processOrganizers();
-        String filepath = MessageFormat.format("./tmp/{0}.csv", LocalDateTime.now().toString());
+        String filepath = MessageFormat.format("{0}/{1}.csv", this.getFilepath(), LocalDateTime.now().toString());
         this.csvDao.create(this.calendarEvents, filepath);
         // TODO this.fileStorageDao.create();
     }
 
     private void processEvents() {
         Set<DayOfWeek> dayOfWeekSet = new HashSet<>(this.events.stream().map(event -> event.getDayOfWeek()).toList());
-        log.info("dayOfWeekSet: {}", dayOfWeekSet);
         dayOfWeekSet.stream().forEach(dayOfWeek -> this.dayOfWeekEventListMap.put(dayOfWeek, new ArrayList<>()));
 
         this.events.stream().forEach(event -> this.dayOfWeekEventListMap.get(event.getDayOfWeek()).add(event));
-        log.info("dayOfWeekEventListMap: {}", dayOfWeekEventListMap);
     }
 
     private void processDate(LocalDate date) {
-        log.info("date: {}", date);
         if (!this.dayOfWeekEventListMap.containsKey(date.getDayOfWeek())) {
             return;
         }
 
         this.dayOfWeekEventListMap.get(date.getDayOfWeek())
-                .forEach(event -> CalendarEvent.builder().event(event).eventDate(date));
+                .forEach(event -> this.calendarEvents.add(CalendarEvent.builder().event(event).eventDate(date).build()));
     }
 
     private void processLocations() {
@@ -102,6 +97,10 @@ public class OrchestrationService {
                 .collect(Collectors.toMap(Organizer::getOrganizerId, Function.identity()));
 
         this.calendarEvents.forEach(calendarEvent -> calendarEvent.setOrganizer(organizerMap.get(calendarEvent.getEvent().getOrganizerId())));
+    }
+
+    private String getFilepath() throws IOException {
+        return Paths.get(this.getClass().getResource("/output").getPath()).toString();
     }
 
 

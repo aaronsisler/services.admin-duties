@@ -1,5 +1,6 @@
 package com.ebsolutions.dal.daos;
 
+import com.ebsolutions.config.Constants;
 import com.ebsolutions.dal.dtos.CalendarEventDto;
 import com.ebsolutions.exceptions.CsvGenerationException;
 import com.ebsolutions.models.CalendarEvent;
@@ -25,12 +26,14 @@ public class CsvDao {
 
         List<CalendarEventDto> calendarEventDtos = this.convertCalendarEventsToDtos(calendarEvents);
 
+        log.info("calendarEventDtos: {}", calendarEventDtos);
         try (Writer writer = new FileWriter(filePath)) {
 
             StatefulBeanToCsv<CalendarEventDto> sbc = new StatefulBeanToCsvBuilder<CalendarEventDto>(writer)
                     .withQuotechar('\'')
                     .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
                     .build();
+
 
             sbc.write(calendarEventDtos);
         } catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e) {
@@ -43,7 +46,10 @@ public class CsvDao {
         return calendarEvents.stream()
                 .map(calendarEvent ->
                         CalendarEventDto.builder()
-                                .eventOrganizerName(calendarEvent.getOrganizer().getName())
+                                .eventOrganizerName(
+                                        calendarEvent.getOrganizer() != null
+                                                ? calendarEvent.getOrganizer().getName()
+                                                : Constants.STRING_EMPTY)
                                 .eventStartDate(calendarEvent.getEventDate().toString())
                                 .EventStartTime(calendarEvent.getEvent().getStartTime().toString())
                                 .eventLength(String.valueOf(calendarEvent.getEvent().getDuration()))
