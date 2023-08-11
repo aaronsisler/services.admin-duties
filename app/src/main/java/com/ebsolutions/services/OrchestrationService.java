@@ -40,9 +40,8 @@ public class OrchestrationService {
         this.csvDao = csvDao;
     }
 
+
     public void createCsv(CsvRequest csvRequest) throws IOException {
-        LocalDate startOfMonth = LocalDate.of(csvRequest.getYear(), csvRequest.getMonth(), 1);
-        LocalDate startOfNextMonth = startOfMonth.plusMonths(1);
 
         this.client = this.clientDao.read(csvRequest.getClientId());
         if (this.client == null) {
@@ -53,17 +52,12 @@ public class OrchestrationService {
         this.locations = this.locationDao.readAll(csvRequest.getClientId());
         this.organizers = this.organizerDao.readAll(csvRequest.getClientId());
         this.events = this.eventDao.readAll(csvRequest.getClientId());
+
         this.processEvents();
-
-        try {
-            startOfMonth.datesUntil(startOfNextMonth).forEach(this::processDate);
-        } catch (Exception e) {
-            log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
-        }
-
+        this.processDates(csvRequest);
         this.processLocations();
         this.processOrganizers();
+
         String filepath = MessageFormat.format("{0}/{1}.csv", this.getFilepath(), LocalDateTime.now().toString());
         this.csvDao.create(this.calendarEvents, filepath);
         // TODO this.fileStorageDao.create();
@@ -78,15 +72,27 @@ public class OrchestrationService {
         metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "processEvents"));
     }
 
+    private void processDates(CsvRequest csvRequest) {
+        metricsStopWatch.resetStopWatchClock();
+        LocalDate startOfMonth = LocalDate.of(csvRequest.getYear(), csvRequest.getMonth(), 1);
+        LocalDate startOfNextMonth = startOfMonth.plusMonths(1);
+        try {
+            startOfMonth.datesUntil(startOfNextMonth).forEach(this::processDate);
+        } catch (Exception e) {
+            log.error("ERROR::{}", this.getClass().getName(), e);
+            throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "processDates"));
+        }
+    }
+
     private void processDate(LocalDate date) {
         if (!this.dayOfWeekEventListMap.containsKey(date.getDayOfWeek())) {
             return;
         }
 
-        metricsStopWatch.resetStopWatchClock();
         this.dayOfWeekEventListMap.get(date.getDayOfWeek())
                 .forEach(event -> this.calendarEvents.add(CalendarEvent.builder().event(event).eventDate(date).build()));
-        metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "processDate"));
     }
 
     private void processLocations() {
@@ -110,29 +116,4 @@ public class OrchestrationService {
     private String getFilepath() throws IOException {
         return Paths.get(this.getClass().getResource("/output").getPath()).toString();
     }
-
-
-//Workflow
-// DONE: Validate the inputs
-// DONE Year
-// DONE Month
-// DONE: ClientId exists
-// DONE: Fetch all active events
-// TBD: Fetch valid workshops for given year and month
-// DONE: Find the beginning and end dates of the year and month combo
-// Flush out the dates of the month with their day i.e. Monday, Tuesday
-// Remove blackout dates for a location
-// Start Function
-// Loop across the dates of the month
-// check what day of week date is
-// for event that matches that day of week, add it to the Calendar Events list
-// End Function
-// Remove blackout dates for an event
-// Add workshop(s) to the Calendar Events list
-// START Table data for CSV
-// Add header row to the table
-// Go through the calendar events and find the columns needed per row. Make sure this works for Workshops
-// END Table data for CSV
-// Generate CSV
-
 }

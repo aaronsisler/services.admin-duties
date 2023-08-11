@@ -32,13 +32,18 @@ public class CsvDao {
         log.info("calendarEventDtos: {}", calendarEventDtos);
         try (Writer writer = new FileWriter(filepath)) {
 
-            StatefulBeanToCsv<CalendarEventDto> sbc = new StatefulBeanToCsvBuilder<CalendarEventDto>(writer)
-                    .withQuotechar('\'')
+            StatefulBeanToCsv<CalendarEventDto> beanWriter = new StatefulBeanToCsvBuilder<CalendarEventDto>(writer)
                     .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
                     .build();
 
 
-            sbc.write(calendarEventDtos);
+//            StatefulBeanToCsv beanWriter = new StatefulBeanToCsvBuilder<CalendarEventDto>(writer)
+//                    .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+//                    .withMappingStrategy(new AnnotationStrategy(calendarEventDtos.iterator().next().getClass()))
+//                    .build();
+
+            beanWriter.write(calendarEventDtos);
+
         } catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
             throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);

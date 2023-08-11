@@ -46,9 +46,12 @@ docker compose -f ./docker-compose.local.yml down
 * DONE: CRUD working for Event
 * DONE: Figure out the readAll of Events and push to other controllers
 * DONE: Create CSV controller and call base Orc service
-* Flush out Orc service
+* DONE: Flush out Orc service
+* Work on validating the CSV
 * Figure out how Workshops fit into Orc Service
 * CRUD working for Workshop
+* Remove blackout dates for location
+* Remove blackout dates for event
 * Set DDB config to work
 * Create AOC Annotation for logging
 
