@@ -50,6 +50,7 @@ docker compose -f ./docker-compose.local.yml down
 * Figure out how Workshops fit into Orc Service
 * CRUD working for Workshop
 * Set DDB config to work
+* Create AOC Annotation for logging
 
 ## TODO
 

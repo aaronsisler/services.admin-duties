@@ -4,6 +4,7 @@ import com.ebsolutions.config.Constants;
 import com.ebsolutions.dal.dtos.CalendarEventDto;
 import com.ebsolutions.exceptions.CsvGenerationException;
 import com.ebsolutions.models.CalendarEvent;
+import com.ebsolutions.models.MetricsStopWatch;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
@@ -22,12 +23,14 @@ import java.util.List;
 @Slf4j
 @Prototype
 public class CsvDao {
-    public void create(List<CalendarEvent> calendarEvents, String filePath) {
+    public void create(List<CalendarEvent> calendarEvents, String filepath) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
+        log.info("filepath: {}", filepath);
 
         List<CalendarEventDto> calendarEventDtos = this.convertCalendarEventsToDtos(calendarEvents);
 
         log.info("calendarEventDtos: {}", calendarEventDtos);
-        try (Writer writer = new FileWriter(filePath)) {
+        try (Writer writer = new FileWriter(filepath)) {
 
             StatefulBeanToCsv<CalendarEventDto> sbc = new StatefulBeanToCsvBuilder<CalendarEventDto>(writer)
                     .withQuotechar('\'')
@@ -39,6 +42,8 @@ public class CsvDao {
         } catch (IOException | CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
             throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "create"));
         }
     }
 

@@ -30,6 +30,7 @@ public class OrchestrationService {
     private List<Location> locations;
     private List<Organizer> organizers;
     private List<Event> events;
+    private MetricsStopWatch metricsStopWatch = new MetricsStopWatch(false);
 
     public OrchestrationService(ClientDao clientDao, OrganizerDao organizerDao, LocationDao locationDao, EventDao eventDao, CsvDao csvDao) {
         this.clientDao = clientDao;
@@ -44,7 +45,6 @@ public class OrchestrationService {
         LocalDate startOfNextMonth = startOfMonth.plusMonths(1);
 
         this.client = this.clientDao.read(csvRequest.getClientId());
-
         if (this.client == null) {
             log.error("ERROR::{}", this.getClass().getName());
             throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()));
@@ -70,10 +70,12 @@ public class OrchestrationService {
     }
 
     private void processEvents() {
+        metricsStopWatch.resetStopWatchClock();
         Set<DayOfWeek> dayOfWeekSet = new HashSet<>(this.events.stream().map(event -> event.getDayOfWeek()).toList());
         dayOfWeekSet.stream().forEach(dayOfWeek -> this.dayOfWeekEventListMap.put(dayOfWeek, new ArrayList<>()));
 
         this.events.stream().forEach(event -> this.dayOfWeekEventListMap.get(event.getDayOfWeek()).add(event));
+        metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "processEvents"));
     }
 
     private void processDate(LocalDate date) {
@@ -81,22 +83,28 @@ public class OrchestrationService {
             return;
         }
 
+        metricsStopWatch.resetStopWatchClock();
         this.dayOfWeekEventListMap.get(date.getDayOfWeek())
                 .forEach(event -> this.calendarEvents.add(CalendarEvent.builder().event(event).eventDate(date).build()));
+        metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "processDate"));
     }
 
     private void processLocations() {
+        metricsStopWatch.resetStopWatchClock();
         Map<String, Location> locationMap = this.locations.stream()
                 .collect(Collectors.toMap(Location::getLocationId, Function.identity()));
 
         this.calendarEvents.forEach(calendarEvent -> calendarEvent.setLocation(locationMap.get(calendarEvent.getEvent().getLocationId())));
+        metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "processLocations"));
     }
 
     private void processOrganizers() {
+        metricsStopWatch.resetStopWatchClock();
         Map<String, Organizer> organizerMap = this.organizers.stream()
                 .collect(Collectors.toMap(Organizer::getOrganizerId, Function.identity()));
 
         this.calendarEvents.forEach(calendarEvent -> calendarEvent.setOrganizer(organizerMap.get(calendarEvent.getEvent().getOrganizerId())));
+        metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "processOrganizers"));
     }
 
     private String getFilepath() throws IOException {

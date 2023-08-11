@@ -3,6 +3,7 @@ package com.ebsolutions.dal.daos;
 import com.ebsolutions.config.DatabaseTables;
 import com.ebsolutions.dal.dtos.OrganizerDto;
 import com.ebsolutions.exceptions.DataProcessingException;
+import com.ebsolutions.models.MetricsStopWatch;
 import com.ebsolutions.models.Organizer;
 import com.ebsolutions.utils.UniqueIdGenerator;
 import io.micronaut.context.annotation.Prototype;
@@ -30,6 +31,7 @@ public class OrganizerDao {
     }
 
     public Organizer read(String clientId, String organizerId) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             Key key = Key.builder().partitionValue(clientId).sortValue(organizerId).build();
 
@@ -50,10 +52,13 @@ public class OrganizerDao {
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
     }
 
     public List<Organizer> readAll(String clientId) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             Key key = Key.builder().partitionValue(clientId).build();
             QueryConditional queryConditional = QueryConditional.keyEqualTo(key);
@@ -76,10 +81,13 @@ public class OrganizerDao {
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "readAll"));
         }
     }
 
     public void delete(String clientId, String organizerId) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             Key key = Key.builder().partitionValue(clientId).sortValue(organizerId).build();
 
@@ -91,10 +99,13 @@ public class OrganizerDao {
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "delete"));
         }
     }
 
     public Organizer create(Organizer organizer) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             LocalDateTime now = LocalDateTime.now();
             OrganizerDto organizerDto = OrganizerDto.builder()
@@ -120,6 +131,8 @@ public class OrganizerDao {
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "create"));
         }
     }
 
@@ -129,6 +142,7 @@ public class OrganizerDao {
      * @param organizer the object to replace the current database object
      */
     public void update(Organizer organizer) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             OrganizerDto organizerDto = OrganizerDto.builder()
                     .clientId(organizer.getClientId())
@@ -146,6 +160,8 @@ public class OrganizerDao {
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "update"));
         }
     }
 }
