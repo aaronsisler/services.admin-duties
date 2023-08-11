@@ -58,15 +58,3 @@ docker compose -f ./docker-compose.local.yml down
 * Process to clear out all data if a client is deleted from CLIENT table
 
 ## Helpful Information
-
-### datetime.isoweekday()
-
-| Number | Day       |
-|--------|-----------|
-| 1      | Monday    |
-| 2      | Tuesday   |
-| 3      | Wednesday |
-| 4      | Thursday  |
-| 5      | Friday    |
-| 6      | Saturday  |
-| 7      | Sunday    |

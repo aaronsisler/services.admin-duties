@@ -14,6 +14,7 @@ import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,12 +23,10 @@ import java.util.stream.Collectors;
 @Prototype
 public class OrganizerDao {
 
-    private DynamoDbEnhancedClient enhancedClient;
-    private DynamoDbTable<OrganizerDto> organizerTable;
+    private final DynamoDbTable<OrganizerDto> organizerTable;
 
     public OrganizerDao(DynamoDbEnhancedClient enhancedClient) {
-        this.enhancedClient = enhancedClient;
-        this.organizerTable = this.enhancedClient.table(DatabaseTables.ORGANIZER, TableSchema.fromBean(OrganizerDto.class));
+        this.organizerTable = enhancedClient.table(DatabaseTables.ORGANIZER, TableSchema.fromBean(OrganizerDto.class));
     }
 
     public Organizer read(String clientId, String organizerId) {
@@ -47,10 +46,10 @@ public class OrganizerDao {
                     .build();
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         }
     }
 
@@ -58,7 +57,7 @@ public class OrganizerDao {
         try {
             Key key = Key.builder().partitionValue(clientId).build();
             QueryConditional queryConditional = QueryConditional.keyEqualTo(key);
-            List<OrganizerDto> organizerDtos = organizerTable.query(queryConditional).items().stream().collect(Collectors.toList());
+            List<OrganizerDto> organizerDtos = organizerTable.query(queryConditional).items().stream().toList();
 
             return organizerDtos.stream()
                     .map(organizerDto ->
@@ -73,10 +72,10 @@ public class OrganizerDao {
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         }
     }
 
@@ -88,10 +87,10 @@ public class OrganizerDao {
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         }
     }
 
@@ -117,10 +116,10 @@ public class OrganizerDao {
                     .build();
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         }
     }
 
@@ -143,10 +142,10 @@ public class OrganizerDao {
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         }
     }
 }

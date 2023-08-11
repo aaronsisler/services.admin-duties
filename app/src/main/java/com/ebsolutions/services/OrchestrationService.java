@@ -1,51 +1,131 @@
 package com.ebsolutions.services;
 
-import com.ebsolutions.models.CsvRequest;
+import com.ebsolutions.dal.daos.*;
+import com.ebsolutions.exceptions.CsvGenerationException;
+import com.ebsolutions.models.*;
 import io.micronaut.context.annotation.Prototype;
 import lombok.extern.slf4j.Slf4j;
 
+import java.text.MessageFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Prototype
 public class OrchestrationService {
+    private final ClientDao clientDao;
+    private final OrganizerDao organizerDao;
+    private final LocationDao locationDao;
+    private final EventDao eventDao;
+    private final CsvDao csvDao;
+    private final List<CalendarEvent> calendarEvents = new ArrayList<>();
+    private Client client;
+    private Map<DayOfWeek, ArrayList<Event>> dayOfWeekEventListMap = new HashMap<>();
+    private List<Location> locations;
+    private List<Organizer> organizers;
+    private List<Event> events;
+
+    public OrchestrationService(ClientDao clientDao, OrganizerDao organizerDao, LocationDao locationDao, EventDao eventDao, CsvDao csvDao) {
+        this.clientDao = clientDao;
+        this.organizerDao = organizerDao;
+        this.locationDao = locationDao;
+        this.eventDao = eventDao;
+        this.csvDao = csvDao;
+    }
+
     public void createCsv(CsvRequest csvRequest) {
         LocalDate startOfMonth = LocalDate.of(csvRequest.getYear(), csvRequest.getMonth(), 1);
         LocalDate startOfNextMonth = startOfMonth.plusMonths(1);
 
-        startOfMonth.datesUntil(startOfNextMonth).forEach(this::processDate);
+        this.client = this.clientDao.read(csvRequest.getClientId());
 
-        List<String> things = new ArrayList<>();
-        things.add("Taco");
+        if (this.client == null) {
+            log.error("ERROR::{}", this.getClass().getName());
+            throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()));
+        }
+
+        log.info("csvRequest: {}", csvRequest);
+        this.locations = this.locationDao.readAll(csvRequest.getClientId());
+        log.info("locations: {}", this.locations);
+        this.organizers = this.organizerDao.readAll(csvRequest.getClientId());
+        log.info("organizers: {}", this.organizers);
+        this.events = this.eventDao.readAll(csvRequest.getClientId());
+        log.info("events: {}", this.events);
+        this.processEvents();
+
+        try {
+            startOfMonth.datesUntil(startOfNextMonth).forEach(this::processDate);
+        } catch (Exception e) {
+            log.error("ERROR::{}", this.getClass().getName(), e);
+            throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
+        }
+
+        this.processLocations();
+        this.processOrganizers();
+        String filepath = MessageFormat.format("./tmp/{0}.csv", LocalDateTime.now().toString());
+        this.csvDao.create(this.calendarEvents, filepath);
+        // TODO this.fileStorageDao.create();
     }
 
-    private void processDate(LocalDate localDate) {
-        log.info("Date Loop :: DayOfYear-> {} :: DayOfWeek -> {}", localDate.getDayOfMonth(), localDate.getDayOfWeek());
+    private void processEvents() {
+        Set<DayOfWeek> dayOfWeekSet = new HashSet<>(this.events.stream().map(event -> event.getDayOfWeek()).toList());
+        log.info("dayOfWeekSet: {}", dayOfWeekSet);
+        dayOfWeekSet.stream().forEach(dayOfWeek -> this.dayOfWeekEventListMap.put(dayOfWeek, new ArrayList<>()));
+
+        this.events.stream().forEach(event -> this.dayOfWeekEventListMap.get(event.getDayOfWeek()).add(event));
+        log.info("dayOfWeekEventListMap: {}", dayOfWeekEventListMap);
     }
+
+    private void processDate(LocalDate date) {
+        log.info("date: {}", date);
+        if (!this.dayOfWeekEventListMap.containsKey(date.getDayOfWeek())) {
+            return;
+        }
+
+        this.dayOfWeekEventListMap.get(date.getDayOfWeek())
+                .forEach(event -> CalendarEvent.builder().event(event).eventDate(date));
+    }
+
+    private void processLocations() {
+        Map<String, Location> locationMap = this.locations.stream()
+                .collect(Collectors.toMap(Location::getLocationId, Function.identity()));
+
+        this.calendarEvents.forEach(calendarEvent -> calendarEvent.setLocation(locationMap.get(calendarEvent.getEvent().getLocationId())));
+    }
+
+    private void processOrganizers() {
+        Map<String, Organizer> organizerMap = this.organizers.stream()
+                .collect(Collectors.toMap(Organizer::getOrganizerId, Function.identity()));
+
+        this.calendarEvents.forEach(calendarEvent -> calendarEvent.setOrganizer(organizerMap.get(calendarEvent.getEvent().getOrganizerId())));
+    }
+
 
 //Workflow
-//Validate the inputs
-//DONE Year
-//DONE Month
-//ClientId exists
-//Fetch all active events
-//Fetch valid workshops for given year and month
-//Find the beginning and end dates of the year and month combo
-//Flush out the dates of the month with their day i.e. Monday, Tuesday
-//Remove blackout dates for a location
-//Start Function
-//Loop across the dates of the month
-//check what day of week date is
-//for event that matches that day of week, add it to the Calendar Events list
-//End Function
-//Remove blackout dates for an event
-//Add workshop(s) to the Calendar Events list
-//START Table data for CSV
-//Add header row to the table
-//Go through the calendar events and find the columns needed per row. Make sure this works for Workshops
-//END Table data for CSV
-//Generate CSV
+// DONE: Validate the inputs
+// DONE Year
+// DONE Month
+// DONE: ClientId exists
+// DONE: Fetch all active events
+// TBD: Fetch valid workshops for given year and month
+// DONE: Find the beginning and end dates of the year and month combo
+// Flush out the dates of the month with their day i.e. Monday, Tuesday
+// Remove blackout dates for a location
+// Start Function
+// Loop across the dates of the month
+// check what day of week date is
+// for event that matches that day of week, add it to the Calendar Events list
+// End Function
+// Remove blackout dates for an event
+// Add workshop(s) to the Calendar Events list
+// START Table data for CSV
+// Add header row to the table
+// Go through the calendar events and find the columns needed per row. Make sure this works for Workshops
+// END Table data for CSV
+// Generate CSV
 
 }
