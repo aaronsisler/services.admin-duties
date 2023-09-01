@@ -1,4 +1,4 @@
-# services.administrative-duties
+# services.admin-duties
 
 ## Running Locally
 
@@ -34,32 +34,32 @@ docker compose -f ./docker-compose.local.yml down
 
 ## Task List
 
-* DONE: Data scripts: Setup locations
-* DONE: Data scripts: Setup event organizers
-* DONE: Data scripts: Setup events
-* DONE: Data scripts: Setup workshops
-* DONE: Database Abstract working
-* DONE: Local DDB config working
-* DONE: Get C-U-D working for Client
-* CRUD working for Location
-* CRUD working for Organizer
-* CRUD working for Event
-* CRUD working for Workshop
-* Flush out orchestration service
-* Set DDB config to work
+- DONE: Data scripts: Setup locations
+- DONE: Data scripts: Setup event organizers
+- DONE: Data scripts: Setup events
+- DONE: Data scripts: Setup workshops
+- DONE: Database Abstract working
+- DONE: Local DDB config working
+- DONE: Get C-U-D working for Client
+- CRUD working for Location
+- CRUD working for Organizer
+- CRUD working for Event
+- CRUD working for Workshop
+- Flush out orchestration service
+- Set DDB config to work
 
 ## TODO
 
-* Where are we getting blackout dates for a location from? Request? DDB?
-* How are we getting the generated CSV to person? S3 link? Immediate stream back from API?
-* Process to clear out all data if a client is deleted from CLIENT table
+- Where are we getting blackout dates for a location from? Request? DDB?
+- How are we getting the generated CSV to person? S3 link? Immediate stream back from API?
+- Process to clear out all data if a client is deleted from CLIENT table
 
 ## Helpful Information
 
 ### datetime.isoweekday()
 
 | Number | Day       |
-|--------|-----------|
+| ------ | --------- |
 | 1      | Monday    |
 | 2      | Tuesday   |
 | 3      | Wednesday |
