@@ -25,7 +25,7 @@ aws dynamodb create-table \
 
 aws dynamodb create-table \
 --endpoint-url=http://dynamo-db-local:8000 \
---table-name EVENT_ORGANIZER \
+--table-name ORGANIZER \
 --attribute-definitions \
   AttributeName=clientId,AttributeType=S  \
   AttributeName=organizerId,AttributeType=S  \
