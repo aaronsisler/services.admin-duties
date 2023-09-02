@@ -1,5 +1,5 @@
 {
-  "EVENT_ORGANIZER": [
+  "ORGANIZER": [
     {
       "PutRequest": {
         "Item": {
