@@ -58,6 +58,7 @@ docker compose -f ./docker-compose.local.yml down
 
 ## TODO
 
+* Figure out how to correctly package a Dockerfile that works with Micronaut
 * Where are we getting blackout dates for a location from? Request? DDB?
 * How are we getting the generated CSV to person? S3 link? Immediate stream back from API?
 * Process to clear out all data if a client is deleted from CLIENT table
