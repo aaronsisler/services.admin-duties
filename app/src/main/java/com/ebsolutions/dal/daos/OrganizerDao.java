@@ -88,6 +88,7 @@ public class OrganizerDao {
 
     public void delete(String clientId, String organizerId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
+       
         try {
             Key key = Key.builder().partitionValue(clientId).sortValue(organizerId).build();
 
@@ -106,6 +107,7 @@ public class OrganizerDao {
 
     public Organizer create(Organizer organizer) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
+       
         try {
             LocalDateTime now = LocalDateTime.now();
             OrganizerDto organizerDto = OrganizerDto.builder()
@@ -143,6 +145,7 @@ public class OrganizerDao {
      */
     public void update(Organizer organizer) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
+       
         try {
             OrganizerDto organizerDto = OrganizerDto.builder()
                     .clientId(organizer.getClientId())

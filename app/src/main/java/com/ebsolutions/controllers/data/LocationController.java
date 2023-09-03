@@ -77,7 +77,6 @@ public class LocationController {
         }
     }
 
-
     @Delete(value = "/{locationId}")
     public HttpResponse<?> deleteLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
         try {
