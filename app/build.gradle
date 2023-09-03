@@ -22,20 +22,22 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
     // These lombok must stay at the top for ordering issues
-    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
-    runtimeOnly("ch.qos.logback:logback-classic")
+    annotationProcessor 'io.micronaut.serde:micronaut-serde-processor'
+    runtimeOnly 'ch.qos.logback:logback-classic'
     implementation platform('software.amazon.awssdk:bom:2.20.56')
 
     // Micronaut dependencies
-    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
-    implementation("io.micronaut.serde:micronaut-serde-jackson")
-    implementation("io.micronaut.validation:micronaut-validation")
+    annotationProcessor 'io.micronaut.validation:micronaut-validation-processor'
+    implementation 'io.micronaut.serde:micronaut-serde-jackson'
+    implementation 'io.micronaut.validation:micronaut-validation'
 
     // AWS Dependencies
     implementation 'software.amazon.awssdk:dynamodb-enhanced'
+    implementation 'com.opencsv:opencsv:5.8'
+
 
     // Testing dependencies
-    testImplementation("io.micronaut:micronaut-http-client")
+    testImplementation 'io.micronaut:micronaut-http-client'
 }
 
 

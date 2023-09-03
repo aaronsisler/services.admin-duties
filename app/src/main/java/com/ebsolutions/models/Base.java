@@ -1,32 +1,28 @@
-package com.ebsolutions.dal.dtos;
+package com.ebsolutions.models;
 
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@DynamoDbBean
 @Serdeable
 @Slf4j
 @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class DatabaseDto {
-    @NonNull
-    @Getter(onMethod_ = @DynamoDbPartitionKey)
+public class Base {
     private String clientId;
 
     private LocalDate expiryDate;
 
-    @NonNull
     private LocalDateTime createdOn;
 
-    @NonNull
     private LocalDateTime lastUpdatedOn;
 }

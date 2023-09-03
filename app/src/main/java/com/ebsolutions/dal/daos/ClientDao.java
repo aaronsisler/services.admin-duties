@@ -4,6 +4,7 @@ import com.ebsolutions.config.DatabaseTables;
 import com.ebsolutions.dal.dtos.ClientDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Client;
+import com.ebsolutions.models.MetricsStopWatch;
 import com.ebsolutions.utils.UniqueIdGenerator;
 import io.micronaut.context.annotation.Prototype;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -27,37 +29,51 @@ public class ClientDao {
         this.clientTable = this.enhancedClient.table(DatabaseTables.CLIENT, TableSchema.fromBean(ClientDto.class));
     }
 
-    public ClientDto read(String clientId) {
+    public Client read(String clientId) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             Key key = Key.builder().partitionValue(clientId).build();
 
             ClientDto clientDto = clientTable.getItem(key);
 
-            return clientDto;
+            return clientDto == null
+                    ? null
+                    : Client.builder()
+                    .clientId(clientDto.getClientId())
+                    .name(clientDto.getName())
+                    .createdOn(clientDto.getCreatedOn())
+                    .lastUpdatedOn(clientDto.getLastUpdatedOn())
+                    .build();
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
     }
 
     public void delete(String clientId) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             Key key = Key.builder().partitionValue(clientId).build();
 
             clientTable.deleteItem(key);
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "delete"));
         }
     }
 
     public Client create(Client client) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             LocalDateTime now = LocalDateTime.now();
 
@@ -77,11 +93,13 @@ public class ClientDao {
                     .lastUpdatedOn(clientDto.getLastUpdatedOn())
                     .build();
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "create"));
         }
     }
 
@@ -91,6 +109,7 @@ public class ClientDao {
      * @param client the object to replace the current database object
      */
     public void update(Client client) {
+        MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             ClientDto clientDto = ClientDto.builder()
                     .clientId(client.getClientId())
@@ -101,11 +120,13 @@ public class ClientDao {
 
             clientTable.putItem(clientDto);
         } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), dbe);
+            log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
-            log.error("ERROR::{}::{}", this.getClass().getName(), this.getClass().getEnclosingMethod().getName(), e);
+            log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+        } finally {
+            metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "update"));
         }
     }
 }

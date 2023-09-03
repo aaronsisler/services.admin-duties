@@ -29,5 +29,7 @@ services:
     depends_on:
       - dynamo-db-local
     build: ./app/
+    environment:
+      MICRONAUT_ENVIRONMENTS: local-docker
     ports:
       - 8080:8080

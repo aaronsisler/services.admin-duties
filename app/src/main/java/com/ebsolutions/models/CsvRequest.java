@@ -1,21 +1,22 @@
 package com.ebsolutions.models;
 
+
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-import lombok.extern.slf4j.Slf4j;
 
+@Builder
 @Data
 @Serdeable
-@Slf4j
-@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Location extends Base {
-    private String locationId;
+public class CsvRequest {
+    private short year;
+    private byte month;
     @NotBlank
-    private String name;
+    private String clientId;
+    private String trackingId;
 }

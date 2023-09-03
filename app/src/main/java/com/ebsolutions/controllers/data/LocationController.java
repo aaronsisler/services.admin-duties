@@ -1,7 +1,6 @@
 package com.ebsolutions.controllers.data;
 
 import com.ebsolutions.dal.daos.LocationDao;
-import com.ebsolutions.dal.dtos.LocationDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Location;
 import com.ebsolutions.validators.LocalDateValidator;
@@ -13,15 +12,39 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import static io.micronaut.http.HttpResponse.*;
 
 @Slf4j
-@Controller("/data/client/{clientId}/locations")
+@Controller("/data/clients/{clientId}/locations")
 public class LocationController {
     private final LocationDao locationDao;
 
     public LocationController(LocationDao locationDao) {
         this.locationDao = locationDao;
+    }
+
+    @Get(value = "/{locationId}", produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<?> getLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
+        try {
+            Location location = locationDao.read(clientId, locationId);
+
+            return location != null ? ok(location) : noContent();
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
+    }
+
+    @Get(value = "/", produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<?> getLocations(@NotBlank @PathVariable String clientId) {
+        try {
+            List<Location> locations = locationDao.readAll(clientId);
+
+            return locations.size() > 0 ? ok(locations) : noContent();
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
     }
 
     @Post(value = "/")
@@ -30,7 +53,7 @@ public class LocationController {
             if (!clientId.matches(location.getClientId())) {
                 return badRequest();
             }
-            ;
+
             return ok(locationDao.create(location));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
@@ -49,17 +72,6 @@ public class LocationController {
             locationDao.update(location);
 
             return noContent();
-        } catch (DataProcessingException dbe) {
-            return serverError(dbe);
-        }
-    }
-
-    @Get(value = "/{locationId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
-        try {
-            LocationDto locationDto = locationDao.read(clientId, locationId);
-
-            return locationDto != null ? ok(locationDto) : noContent();
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

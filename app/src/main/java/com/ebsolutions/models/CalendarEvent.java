@@ -1,21 +1,23 @@
 package com.ebsolutions.models;
 
 import io.micronaut.serde.annotation.Serdeable;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDate;
+
+@Builder
 @Data
 @Serdeable
 @Slf4j
-@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Location extends Base {
-    private String locationId;
-    @NotBlank
-    private String name;
+public class CalendarEvent {
+    private LocalDate eventDate;
+    private Location location;
+    private Organizer organizer;
+    private Event event;
 }

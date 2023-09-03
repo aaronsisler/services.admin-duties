@@ -42,29 +42,26 @@ docker compose -f ./docker-compose.local.yml down
 - DONE: Local DDB config working
 - DONE: Get C-U-D working for Client
 - DONE: CRUD working for Location
-- CRUD working for Organizer
-- CRUD working for Event
-- Figure out the readAll of Events and push to other controllers
+- DONE: CRUD working for Organizer
+- DONE: CRUD working for Event
+- DONE: Figure out the readAll of Events and push to other controllers
+- DONE: Create CSV controller and call base Orc service
+- DONE: Flush out Orc service
+- Get headers for CSV to upload correctly in WordPress
+- Figure out how Workshops fit into Orc Service
+- How are we handling if and event is active?
 - CRUD working for Workshop
-- Flush out orchestration service
+- Remove blackout dates for location
+- Remove blackout dates for event
 - Set DDB config to work
+- Create AOC Annotation for logging
 
 ## TODO
 
+- Figure out how to correctly package a Dockerfile that works with Micronaut
 - Where are we getting blackout dates for a location from? Request? DDB?
 - How are we getting the generated CSV to person? S3 link? Immediate stream back from API?
 - Process to clear out all data if a client is deleted from CLIENT table
+- How are we handling switching an organizer midway through a month?
 
 ## Helpful Information
-
-### datetime.isoweekday()
-
-| Number | Day       |
-| ------ | --------- |
-| 1      | Monday    |
-| 2      | Tuesday   |
-| 3      | Wednesday |
-| 4      | Thursday  |
-| 5      | Friday    |
-| 6      | Saturday  |
-| 7      | Sunday    |
