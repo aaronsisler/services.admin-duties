@@ -91,10 +91,52 @@
             "S": "body-kinect-wellness"
           },
           "organizerId": {
-            "S": "terri"
+            "S": "terri-balog"
           },
           "name": {
-            "S": "Terri"
+            "S": "Terri Balog"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "organizerId": {
+            "S": "alyssa-archer"
+          },
+          "name": {
+            "S": "Alyssa Archer"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "organizerId": {
+            "S": "maci-keaton"
+          },
+          "name": {
+            "S": "Maci Keaton"
           },
           "createdOn": {
             "S": "2023-07-26T07:31:21"

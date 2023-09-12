@@ -49,7 +49,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Ability full body fitness cardio strength class"
+            "S": "ability-full-body-fitness-cardio-strength-class"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -64,7 +64,7 @@
             "S": "Wellness Center"
           },
           "description": {
-            "S": "This class allows you to exercise from a chair or in standing. Join our full body strength and cardio training class. Get stronger and more flexible as you have fun."
+            "S": "This class is for people who want to have fun as they work out. Emphasis is on conditioning. Move to the rhythm of the music as you use dumbbells that are appropriate for your physical condition and drumsticks to add the beat of your conditioning."
           },
           "dayOfWeek": {
             "N": "2"
@@ -91,7 +91,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Evening flow and restore"
+            "S": "evening-flow-and-restore"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -106,7 +106,7 @@
             "S": "Wellness Center"
           },
           "description": {
-            "S": "Join us for this evening class. Unwind after a long day. Come move and stretch your body, working out all the kinks and stresses of the day. End with relaxing and restoring poses. Suitable for everyone."
+            "S": "These classes start with vinyasa flow and end with a relaxing restorative or stretching sequence. Great way to end your day!"
           },
           "dayOfWeek": {
             "N": "1"
@@ -133,7 +133,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Men's yoga"
+            "S": "mens-yoga"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -175,7 +175,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Chair yoga"
+            "S": "chair-yoga"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -190,7 +190,7 @@
             "S": "Yoga"
           },
           "description": {
-            "S": "This class is suitable for everyone. Within this class, our asanas are performed in a chair or in standing. Emphasis is on range of motion, stretching, strengthening, balance and breath work."
+            "S": "Whether you are new to yoga or a seasoned yogi, Can touch your toes or barely reach them, this class is for you. Asanas are done in standing or in a chair. Balance and Breath work are incorporated with every class."
           },
           "dayOfWeek": {
             "N": "1"
@@ -217,7 +217,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Foundational yoga"
+            "S": "foundational-yoga"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -232,7 +232,7 @@
             "S": "Yoga"
           },
           "description": {
-            "S": "This class is appropriate for beginners and advanced yogis who want to assure they are learning yoga that aligns with the physical. mental and emotional bodies within themselves. Come learn from the ground up what the asanas feel like within your body. Our instructor will guide you throughout the class."
+            "S": "Foundational yoga is a perfect class for those that want to slow down and experience yoga poses (asana) within their body. Connect with your breath and your body. Come away with a sense of peace. Feel centered throughout your day."
           },
           "dayOfWeek": {
             "N": "3"
@@ -259,7 +259,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Yin yoga"
+            "S": "yin-yoga"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -301,7 +301,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Vinyasa for everybody"
+            "S": "vinyasa-for-everybody"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -316,7 +316,7 @@
             "S": "Wellness Center"
           },
           "description": {
-            "S": "This class is suitable for everybody. Movement is so important for our bodies. Movement increases our metabolism, works on our immune system, stretches our fascia and muscles. Learn asanas and put them together with breath and movement for a full body experience."
+            "S": "Vinyasa is a class where you connect pose to pose through breath and movement. Allowing the natural heat of your body to rise. This allows the muscles to lengthen and strengthen, promotes detoxification, and increases your natural immunity."
           },
           "dayOfWeek": {
             "N": "3"
@@ -343,7 +343,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Wellness book club"
+            "S": "wellness-book-club"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -400,13 +400,97 @@
             "S": "Wellness Center"
           },
           "description": {
-            "S": "Join us for this morning class and jump start your day! Come move and stretch your body, priming yourself for what the day may bring. End with relaxing and restoring poses. Suitable for everyone."
+            "S": "Start your day off connecting to you. Inhale, Exhale let this moment be about you. Shrug off the body stiffness as you flow to your own rhythm. You will leave feeling energized and be ready for your day and week."
           },
           "dayOfWeek": {
             "N": "5"
           },
           "startTime": {
             "S": "07:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "eventId": {
+            "S": "fitness-friday"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "maci-keaton"
+          },
+          "name": {
+            "S": "Fitness Friday"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "This is a conditioning class, blends yoga, strength training with your own body weight, bands and or light weights. We will work on balance and functional training. All can be done from a chair as needed."
+          },
+          "dayOfWeek": {
+            "N": "5"
+          },
+          "startTime": {
+            "S": "10:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "eventId": {
+            "S": "mixedfit"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "guest-instructor"
+          },
+          "name": {
+            "S": "Mixedfit"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "Mixedfit is a people inspired fitness program that combines dance movements with body weight toning. Mixedfit is an exhilarating fun fitness program."
+          },
+          "dayOfWeek": {
+            "N": "5"
+          },
+          "startTime": {
+            "S": "10:30:00"
           },
           "duration": {
             "N": "60"
