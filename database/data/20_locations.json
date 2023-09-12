@@ -1,12 +1,12 @@
 {
-  "LOCATION": [
+  "SERVICES_ADMIN_DUTIES_BETA": [
     {
       "PutRequest": {
         "Item": {
           "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "locationId": {
+          "sortKey": {
             "S": "body-kinect-wellness-center"
           },
           "name": {

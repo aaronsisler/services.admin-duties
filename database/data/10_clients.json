@@ -6,6 +6,9 @@
           "partitionKey": {
             "S": "body-kinect-wellness"
           },
+          "sortKey": {
+            "S": "CLIENT"
+          },
           "name": {
             "S": "Body Kinect Wellness"
           },

@@ -7,8 +7,11 @@ aws dynamodb create-table \
 --table-name SERVICES_ADMIN_DUTIES_BETA \
 --attribute-definitions \
   AttributeName=partitionKey,AttributeType=S  \
+  AttributeName=sortKey,AttributeType=S \
 --key-schema \
-  AttributeName=sortKey,KeyType=HASH;
+  AttributeName=partitionKey,KeyType=HASH \
+  AttributeName=sortKey,KeyType=RANGE \
+--billing-mode PAY_PER_REQUEST;
 
 # aws dynamodb create-table \
 # --endpoint-url=http://dynamo-db-local:8000 \

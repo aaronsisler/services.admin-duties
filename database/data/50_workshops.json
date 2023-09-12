@@ -1,5 +1,5 @@
 {
-  "WORKSHOP": [
+  "SERVICES_ADMIN_DUTIES_BETA": [
     {
       "PutRequest": {
         "Item": {
@@ -97,52 +97,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "restorative-journey-sound-yoga-workshop"
-          },
-          "locationId": {
-            "S": "body-kinect-wellness-center"
-          },
-          "organizerId": {
-            "S": "tami-richards"
-          },
-          "name": {
-            "S": "Restorative Journal Sound Yoga Workshop"
-          },
-          "category": {
-            "S": "Wellness Center"
-          },
-          "description": {
-            "S": "This class is all about restoration of your body, mind and soul. You will be positioned in relaxing restorative poses as you sink into your suppurative space and breath. This class is all about you! Journal work and sound will be included for your enjoyment and to deepen your experience and connection with self."
-          },
-          "workshopDate": {
-            "S": "20230928"
-          },
-          "startTime": {
-            "S": "11:00:00"
-          },
-          "duration": {
-            "N": "90"
-          },
-          "cost": {
-            "N": "20"
-          },
-          "createdOn": {
-            "S": "2023-09-09T07:31:21"
-          },
-          "lastUpdatedOn": {
-            "S": "2023-09-09T07:31:21"
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "partitionKey": {
-            "S": "body-kinect-wellness"
-          },
-          "sortKey": {
-            "S": "core-align-demo"
+            "S": "core-align-demo-20230913"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -187,7 +142,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "core-align-demo"
+            "S": "core-align-demo-20230914"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
