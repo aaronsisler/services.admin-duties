@@ -9,6 +9,12 @@
           "workshopId": {
             "S": "restorative-journey-workshop"
           },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "guest-instructor"
+          },
           "name": {
             "S": "Restorative Journey Workshop"
           },
@@ -48,6 +54,12 @@
           "workshopId": {
             "S": "restorative-journey-sound-yoga-workshop"
           },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "guest-instructor"
+          },
           "name": {
             "S": "Restorative Journal Sound Yoga Workshop"
           },
@@ -87,6 +99,12 @@
           "workshopId": {
             "S": "restorative-journey-sound-yoga-workshop"
           },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "tami-richards"
+          },
           "name": {
             "S": "Restorative Journal Sound Yoga Workshop"
           },
@@ -126,6 +144,12 @@
           "workshopId": {
             "S": "core-align-demo"
           },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "tami-richards"
+          },
           "name": {
             "S": "Core Align Demo"
           },
@@ -164,6 +188,12 @@
           },
           "workshopId": {
             "S": "core-align-demo"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "tami-richards"
           },
           "name": {
             "S": "Core Align Demo"

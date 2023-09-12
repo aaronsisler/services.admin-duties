@@ -49,7 +49,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Ability full body fitness cardio strength class"
+            "S": "ability-full-body-fitness-cardio-strength-class"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -91,7 +91,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Evening flow and restore"
+            "S": "evening-flow-and-restore"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -133,7 +133,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Men's yoga"
+            "S": "mens-yoga"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -175,7 +175,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Chair yoga"
+            "S": "chair-yoga"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -217,7 +217,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Foundational yoga"
+            "S": "foundational-yoga"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -259,7 +259,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Yin yoga"
+            "S": "yin-yoga"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -301,7 +301,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Vinyasa for everybody"
+            "S": "vinyasa-for-everybody"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -343,7 +343,7 @@
             "S": "body-kinect-wellness"
           },
           "eventId": {
-            "S": "Wellness book club"
+            "S": "wellness-book-club"
           },
           "locationId": {
             "S": "body-kinect-wellness-center"
@@ -407,6 +407,90 @@
           },
           "startTime": {
             "S": "07:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "eventId": {
+            "S": "fitness-friday"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "maci-keaton"
+          },
+          "name": {
+            "S": "Fitness Friday"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "This is a conditioning class, blends yoga, strength training with your own body weight, bands and or light weights. We will work on balance and functional training. All can be done from a chair as needed."
+          },
+          "dayOfWeek": {
+            "N": "5"
+          },
+          "startTime": {
+            "S": "10:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "clientId": {
+            "S": "body-kinect-wellness"
+          },
+          "eventId": {
+            "S": "mixedfit"
+          },
+          "locationId": {
+            "S": "body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "guest-instructor"
+          },
+          "name": {
+            "S": "Mixedfit"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "Mixedfit is a people inspired fitness program that combines dance movements with body weight toning. Mixedfit is an exhilarating fun fitness program."
+          },
+          "dayOfWeek": {
+            "N": "5"
+          },
+          "startTime": {
+            "S": "10:30:00"
           },
           "duration": {
             "N": "60"
