@@ -1,6 +1,6 @@
 package com.ebsolutions.dal.daos;
 
-import com.ebsolutions.config.DatabaseTables;
+import com.ebsolutions.config.Constants;
 import com.ebsolutions.dal.dtos.OrganizerDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.MetricsStopWatch;
@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 @Prototype
 public class OrganizerDao {
 
-    private final DynamoDbTable<OrganizerDto> organizerTable;
+    private final DynamoDbTable<OrganizerDto> ddbTable;
 
     public OrganizerDao(DynamoDbEnhancedClient enhancedClient) {
-        this.organizerTable = enhancedClient.table(DatabaseTables.ORGANIZER, TableSchema.fromBean(OrganizerDto.class));
+        this.ddbTable = enhancedClient.table(Constants.DATABASE_TABLE_NAME, TableSchema.fromBean(OrganizerDto.class));
     }
 
     public Organizer read(String clientId, String organizerId) {
@@ -35,13 +35,13 @@ public class OrganizerDao {
         try {
             Key key = Key.builder().partitionValue(clientId).sortValue(organizerId).build();
 
-            OrganizerDto organizerDto = organizerTable.getItem(key);
+            OrganizerDto organizerDto = ddbTable.getItem(key);
 
             return organizerDto == null
                     ? null
                     : Organizer.builder()
-                    .clientId(organizerDto.getClientId())
-                    .organizerId(organizerDto.getOrganizerId())
+                    .clientId(organizerDto.getPartitionKey())
+                    .organizerId(organizerDto.getSortKey())
                     .name(organizerDto.getName())
                     .createdOn(organizerDto.getCreatedOn())
                     .lastUpdatedOn(organizerDto.getLastUpdatedOn())
@@ -62,13 +62,13 @@ public class OrganizerDao {
         try {
             Key key = Key.builder().partitionValue(clientId).build();
             QueryConditional queryConditional = QueryConditional.keyEqualTo(key);
-            List<OrganizerDto> organizerDtos = organizerTable.query(queryConditional).items().stream().toList();
+            List<OrganizerDto> organizerDtos = ddbTable.query(queryConditional).items().stream().toList();
 
             return organizerDtos.stream()
                     .map(organizerDto ->
                             Organizer.builder()
-                                    .clientId(organizerDto.getClientId())
-                                    .organizerId(organizerDto.getOrganizerId())
+                                    .clientId(organizerDto.getPartitionKey())
+                                    .organizerId(organizerDto.getSortKey())
                                     .name(organizerDto.getName())
                                     .createdOn(organizerDto.getCreatedOn())
                                     .lastUpdatedOn(organizerDto.getLastUpdatedOn())
@@ -88,11 +88,11 @@ public class OrganizerDao {
 
     public void delete(String clientId, String organizerId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
-       
+
         try {
             Key key = Key.builder().partitionValue(clientId).sortValue(organizerId).build();
 
-            organizerTable.deleteItem(key);
+            ddbTable.deleteItem(key);
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
@@ -107,22 +107,22 @@ public class OrganizerDao {
 
     public Organizer create(Organizer organizer) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
-       
+
         try {
             LocalDateTime now = LocalDateTime.now();
             OrganizerDto organizerDto = OrganizerDto.builder()
-                    .clientId(organizer.getClientId())
-                    .organizerId(UniqueIdGenerator.generate())
+                    .partitionKey(organizer.getClientId())
+                    .sortKey(UniqueIdGenerator.generate())
                     .name(organizer.getName())
                     .createdOn(now)
                     .lastUpdatedOn(now)
                     .build();
 
-            organizerTable.updateItem(organizerDto);
+            ddbTable.updateItem(organizerDto);
 
             return Organizer.builder()
-                    .clientId(organizerDto.getClientId())
-                    .organizerId(organizerDto.getOrganizerId())
+                    .clientId(organizerDto.getPartitionKey())
+                    .organizerId(organizerDto.getSortKey())
                     .name(organizerDto.getName())
                     .createdOn(organizerDto.getCreatedOn())
                     .lastUpdatedOn(organizerDto.getLastUpdatedOn())
@@ -145,17 +145,17 @@ public class OrganizerDao {
      */
     public void update(Organizer organizer) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
-       
+
         try {
             OrganizerDto organizerDto = OrganizerDto.builder()
-                    .clientId(organizer.getClientId())
-                    .organizerId(organizer.getOrganizerId())
+                    .partitionKey(organizer.getClientId())
+                    .sortKey(organizer.getOrganizerId())
                     .name(organizer.getName())
                     .createdOn(organizer.getCreatedOn())
                     .lastUpdatedOn(LocalDateTime.now())
                     .build();
 
-            organizerTable.putItem(organizerDto);
+            ddbTable.putItem(organizerDto);
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);

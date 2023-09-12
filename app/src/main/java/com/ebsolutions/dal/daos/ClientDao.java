@@ -1,6 +1,6 @@
 package com.ebsolutions.dal.daos;
 
-import com.ebsolutions.config.DatabaseTables;
+import com.ebsolutions.config.Constants;
 import com.ebsolutions.dal.dtos.ClientDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Client;
@@ -21,25 +21,23 @@ import java.time.LocalDateTime;
 @Prototype
 public class ClientDao {
 
-    private DynamoDbEnhancedClient enhancedClient;
-    private DynamoDbTable<ClientDto> clientTable;
+    private DynamoDbTable<ClientDto> ddbTable;
 
     public ClientDao(DynamoDbEnhancedClient enhancedClient) {
-        this.enhancedClient = enhancedClient;
-        this.clientTable = this.enhancedClient.table(DatabaseTables.CLIENT, TableSchema.fromBean(ClientDto.class));
+        this.ddbTable = enhancedClient.table(Constants.DATABASE_TABLE_NAME, TableSchema.fromBean(ClientDto.class));
     }
 
     public Client read(String clientId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = Key.builder().partitionValue(clientId).build();
+            Key key = Key.builder().partitionValue(clientId).sortValue(Constants.CLIENT_SORT_KEY).build();
 
-            ClientDto clientDto = clientTable.getItem(key);
+            ClientDto clientDto = ddbTable.getItem(key);
 
             return clientDto == null
                     ? null
                     : Client.builder()
-                    .clientId(clientDto.getClientId())
+                    .clientId(clientDto.getPartitionKey())
                     .name(clientDto.getName())
                     .createdOn(clientDto.getCreatedOn())
                     .lastUpdatedOn(clientDto.getLastUpdatedOn())
@@ -60,7 +58,7 @@ public class ClientDao {
         try {
             Key key = Key.builder().partitionValue(clientId).build();
 
-            clientTable.deleteItem(key);
+            ddbTable.deleteItem(key);
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
@@ -78,16 +76,17 @@ public class ClientDao {
             LocalDateTime now = LocalDateTime.now();
 
             ClientDto clientDto = ClientDto.builder()
-                    .clientId(UniqueIdGenerator.generate())
+                    .partitionKey(UniqueIdGenerator.generate())
+                    .sortKey(Constants.CLIENT_SORT_KEY)
                     .name(client.getName())
                     .createdOn(now)
                     .lastUpdatedOn(now)
                     .build();
 
-            clientTable.updateItem(clientDto);
+            ddbTable.updateItem(clientDto);
 
             return Client.builder()
-                    .clientId(clientDto.getClientId())
+                    .clientId(clientDto.getPartitionKey())
                     .name(clientDto.getName())
                     .createdOn(clientDto.getCreatedOn())
                     .lastUpdatedOn(clientDto.getLastUpdatedOn())
@@ -112,13 +111,14 @@ public class ClientDao {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             ClientDto clientDto = ClientDto.builder()
-                    .clientId(client.getClientId())
+                    .partitionKey(client.getClientId())
+                    .sortKey(Constants.CLIENT_SORT_KEY)
                     .name(client.getName())
                     .createdOn(client.getCreatedOn())
                     .lastUpdatedOn(LocalDateTime.now())
                     .build();
 
-            clientTable.putItem(clientDto);
+            ddbTable.putItem(clientDto);
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);

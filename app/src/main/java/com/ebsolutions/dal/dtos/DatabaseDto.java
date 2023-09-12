@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,7 +21,11 @@ import java.time.LocalDateTime;
 public class DatabaseDto {
     @NonNull
     @Getter(onMethod_ = @DynamoDbPartitionKey)
-    private String clientId;
+    private String partitionKey;
+
+    @NonNull
+    @Getter(onMethod_ = @DynamoDbSortKey)
+    private String sortKey;
 
     private LocalDate expiryDate;
 

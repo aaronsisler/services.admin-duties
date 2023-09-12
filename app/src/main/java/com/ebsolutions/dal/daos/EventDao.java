@@ -1,6 +1,6 @@
 package com.ebsolutions.dal.daos;
 
-import com.ebsolutions.config.DatabaseTables;
+import com.ebsolutions.config.Constants;
 import com.ebsolutions.dal.dtos.EventDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Event;
@@ -24,13 +24,10 @@ import java.util.stream.Collectors;
 @Slf4j
 @Prototype
 public class EventDao {
-
-    private DynamoDbEnhancedClient enhancedClient;
-    private DynamoDbTable<EventDto> eventTable;
+    private DynamoDbTable<EventDto> ddbTable;
 
     public EventDao(DynamoDbEnhancedClient enhancedClient) {
-        this.enhancedClient = enhancedClient;
-        this.eventTable = this.enhancedClient.table(DatabaseTables.EVENT, TableSchema.fromBean(EventDto.class));
+        this.ddbTable = enhancedClient.table(Constants.DATABASE_TABLE_NAME, TableSchema.fromBean(EventDto.class));
     }
 
     public Event read(String clientId, String eventId) {
@@ -38,13 +35,13 @@ public class EventDao {
         try {
             Key key = Key.builder().partitionValue(clientId).sortValue(eventId).build();
 
-            EventDto eventDto = eventTable.getItem(key);
+            EventDto eventDto = ddbTable.getItem(key);
 
             return eventDto == null
                     ? null
                     : Event.builder()
-                    .clientId(eventDto.getClientId())
-                    .eventId(eventDto.getEventId())
+                    .clientId(eventDto.getPartitionKey())
+                    .eventId(eventDto.getSortKey())
                     .locationId(eventDto.getLocationId())
                     .organizerId(eventDto.getOrganizerId())
                     .name(eventDto.getName())
@@ -72,13 +69,13 @@ public class EventDao {
         try {
             Key key = Key.builder().partitionValue(clientId).build();
             QueryConditional queryConditional = QueryConditional.keyEqualTo(key);
-            List<EventDto> eventDtos = eventTable.query(queryConditional).items().stream().collect(Collectors.toList());
+            List<EventDto> eventDtos = ddbTable.query(queryConditional).items().stream().collect(Collectors.toList());
 
             return eventDtos.stream()
                     .map(eventDto ->
                             Event.builder()
-                                    .clientId(eventDto.getClientId())
-                                    .eventId(eventDto.getEventId())
+                                    .clientId(eventDto.getPartitionKey())
+                                    .eventId(eventDto.getSortKey())
                                     .locationId(eventDto.getLocationId())
                                     .organizerId(eventDto.getOrganizerId())
                                     .name(eventDto.getName())
@@ -108,7 +105,7 @@ public class EventDao {
         try {
             Key key = Key.builder().partitionValue(clientId).sortValue(eventId).build();
 
-            eventTable.deleteItem(key);
+            ddbTable.deleteItem(key);
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
@@ -126,8 +123,8 @@ public class EventDao {
         try {
             LocalDateTime now = LocalDateTime.now();
             EventDto eventDto = EventDto.builder()
-                    .clientId(event.getClientId())
-                    .eventId(UniqueIdGenerator.generate())
+                    .partitionKey(event.getClientId())
+                    .sortKey(UniqueIdGenerator.generate())
                     .locationId(event.getLocationId())
                     .organizerId(event.getOrganizerId())
                     .name(event.getName())
@@ -140,11 +137,11 @@ public class EventDao {
                     .lastUpdatedOn(now)
                     .build();
 
-            eventTable.updateItem(eventDto);
+            ddbTable.updateItem(eventDto);
 
             return Event.builder()
-                    .clientId(eventDto.getClientId())
-                    .eventId(eventDto.getEventId())
+                    .clientId(eventDto.getPartitionKey())
+                    .eventId(eventDto.getSortKey())
                     .locationId(eventDto.getLocationId())
                     .organizerId(eventDto.getOrganizerId())
                     .name(eventDto.getName())
@@ -176,8 +173,8 @@ public class EventDao {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             EventDto eventDto = EventDto.builder()
-                    .clientId(event.getClientId())
-                    .eventId(event.getEventId())
+                    .partitionKey(event.getClientId())
+                    .sortKey(event.getEventId())
                     .locationId(event.getLocationId())
                     .organizerId(event.getOrganizerId())
                     .name(event.getName())
@@ -190,7 +187,7 @@ public class EventDao {
                     .lastUpdatedOn(LocalDateTime.now())
                     .build();
 
-            eventTable.putItem(eventDto);
+            ddbTable.putItem(eventDto);
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);

@@ -1,11 +1,13 @@
 package com.ebsolutions.dal.dtos;
 
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
 
 import java.time.LocalTime;
 
@@ -17,9 +19,6 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventDto extends DatabaseDto {
-    @NonNull
-    @Getter(onMethod_ = @DynamoDbSortKey)
-    private String eventId;
     @NonNull
     private String locationId;
     @NonNull
