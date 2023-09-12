@@ -3,10 +3,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "yoga-for-everybody"
           },
           "locationId": {
@@ -45,10 +45,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "ability-full-body-fitness-cardio-strength-class"
           },
           "locationId": {
@@ -87,10 +87,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "evening-flow-and-restore"
           },
           "locationId": {
@@ -129,10 +129,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "mens-yoga"
           },
           "locationId": {
@@ -171,10 +171,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "chair-yoga"
           },
           "locationId": {
@@ -213,10 +213,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "foundational-yoga"
           },
           "locationId": {
@@ -255,10 +255,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "yin-yoga"
           },
           "locationId": {
@@ -297,10 +297,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "vinyasa-for-everybody"
           },
           "locationId": {
@@ -339,10 +339,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "wellness-book-club"
           },
           "locationId": {
@@ -381,10 +381,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "earlybird-flow"
           },
           "locationId": {
@@ -423,10 +423,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "fitness-friday"
           },
           "locationId": {
@@ -465,10 +465,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
+          "sortKey": {
             "S": "mixedfit"
           },
           "locationId": {

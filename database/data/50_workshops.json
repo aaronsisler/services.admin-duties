@@ -3,10 +3,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "workshopId": {
+          "sortKey": {
             "S": "restorative-journey-workshop"
           },
           "locationId": {
@@ -48,10 +48,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "workshopId": {
+          "sortKey": {
             "S": "restorative-journey-sound-yoga-workshop"
           },
           "locationId": {
@@ -93,10 +93,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "workshopId": {
+          "sortKey": {
             "S": "restorative-journey-sound-yoga-workshop"
           },
           "locationId": {
@@ -138,10 +138,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "workshopId": {
+          "sortKey": {
             "S": "core-align-demo"
           },
           "locationId": {
@@ -183,10 +183,10 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "workshopId": {
+          "sortKey": {
             "S": "core-align-demo"
           },
           "locationId": {

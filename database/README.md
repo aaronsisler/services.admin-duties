@@ -24,3 +24,17 @@
 
 - Retrieve a workshop of a client
 - Retrieve all workshops of a client
+
+## AWS CLI
+
+### Create stack
+
+```bash
+aws cloudformation create-stack --stack-name service-admin-duties-beta-dynamodb --template-body file://database/cloud-formation/dynamodb.yaml
+```
+
+### Delete stack
+
+```bash
+aws cloudformation delete-stack --stack-name service-admin-duties-beta-dynamodb
+```

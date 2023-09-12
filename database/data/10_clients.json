@@ -1,9 +1,9 @@
 {
-  "CLIENT": [
+  "SERVICES_ADMIN_DUTIES_BETA": [
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
           "name": {

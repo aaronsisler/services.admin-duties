@@ -3,7 +3,7 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
           "locationId": {
