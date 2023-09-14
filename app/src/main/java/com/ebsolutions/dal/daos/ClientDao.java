@@ -1,6 +1,6 @@
 package com.ebsolutions.dal.daos;
 
-import com.ebsolutions.config.Constants;
+import com.ebsolutions.config.DatabaseConstants;
 import com.ebsolutions.dal.dtos.ClientDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Client;
@@ -24,13 +24,13 @@ public class ClientDao {
     private DynamoDbTable<ClientDto> ddbTable;
 
     public ClientDao(DynamoDbEnhancedClient enhancedClient) {
-        this.ddbTable = enhancedClient.table(Constants.DATABASE_TABLE_NAME, TableSchema.fromBean(ClientDto.class));
+        this.ddbTable = enhancedClient.table(DatabaseConstants.DATABASE_TABLE_NAME, TableSchema.fromBean(ClientDto.class));
     }
 
     public Client read(String clientId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = Key.builder().partitionValue(clientId).sortValue(Constants.CLIENT_SORT_KEY).build();
+            Key key = Key.builder().partitionValue(clientId).sortValue(DatabaseConstants.CLIENT_SORT_KEY).build();
 
             ClientDto clientDto = ddbTable.getItem(key);
 
@@ -77,7 +77,7 @@ public class ClientDao {
 
             ClientDto clientDto = ClientDto.builder()
                     .partitionKey(UniqueIdGenerator.generate())
-                    .sortKey(Constants.CLIENT_SORT_KEY)
+                    .sortKey(DatabaseConstants.CLIENT_SORT_KEY)
                     .name(client.getName())
                     .createdOn(now)
                     .lastUpdatedOn(now)
@@ -112,7 +112,7 @@ public class ClientDao {
         try {
             ClientDto clientDto = ClientDto.builder()
                     .partitionKey(client.getClientId())
-                    .sortKey(Constants.CLIENT_SORT_KEY)
+                    .sortKey(DatabaseConstants.CLIENT_SORT_KEY)
                     .name(client.getName())
                     .createdOn(client.getCreatedOn())
                     .lastUpdatedOn(LocalDateTime.now())

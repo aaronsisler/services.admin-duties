@@ -1,6 +1,6 @@
 package com.ebsolutions.dal.daos;
 
-import com.ebsolutions.config.Constants;
+import com.ebsolutions.config.DatabaseConstants;
 import com.ebsolutions.dal.dtos.EventDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Event;
@@ -27,7 +27,7 @@ public class EventDao {
     private DynamoDbTable<EventDto> ddbTable;
 
     public EventDao(DynamoDbEnhancedClient enhancedClient) {
-        this.ddbTable = enhancedClient.table(Constants.DATABASE_TABLE_NAME, TableSchema.fromBean(EventDto.class));
+        this.ddbTable = enhancedClient.table(DatabaseConstants.DATABASE_TABLE_NAME, TableSchema.fromBean(EventDto.class));
     }
 
     public Event read(String clientId, String eventId) {

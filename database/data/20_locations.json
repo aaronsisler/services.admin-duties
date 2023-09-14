@@ -7,7 +7,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "name": {
             "S": "Body Kinect Wellness Center"

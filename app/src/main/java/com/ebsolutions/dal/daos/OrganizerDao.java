@@ -1,6 +1,6 @@
 package com.ebsolutions.dal.daos;
 
-import com.ebsolutions.config.Constants;
+import com.ebsolutions.config.DatabaseConstants;
 import com.ebsolutions.dal.dtos.OrganizerDto;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.MetricsStopWatch;
@@ -27,7 +27,7 @@ public class OrganizerDao {
     private final DynamoDbTable<OrganizerDto> ddbTable;
 
     public OrganizerDao(DynamoDbEnhancedClient enhancedClient) {
-        this.ddbTable = enhancedClient.table(Constants.DATABASE_TABLE_NAME, TableSchema.fromBean(OrganizerDto.class));
+        this.ddbTable = enhancedClient.table(DatabaseConstants.DATABASE_TABLE_NAME, TableSchema.fromBean(OrganizerDto.class));
     }
 
     public Organizer read(String clientId, String organizerId) {
