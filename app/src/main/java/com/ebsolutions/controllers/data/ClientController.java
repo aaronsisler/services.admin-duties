@@ -23,6 +23,17 @@ public class ClientController {
         this.clientDao = clientDao;
     }
 
+    @Get(value = "/{clientId}", produces = MediaType.APPLICATION_JSON)
+    public HttpResponse<?> getClient(@NotBlank @PathVariable String clientId) {
+        try {
+            Client client = clientDao.read(clientId);
+
+            return client != null ? ok(client) : noContent();
+        } catch (DataProcessingException dbe) {
+            return serverError(dbe);
+        }
+    }
+
     @Post(value = "/")
     public HttpResponse<?> postClient(@Valid @Body Client client) {
         try {
@@ -48,16 +59,6 @@ public class ClientController {
         }
     }
 
-    @Get(value = "/{clientId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getClient(@NotBlank @PathVariable String clientId) {
-        try {
-            Client client = clientDao.read(clientId);
-
-            return client != null ? ok(client) : noContent();
-        } catch (DataProcessingException dbe) {
-            return serverError(dbe);
-        }
-    }
 
     @Delete(value = "/{clientId}")
     public HttpResponse<?> deleteClient(@NotBlank @PathVariable String clientId) {

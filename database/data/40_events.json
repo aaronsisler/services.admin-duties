@@ -1,16 +1,16 @@
 {
-  "EVENT": [
+  "SERVICES_ADMIN_DUTIES_BETA": [
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "yoga-for-everybody"
+          "sortKey": {
+            "S": "EVENT#yoga-for-everybody"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -45,14 +45,14 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "ability-full-body-fitness-cardio-strength-class"
+          "sortKey": {
+            "S": "EVENT#ability-full-body-fitness-cardio-strength-class"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -87,14 +87,14 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "evening-flow-and-restore"
+          "sortKey": {
+            "S": "EVENT#evening-flow-and-restore"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -129,14 +129,14 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "mens-yoga"
+          "sortKey": {
+            "S": "EVENT#mens-yoga"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -171,14 +171,14 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "chair-yoga"
+          "sortKey": {
+            "S": "EVENT#chair-yoga"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -213,14 +213,14 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "foundational-yoga"
+          "sortKey": {
+            "S": "EVENT#foundational-yoga"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -255,14 +255,14 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "yin-yoga"
+          "sortKey": {
+            "S": "EVENT#yin-yoga"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -297,14 +297,14 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "vinyasa-for-everybody"
+          "sortKey": {
+            "S": "EVENT#vinyasa-for-everybody"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -339,14 +339,14 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "wellness-book-club"
+          "sortKey": {
+            "S": "EVENT#wellness-book-club"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -381,14 +381,14 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "earlybird-flow"
+          "sortKey": {
+            "S": "EVENT#earlybird-flow"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -423,17 +423,17 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "fitness-friday"
+          "sortKey": {
+            "S": "EVENT#fitness-friday"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "maci-keaton"
+            "S": "ORGANIZER#maci-keaton"
           },
           "name": {
             "S": "Fitness Friday"
@@ -465,17 +465,17 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "eventId": {
-            "S": "mixedfit"
+          "sortKey": {
+            "S": "EVENT#mixedfit"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "guest-instructor"
+            "S": "ORGANIZER#guest-instructor"
           },
           "name": {
             "S": "Mixedfit"

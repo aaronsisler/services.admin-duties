@@ -35,6 +35,8 @@ dependencies {
     implementation 'software.amazon.awssdk:dynamodb-enhanced'
     implementation 'com.opencsv:opencsv:5.8'
 
+    // Third Party
+    implementation 'org.apache.commons:commons-lang3:3.13.0'
 
     // Testing dependencies
     testImplementation 'io.micronaut:micronaut-http-client'

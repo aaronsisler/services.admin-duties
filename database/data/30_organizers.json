@@ -1,13 +1,13 @@
 {
-  "ORGANIZER": [
+  "SERVICES_ADMIN_DUTIES_BETA": [
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "organizerId": {
-            "S": "tami-richards"
+          "sortKey": {
+            "S": "ORGANIZER#tami-richards"
           },
           "name": {
             "S": "Tami Richards"
@@ -24,11 +24,11 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "organizerId": {
-            "S": "ryin-santana"
+          "sortKey": {
+            "S": "ORGANIZER#ryin-santana"
           },
           "name": {
             "S": "Ryin Santana"
@@ -45,11 +45,11 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "organizerId": {
-            "S": "hope-ashby"
+          "sortKey": {
+            "S": "ORGANIZER#hope-ashby"
           },
           "name": {
             "S": "Hope Ashby"
@@ -66,11 +66,11 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "organizerId": {
-            "S": "toni-midgett"
+          "sortKey": {
+            "S": "ORGANIZER#toni-midgett"
           },
           "name": {
             "S": "Toni Midgett"
@@ -87,11 +87,11 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "organizerId": {
-            "S": "terri-balog"
+          "sortKey": {
+            "S": "ORGANIZER#terri-balog"
           },
           "name": {
             "S": "Terri Balog"
@@ -108,11 +108,11 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "organizerId": {
-            "S": "alyssa-archer"
+          "sortKey": {
+            "S": "ORGANIZER#alyssa-archer"
           },
           "name": {
             "S": "Alyssa Archer"
@@ -129,11 +129,11 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "organizerId": {
-            "S": "maci-keaton"
+          "sortKey": {
+            "S": "ORGANIZER#maci-keaton"
           },
           "name": {
             "S": "Maci Keaton"
@@ -150,11 +150,11 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "organizerId": {
-            "S": "guest-instructor"
+          "sortKey": {
+            "S": "ORGANIZER#guest-instructor"
           },
           "name": {
             "S": "Guest Instructor"

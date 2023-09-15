@@ -1,18 +1,19 @@
 package com.ebsolutions.dal.daos;
 
-import com.ebsolutions.config.DatabaseTables;
+import com.ebsolutions.config.DatabaseConstants;
 import com.ebsolutions.dal.dtos.LocationDto;
+import com.ebsolutions.dal.utils.KeyBuilder;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Location;
 import com.ebsolutions.models.MetricsStopWatch;
 import com.ebsolutions.utils.UniqueIdGenerator;
 import io.micronaut.context.annotation.Prototype;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
-import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 import java.text.MessageFormat;
@@ -20,30 +21,29 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional.sortBeginsWith;
+
 @Slf4j
 @Prototype
 public class LocationDao {
-
-    private DynamoDbEnhancedClient enhancedClient;
-    private DynamoDbTable<LocationDto> locationTable;
+    private DynamoDbTable<LocationDto> ddbTable;
 
     public LocationDao(DynamoDbEnhancedClient enhancedClient) {
-        this.enhancedClient = enhancedClient;
-        this.locationTable = this.enhancedClient.table(DatabaseTables.LOCATION, TableSchema.fromBean(LocationDto.class));
+        this.ddbTable = enhancedClient.table(DatabaseConstants.DATABASE_TABLE_NAME, TableSchema.fromBean(LocationDto.class));
     }
 
     public Location read(String clientId, String locationId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = Key.builder().partitionValue(clientId).sortValue(locationId).build();
+            Key key = KeyBuilder.build(clientId, DatabaseConstants.LOCATION_SORT_KEY, locationId);
 
-            LocationDto locationDto = locationTable.getItem(key);
+            LocationDto locationDto = ddbTable.getItem(key);
 
             return locationDto == null
                     ? null
                     : Location.builder()
-                    .clientId(locationDto.getClientId())
-                    .locationId(locationDto.getLocationId())
+                    .clientId(locationDto.getPartitionKey())
+                    .locationId(StringUtils.remove(locationDto.getSortKey(), DatabaseConstants.LOCATION_SORT_KEY))
                     .name(locationDto.getName())
                     .createdOn(locationDto.getCreatedOn())
                     .lastUpdatedOn(locationDto.getLastUpdatedOn())
@@ -62,15 +62,20 @@ public class LocationDao {
     public List<Location> readAll(String clientId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = Key.builder().partitionValue(clientId).build();
-            QueryConditional queryConditional = QueryConditional.keyEqualTo(key);
-            List<LocationDto> locationDtos = locationTable.query(queryConditional).items().stream().collect(Collectors.toList());
+            List<LocationDto> locationDtos = ddbTable
+                    .query(r -> r.queryConditional(
+                            sortBeginsWith(s
+                                    -> s.partitionValue(clientId).sortValue(DatabaseConstants.LOCATION_SORT_KEY).build()))
+                    )
+                    .items()
+                    .stream()
+                    .collect(Collectors.toList());
 
             return locationDtos.stream()
                     .map(locationDto ->
                             Location.builder()
-                                    .clientId(locationDto.getClientId())
-                                    .locationId(locationDto.getLocationId())
+                                    .clientId(locationDto.getPartitionKey())
+                                    .locationId(StringUtils.remove(locationDto.getSortKey(), DatabaseConstants.LOCATION_SORT_KEY))
                                     .name(locationDto.getName())
                                     .createdOn(locationDto.getCreatedOn())
                                     .lastUpdatedOn(locationDto.getLastUpdatedOn())
@@ -91,9 +96,9 @@ public class LocationDao {
     public void delete(String clientId, String locationId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = Key.builder().partitionValue(clientId).sortValue(locationId).build();
+            Key key = KeyBuilder.build(clientId, DatabaseConstants.LOCATION_SORT_KEY, locationId);
 
-            locationTable.deleteItem(key);
+            ddbTable.deleteItem(key);
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
@@ -111,18 +116,18 @@ public class LocationDao {
         try {
             LocalDateTime now = LocalDateTime.now();
             LocationDto locationDto = LocationDto.builder()
-                    .clientId(location.getClientId())
-                    .locationId(UniqueIdGenerator.generate())
+                    .partitionKey(location.getClientId())
+                    .sortKey(DatabaseConstants.LOCATION_SORT_KEY + UniqueIdGenerator.generate())
                     .name(location.getName())
                     .createdOn(now)
                     .lastUpdatedOn(now)
                     .build();
 
-            locationTable.updateItem(locationDto);
+            ddbTable.updateItem(locationDto);
 
             return Location.builder()
-                    .clientId(locationDto.getClientId())
-                    .locationId(locationDto.getLocationId())
+                    .clientId(locationDto.getPartitionKey())
+                    .locationId(StringUtils.remove(locationDto.getSortKey(), DatabaseConstants.LOCATION_SORT_KEY))
                     .name(locationDto.getName())
                     .createdOn(locationDto.getCreatedOn())
                     .lastUpdatedOn(locationDto.getLastUpdatedOn())
@@ -147,14 +152,14 @@ public class LocationDao {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             LocationDto locationDto = LocationDto.builder()
-                    .clientId(location.getClientId())
-                    .locationId(location.getLocationId())
+                    .partitionKey(location.getClientId())
+                    .sortKey(DatabaseConstants.LOCATION_SORT_KEY + location.getLocationId())
                     .name(location.getName())
                     .createdOn(location.getCreatedOn())
                     .lastUpdatedOn(LocalDateTime.now())
                     .build();
 
-            locationTable.putItem(locationDto);
+            ddbTable.putItem(locationDto);
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);

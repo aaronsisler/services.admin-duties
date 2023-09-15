@@ -1,19 +1,19 @@
 {
-  "WORKSHOP": [
+  "SERVICES_ADMIN_DUTIES_BETA": [
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "workshopId": {
-            "S": "restorative-journey-workshop"
+          "sortKey": {
+            "S": "WORKSHOP#restorative-journey-workshop"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "guest-instructor"
+            "S": "ORGANIZER#guest-instructor"
           },
           "name": {
             "S": "Restorative Journey Workshop"
@@ -48,17 +48,17 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "workshopId": {
-            "S": "restorative-journey-sound-yoga-workshop"
+          "sortKey": {
+            "S": "WORKSHOP#restorative-journey-sound-yoga-workshop"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "guest-instructor"
+            "S": "ORGANIZER#guest-instructor"
           },
           "name": {
             "S": "Restorative Journal Sound Yoga Workshop"
@@ -93,62 +93,17 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "workshopId": {
-            "S": "restorative-journey-sound-yoga-workshop"
+          "sortKey": {
+            "S": "WORKSHOP#core-align-demo-20230913"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "tami-richards"
-          },
-          "name": {
-            "S": "Restorative Journal Sound Yoga Workshop"
-          },
-          "category": {
-            "S": "Wellness Center"
-          },
-          "description": {
-            "S": "This class is all about restoration of your body, mind and soul. You will be positioned in relaxing restorative poses as you sink into your suppurative space and breath. This class is all about you! Journal work and sound will be included for your enjoyment and to deepen your experience and connection with self."
-          },
-          "workshopDate": {
-            "S": "20230928"
-          },
-          "startTime": {
-            "S": "11:00:00"
-          },
-          "duration": {
-            "N": "90"
-          },
-          "cost": {
-            "N": "20"
-          },
-          "createdOn": {
-            "S": "2023-09-09T07:31:21"
-          },
-          "lastUpdatedOn": {
-            "S": "2023-09-09T07:31:21"
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "clientId": {
-            "S": "body-kinect-wellness"
-          },
-          "workshopId": {
-            "S": "core-align-demo"
-          },
-          "locationId": {
-            "S": "body-kinect-wellness-center"
-          },
-          "organizerId": {
-            "S": "tami-richards"
+            "S": "ORGANIZER#tami-richards"
           },
           "name": {
             "S": "Core Align Demo"
@@ -183,17 +138,17 @@
     {
       "PutRequest": {
         "Item": {
-          "clientId": {
+          "partitionKey": {
             "S": "body-kinect-wellness"
           },
-          "workshopId": {
-            "S": "core-align-demo"
+          "sortKey": {
+            "S": "WORKSHOP#core-align-demo-20230914"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "tami-richards"
+            "S": "ORGANIZER#tami-richards"
           },
           "name": {
             "S": "Core Align Demo"
