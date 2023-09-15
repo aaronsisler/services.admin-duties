@@ -1,7 +1,6 @@
 package com.ebsolutions.models;
 
 import io.micronaut.serde.annotation.Serdeable;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +17,5 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Workshop extends BaseEvent {
     private String workshopId;
-    @NotBlank
     private LocalDate workshopDate;
 }

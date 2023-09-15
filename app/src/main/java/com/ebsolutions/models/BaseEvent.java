@@ -26,8 +26,6 @@ public class BaseEvent extends Base {
     private String category;
     @NotBlank
     private String description;
-    @NotBlank
     private LocalTime startTime;
-    @NotBlank
     private short duration;
 }

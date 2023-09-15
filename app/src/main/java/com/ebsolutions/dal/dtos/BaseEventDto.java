@@ -33,6 +33,5 @@ public class BaseEventDto extends DatabaseDto {
     /**
      * Value in minutes
      */
-    @NonNull
     private short duration;
 }

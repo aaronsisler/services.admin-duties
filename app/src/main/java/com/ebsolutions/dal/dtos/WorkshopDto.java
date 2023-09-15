@@ -24,6 +24,5 @@ public class WorkshopDto extends BaseEventDto {
     /**
      * Value in pennies
      */
-    @NonNull
     private short cost;
 }
