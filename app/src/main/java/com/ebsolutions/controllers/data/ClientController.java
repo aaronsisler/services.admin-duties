@@ -24,7 +24,7 @@ public class ClientController {
     }
 
     @Get(value = "/{clientId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getClient(@NotBlank @PathVariable String clientId) {
+    public HttpResponse<?> get(@NotBlank @PathVariable String clientId) {
         try {
             Client client = clientDao.read(clientId);
 
@@ -35,7 +35,7 @@ public class ClientController {
     }
 
     @Post(value = "/")
-    public HttpResponse<?> postClient(@Valid @Body Client client) {
+    public HttpResponse<?> post(@Valid @Body Client client) {
         try {
             return ok(clientDao.create(client));
         } catch (DataProcessingException dbe) {
@@ -44,7 +44,7 @@ public class ClientController {
     }
 
     @Put(value = "/")
-    public HttpResponse<?> putClient(@Valid @Body Client client) {
+    public HttpResponse<?> put(@Valid @Body Client client) {
         try {
             if (StringValidator.isBlank(client.getClientId())
                     || !LocalDateValidator.isBeforeNow(client.getCreatedOn())
@@ -61,7 +61,7 @@ public class ClientController {
 
 
     @Delete(value = "/{clientId}")
-    public HttpResponse<?> deleteClient(@NotBlank @PathVariable String clientId) {
+    public HttpResponse<?> delete(@NotBlank @PathVariable String clientId) {
         try {
             clientDao.delete(clientId);
 

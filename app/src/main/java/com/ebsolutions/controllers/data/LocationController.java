@@ -26,7 +26,7 @@ public class LocationController {
     }
 
     @Get(value = "/{locationId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
+    public HttpResponse<?> get(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
         try {
             Location location = locationDao.read(clientId, locationId);
 
@@ -37,7 +37,7 @@ public class LocationController {
     }
 
     @Get(value = "/", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getLocations(@NotBlank @PathVariable String clientId) {
+    public HttpResponse<?> getAll(@NotBlank @PathVariable String clientId) {
         try {
             List<Location> locations = locationDao.readAll(clientId);
 
@@ -48,7 +48,7 @@ public class LocationController {
     }
 
     @Post(value = "/")
-    public HttpResponse<?> postLocation(@NotBlank @PathVariable String clientId, @Valid @Body Location location) {
+    public HttpResponse<?> post(@NotBlank @PathVariable String clientId, @Valid @Body Location location) {
         try {
             if (!clientId.matches(location.getClientId())) {
                 return badRequest();
@@ -61,7 +61,7 @@ public class LocationController {
     }
 
     @Put(value = "/")
-    public HttpResponse<?> putLocation(@NotBlank @PathVariable String clientId, @Valid @Body Location location) {
+    public HttpResponse<?> put(@NotBlank @PathVariable String clientId, @Valid @Body Location location) {
         try {
             if (!clientId.matches(location.getClientId())
                     || StringValidator.isBlank(location.getLocationId())
@@ -78,7 +78,7 @@ public class LocationController {
     }
 
     @Delete(value = "/{locationId}")
-    public HttpResponse<?> deleteLocation(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
+    public HttpResponse<?> delete(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String locationId) {
         try {
             locationDao.delete(clientId, locationId);
 

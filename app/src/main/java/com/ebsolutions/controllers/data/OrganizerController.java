@@ -26,7 +26,7 @@ public class OrganizerController {
     }
 
     @Get(value = "/{organizerId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getOrganizer(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String organizerId) {
+    public HttpResponse<?> get(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String organizerId) {
         try {
             Organizer organizer = organizerDao.read(clientId, organizerId);
 
@@ -37,7 +37,7 @@ public class OrganizerController {
     }
 
     @Get(value = "/", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getOrganizers(@NotBlank @PathVariable String clientId) {
+    public HttpResponse<?> getAll(@NotBlank @PathVariable String clientId) {
         try {
             List<Organizer> organizers = organizerDao.readAll(clientId);
 
@@ -48,7 +48,7 @@ public class OrganizerController {
     }
 
     @Post(value = "/")
-    public HttpResponse<?> postClient(@NotBlank @PathVariable String clientId, @Valid @Body Organizer organizer) {
+    public HttpResponse<?> post(@NotBlank @PathVariable String clientId, @Valid @Body Organizer organizer) {
         try {
             if (!clientId.matches(organizer.getClientId())) {
                 return badRequest();
@@ -61,7 +61,7 @@ public class OrganizerController {
     }
 
     @Put(value = "/")
-    public HttpResponse<?> putOrganizer(@NotBlank @PathVariable String clientId, @Valid @Body Organizer organizer) {
+    public HttpResponse<?> put(@NotBlank @PathVariable String clientId, @Valid @Body Organizer organizer) {
         try {
             if (!clientId.matches(organizer.getClientId())
                     || StringValidator.isBlank(organizer.getOrganizerId())
@@ -79,7 +79,7 @@ public class OrganizerController {
 
 
     @Delete(value = "/{organizerId}")
-    public HttpResponse<?> deleteOrganizer(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String organizerId) {
+    public HttpResponse<?> delete(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String organizerId) {
         try {
             organizerDao.delete(clientId, organizerId);
 
