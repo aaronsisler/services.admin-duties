@@ -7,10 +7,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "yoga-for-everybody"
+            "S": "EVENT#yoga-for-everybody"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -49,10 +49,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "ability-full-body-fitness-cardio-strength-class"
+            "S": "EVENT#ability-full-body-fitness-cardio-strength-class"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -91,10 +91,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "evening-flow-and-restore"
+            "S": "EVENT#evening-flow-and-restore"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -133,10 +133,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "mens-yoga"
+            "S": "EVENT#mens-yoga"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -175,10 +175,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "chair-yoga"
+            "S": "EVENT#chair-yoga"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -217,10 +217,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "foundational-yoga"
+            "S": "EVENT#foundational-yoga"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -259,10 +259,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "yin-yoga"
+            "S": "EVENT#yin-yoga"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -301,10 +301,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "vinyasa-for-everybody"
+            "S": "EVENT#vinyasa-for-everybody"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -343,10 +343,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "wellness-book-club"
+            "S": "EVENT#wellness-book-club"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -385,10 +385,10 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "earlybird-flow"
+            "S": "EVENT#earlybird-flow"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
             "S": ""
@@ -427,13 +427,13 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "fitness-friday"
+            "S": "EVENT#fitness-friday"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "maci-keaton"
+            "S": "ORGANIZER#maci-keaton"
           },
           "name": {
             "S": "Fitness Friday"
@@ -469,13 +469,13 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "mixedfit"
+            "S": "EVENT#mixedfit"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "guest-instructor"
+            "S": "ORGANIZER#guest-instructor"
           },
           "name": {
             "S": "Mixedfit"

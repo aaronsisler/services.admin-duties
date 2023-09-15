@@ -7,13 +7,13 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "restorative-journey-workshop"
+            "S": "WORKSHOP#restorative-journey-workshop"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "guest-instructor"
+            "S": "ORGANIZER#guest-instructor"
           },
           "name": {
             "S": "Restorative Journey Workshop"
@@ -52,13 +52,13 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "restorative-journey-sound-yoga-workshop"
+            "S": "WORKSHOP#restorative-journey-sound-yoga-workshop"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "guest-instructor"
+            "S": "ORGANIZER#guest-instructor"
           },
           "name": {
             "S": "Restorative Journal Sound Yoga Workshop"
@@ -97,13 +97,13 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "core-align-demo-20230913"
+            "S": "WORKSHOP#core-align-demo-20230913"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "tami-richards"
+            "S": "ORGANIZER#tami-richards"
           },
           "name": {
             "S": "Core Align Demo"
@@ -142,13 +142,13 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "core-align-demo-20230914"
+            "S": "WORKSHOP#core-align-demo-20230914"
           },
           "locationId": {
-            "S": "body-kinect-wellness-center"
+            "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "tami-richards"
+            "S": "ORGANIZER#tami-richards"
           },
           "name": {
             "S": "Core Align Demo"

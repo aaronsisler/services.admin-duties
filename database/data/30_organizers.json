@@ -7,7 +7,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "tami-richards"
+            "S": "ORGANIZER#tami-richards"
           },
           "name": {
             "S": "Tami Richards"
@@ -28,7 +28,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "ryin-santana"
+            "S": "ORGANIZER#ryin-santana"
           },
           "name": {
             "S": "Ryin Santana"
@@ -49,7 +49,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "hope-ashby"
+            "S": "ORGANIZER#hope-ashby"
           },
           "name": {
             "S": "Hope Ashby"
@@ -70,7 +70,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "toni-midgett"
+            "S": "ORGANIZER#toni-midgett"
           },
           "name": {
             "S": "Toni Midgett"
@@ -91,7 +91,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "terri-balog"
+            "S": "ORGANIZER#terri-balog"
           },
           "name": {
             "S": "Terri Balog"
@@ -112,7 +112,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "alyssa-archer"
+            "S": "ORGANIZER#alyssa-archer"
           },
           "name": {
             "S": "Alyssa Archer"
@@ -133,7 +133,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "maci-keaton"
+            "S": "ORGANIZER#maci-keaton"
           },
           "name": {
             "S": "Maci Keaton"
@@ -154,7 +154,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "guest-instructor"
+            "S": "ORGANIZER#guest-instructor"
           },
           "name": {
             "S": "Guest Instructor"
