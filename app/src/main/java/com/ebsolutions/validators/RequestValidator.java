@@ -1,21 +1,26 @@
 package com.ebsolutions.validators;
 
-import com.ebsolutions.models.CsvRequest;
-import com.ebsolutions.models.Event;
-import com.ebsolutions.models.RequestMethod;
+import com.ebsolutions.models.*;
 
 import java.time.LocalDate;
 
 public class RequestValidator {
     public static boolean isEventValid(RequestMethod requestMethod, Event event) {
         return switch (requestMethod) {
-            case POST -> RequestValidator.isPostEventValid(event);
+            case POST -> RequestValidator.isPostBaseEventValid(event);
             case GET, PUT, DELETE -> true;
         };
     }
 
-    private static boolean isPostEventValid(Event event) {
-        return event.getDuration() > 0;
+    public static boolean isWorkshopValid(RequestMethod requestMethod, Workshop workshop) {
+        return switch (requestMethod) {
+            case POST -> RequestValidator.isPostBaseEventValid(workshop);
+            case GET, PUT, DELETE -> true;
+        };
+    }
+
+    private static boolean isPostBaseEventValid(BaseEvent baseEvent) {
+        return baseEvent.getDuration() > 0;
     }
 
     public static boolean isCsvRequestValid(CsvRequest csvRequest) {

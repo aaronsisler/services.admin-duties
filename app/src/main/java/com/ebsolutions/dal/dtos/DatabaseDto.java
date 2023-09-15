@@ -27,6 +27,10 @@ public class DatabaseDto {
     @Getter(onMethod_ = @DynamoDbSortKey)
     private String sortKey;
 
+    /**
+     * Date that record is no longer active
+     * i.e. should not be considered for items past expiryDate
+     */
     private LocalDate expiryDate;
 
     @NonNull
