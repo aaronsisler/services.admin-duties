@@ -2,6 +2,7 @@ package com.ebsolutions.dal.daos;
 
 import com.ebsolutions.config.DatabaseConstants;
 import com.ebsolutions.dal.dtos.LocationDto;
+import com.ebsolutions.dal.utils.KeyBuilder;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Location;
 import com.ebsolutions.models.MetricsStopWatch;
@@ -34,10 +35,7 @@ public class LocationDao {
     public Location read(String clientId, String locationId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = Key.builder()
-                    .partitionValue(clientId)
-                    .sortValue(DatabaseConstants.LOCATION_SORT_KEY + locationId)
-                    .build();
+            Key key = KeyBuilder.build(clientId, DatabaseConstants.LOCATION_SORT_KEY, locationId);
 
             LocationDto locationDto = ddbTable.getItem(key);
 
@@ -73,7 +71,6 @@ public class LocationDao {
                     .stream()
                     .collect(Collectors.toList());
 
-
             return locationDtos.stream()
                     .map(locationDto ->
                             Location.builder()
@@ -99,10 +96,7 @@ public class LocationDao {
     public void delete(String clientId, String locationId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = Key.builder()
-                    .partitionValue(clientId)
-                    .sortValue(DatabaseConstants.LOCATION_SORT_KEY + locationId)
-                    .build();
+            Key key = KeyBuilder.build(clientId, DatabaseConstants.LOCATION_SORT_KEY, locationId);
 
             ddbTable.deleteItem(key);
 
