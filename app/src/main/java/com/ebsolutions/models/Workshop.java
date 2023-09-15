@@ -1,6 +1,5 @@
 package com.ebsolutions.models;
 
-import io.micronaut.core.annotation.NonNull;
 import io.micronaut.serde.annotation.Serdeable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 @Data
 @Serdeable
@@ -16,8 +15,7 @@ import java.time.DayOfWeek;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Event extends BaseEvent {
-    private String eventId;
-    @NonNull
-    private DayOfWeek dayOfWeek;
+public class Workshop extends BaseEvent {
+    private String workshopId;
+    private LocalDate workshopDate;
 }

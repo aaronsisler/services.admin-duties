@@ -28,7 +28,7 @@ public class EventController {
     }
 
     @Get(value = "/{eventId}", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getEvent(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String eventId) {
+    public HttpResponse<?> get(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String eventId) {
         try {
             Event event = eventDao.read(clientId, eventId);
 
@@ -39,7 +39,7 @@ public class EventController {
     }
 
     @Get(value = "/", produces = MediaType.APPLICATION_JSON)
-    public HttpResponse<?> getEvents(@NotBlank @PathVariable String clientId) {
+    public HttpResponse<?> getAll(@NotBlank @PathVariable String clientId) {
         try {
             List<Event> events = eventDao.readAll(clientId);
 
@@ -50,7 +50,7 @@ public class EventController {
     }
 
     @Post(value = "/")
-    public HttpResponse<?> postEvent(@NotBlank @PathVariable String clientId, @Valid @Body Event event) {
+    public HttpResponse<?> post(@NotBlank @PathVariable String clientId, @Valid @Body Event event) {
         try {
             if (!clientId.matches(event.getClientId())
                     || !RequestValidator.isEventValid(RequestMethod.POST, event)) {
@@ -64,7 +64,7 @@ public class EventController {
     }
 
     @Put(value = "/")
-    public HttpResponse<?> putEvent(@NotBlank @PathVariable String clientId, @Valid @Body Event event) {
+    public HttpResponse<?> put(@NotBlank @PathVariable String clientId, @Valid @Body Event event) {
         try {
             if (!clientId.matches(event.getClientId())
                     || StringValidator.isBlank(event.getEventId())
@@ -82,7 +82,7 @@ public class EventController {
 
 
     @Delete(value = "/{eventId}")
-    public HttpResponse<?> deleteEvent(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String eventId) {
+    public HttpResponse<?> delete(@NotBlank @PathVariable String clientId, @NotBlank @PathVariable String eventId) {
         try {
             eventDao.delete(clientId, eventId);
 
