@@ -39,6 +39,8 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.13.0'
 
     // Testing dependencies
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testImplementation "io.micronaut.test:micronaut-test-spock"
     testImplementation 'io.micronaut:micronaut-http-client'
 }
 
