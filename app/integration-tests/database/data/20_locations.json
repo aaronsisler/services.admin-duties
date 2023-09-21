@@ -1,0 +1,46 @@
+{
+  "SERVICES_ADMIN_DUTIES_TESTS": [
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "mock-client-id"
+          },
+          "sortKey": {
+            "S": "LOCATION#mock-location-1-id"
+          },
+          "name": {
+            "S": "Mock Location 1"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "mock-client-id"
+          },
+          "sortKey": {
+            "S": "LOCATION#mock-location-2-id"
+          },
+          "name": {
+            "S": "Mock Location 2"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    }
+  ]
+}

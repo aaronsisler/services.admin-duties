@@ -1,0 +1,88 @@
+{
+  "SERVICES_ADMIN_DUTIES_TESTS": [
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "mock-client-id"
+          },
+          "sortKey": {
+            "S": "EVENT#mock-event-1-id"
+          },
+          "locationId": {
+            "S": "LOCATION#mock-location-1-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#mock-organizer-1-id"
+          },
+          "name": {
+            "S": "Mock Event Name 1"
+          },
+          "category": {
+            "S": "Mock Event Category 1"
+          },
+          "description": {
+            "S": "Mock Event Description 1"
+          },
+          "dayOfWeek": {
+            "N": "6"
+          },
+          "startTime": {
+            "S": "08:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "mock-client-id"
+          },
+          "sortKey": {
+            "S": "EVENT#mock-event-2-id"
+          },
+          "locationId": {
+            "S": "LOCATION#mock-location-2-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#mock-organizer-2-id"
+          },
+          "name": {
+            "S": "Mock Event Name 2"
+          },
+          "category": {
+            "S": "Mock Event Category 2"
+          },
+          "description": {
+            "S": "Mock Event Description 2"
+          },
+          "dayOfWeek": {
+            "N": "2"
+          },
+          "startTime": {
+            "S": "09:00:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    }
+  ]
+}

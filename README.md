@@ -36,4 +36,10 @@ Stop the Docker containers
 docker compose -f ./docker-compose.local.yml down
 ```
 
+## Testing
+
+```bash
+docker-compose -f ./app/integration-tests/docker-compose.yaml up -d
+```
+
 ## Helpful Information

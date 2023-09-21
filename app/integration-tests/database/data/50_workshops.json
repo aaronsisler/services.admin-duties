@@ -1,0 +1,94 @@
+{
+  "SERVICES_ADMIN_DUTIES_TESTS": [
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "mock-client-id"
+          },
+          "sortKey": {
+            "S": "WORKSHOP#mock-workshop-1-id"
+          },
+          "locationId": {
+            "S": "LOCATION#mock-location-1-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#mock-organizer-1-id"
+          },
+          "name": {
+            "S": "Mock Workshop Name 1"
+          },
+          "category": {
+            "S": "Mock Workshop Category 1"
+          },
+          "description": {
+            "S": "Mock Workshop Description 1"
+          },
+          "workshopDate": {
+            "S": "2023-09-28"
+          },
+          "startTime": {
+            "S": "08:30:00"
+          },
+          "cost": {
+            "N": "2000"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "mock-client-id"
+          },
+          "sortKey": {
+            "S": "WORKSHOP#mock-workshop-2-id"
+          },
+          "locationId": {
+            "S": "LOCATION#mock-location-2-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#mock-organizer-2-id"
+          },
+          "name": {
+            "S": "Mock Workshop Name 2"
+          },
+          "category": {
+            "S": "Mock Workshop Category 2"
+          },
+          "description": {
+            "S": "Mock Workshop Description 2"
+          },
+          "workshopDate": {
+            "S": "2023-09-28"
+          },
+          "startTime": {
+            "S": "09:00:00"
+          },
+          "cost": {
+            "N": "2000"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    }
+  ]
+}
