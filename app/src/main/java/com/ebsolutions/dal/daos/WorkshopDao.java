@@ -1,6 +1,7 @@
 package com.ebsolutions.dal.daos;
 
 import com.ebsolutions.config.DatabaseConstants;
+import com.ebsolutions.dal.SortKeyType;
 import com.ebsolutions.dal.dtos.WorkshopDto;
 import com.ebsolutions.dal.utils.KeyBuilder;
 import com.ebsolutions.exceptions.DataProcessingException;
@@ -35,7 +36,7 @@ public class WorkshopDao {
     public Workshop read(String clientId, String workshopId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.WORKSHOP_SORT_KEY, workshopId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.WORKSHOP, workshopId);
 
             WorkshopDto workshopDto = ddbTable.getItem(key);
 
@@ -43,9 +44,9 @@ public class WorkshopDao {
                     ? null
                     : Workshop.builder()
                     .clientId(workshopDto.getPartitionKey())
-                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), DatabaseConstants.WORKSHOP_SORT_KEY))
-                    .locationId(StringUtils.remove(workshopDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), SortKeyType.WORKSHOP.name()))
+                    .locationId(StringUtils.remove(workshopDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                     .name(workshopDto.getName())
                     .category(workshopDto.getCategory())
                     .description(workshopDto.getDescription())
@@ -72,7 +73,7 @@ public class WorkshopDao {
             List<WorkshopDto> workshopDtos = ddbTable
                     .query(r -> r.queryConditional(
                             sortBeginsWith(s
-                                    -> s.partitionValue(clientId).sortValue(DatabaseConstants.WORKSHOP_SORT_KEY).build()))
+                                    -> s.partitionValue(clientId).sortValue(SortKeyType.WORKSHOP.name()).build()))
                     )
                     .items()
                     .stream()
@@ -82,9 +83,9 @@ public class WorkshopDao {
                     .map(workshopDto ->
                             Workshop.builder()
                                     .clientId(workshopDto.getPartitionKey())
-                                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), DatabaseConstants.WORKSHOP_SORT_KEY))
-                                    .locationId(StringUtils.remove(workshopDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), SortKeyType.WORKSHOP.name()))
+                                    .locationId(StringUtils.remove(workshopDto.getLocationId(), SortKeyType.LOCATION.name()))
+                                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                                     .name(workshopDto.getName())
                                     .category(workshopDto.getCategory())
                                     .description(workshopDto.getDescription())
@@ -110,7 +111,7 @@ public class WorkshopDao {
     public void delete(String clientId, String workshopId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.WORKSHOP_SORT_KEY, workshopId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.WORKSHOP, workshopId);
 
             ddbTable.deleteItem(key);
 
@@ -131,9 +132,9 @@ public class WorkshopDao {
             LocalDateTime now = LocalDateTime.now();
             WorkshopDto workshopDto = WorkshopDto.builder()
                     .partitionKey(workshop.getClientId())
-                    .sortKey(DatabaseConstants.WORKSHOP_SORT_KEY + UniqueIdGenerator.generate())
-                    .locationId(DatabaseConstants.LOCATION_SORT_KEY + workshop.getLocationId())
-                    .organizerId(DatabaseConstants.ORGANIZER_SORT_KEY + workshop.getOrganizerId())
+                    .sortKey(SortKeyType.WORKSHOP.name() + UniqueIdGenerator.generate())
+                    .locationId(SortKeyType.LOCATION.name() + workshop.getLocationId())
+                    .organizerId(SortKeyType.ORGANIZER.name() + workshop.getOrganizerId())
                     .name(workshop.getName())
                     .category(workshop.getCategory())
                     .description(workshop.getDescription())
@@ -148,9 +149,9 @@ public class WorkshopDao {
 
             return Workshop.builder()
                     .clientId(workshopDto.getPartitionKey())
-                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), DatabaseConstants.WORKSHOP_SORT_KEY))
-                    .locationId(StringUtils.remove(workshopDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), SortKeyType.WORKSHOP.name()))
+                    .locationId(StringUtils.remove(workshopDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                     .name(workshopDto.getName())
                     .category(workshopDto.getCategory())
                     .description(workshopDto.getDescription())
@@ -181,9 +182,9 @@ public class WorkshopDao {
         try {
             WorkshopDto workshopDto = WorkshopDto.builder()
                     .partitionKey(workshop.getClientId())
-                    .sortKey(DatabaseConstants.WORKSHOP_SORT_KEY + workshop.getWorkshopId())
-                    .locationId(DatabaseConstants.LOCATION_SORT_KEY + workshop.getLocationId())
-                    .organizerId(DatabaseConstants.ORGANIZER_SORT_KEY + workshop.getOrganizerId())
+                    .sortKey(SortKeyType.WORKSHOP.name() + workshop.getWorkshopId())
+                    .locationId(SortKeyType.LOCATION.name() + workshop.getLocationId())
+                    .organizerId(SortKeyType.ORGANIZER.name() + workshop.getOrganizerId())
                     .name(workshop.getName())
                     .category(workshop.getCategory())
                     .description(workshop.getDescription())

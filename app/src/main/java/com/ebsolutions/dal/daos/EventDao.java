@@ -1,6 +1,7 @@
 package com.ebsolutions.dal.daos;
 
 import com.ebsolutions.config.DatabaseConstants;
+import com.ebsolutions.dal.SortKeyType;
 import com.ebsolutions.dal.dtos.EventDto;
 import com.ebsolutions.dal.utils.KeyBuilder;
 import com.ebsolutions.exceptions.DataProcessingException;
@@ -36,7 +37,7 @@ public class EventDao {
     public Event read(String clientId, String eventId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.EVENT_SORT_KEY, eventId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.EVENT, eventId);
 
             EventDto eventDto = ddbTable.getItem(key);
 
@@ -44,9 +45,9 @@ public class EventDao {
                     ? null
                     : Event.builder()
                     .clientId(eventDto.getPartitionKey())
-                    .eventId(StringUtils.remove(eventDto.getSortKey(), DatabaseConstants.EVENT_SORT_KEY))
-                    .locationId(StringUtils.remove(eventDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                    .eventId(StringUtils.remove(eventDto.getSortKey(), SortKeyType.EVENT.name()))
+                    .locationId(StringUtils.remove(eventDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                     .name(eventDto.getName())
                     .category(eventDto.getCategory())
                     .description(eventDto.getDescription())
@@ -73,7 +74,7 @@ public class EventDao {
             List<EventDto> eventDtos = ddbTable
                     .query(r -> r.queryConditional(
                             sortBeginsWith(s
-                                    -> s.partitionValue(clientId).sortValue(DatabaseConstants.EVENT_SORT_KEY).build()))
+                                    -> s.partitionValue(clientId).sortValue(SortKeyType.EVENT.name()).build()))
                     )
                     .items()
                     .stream()
@@ -83,9 +84,9 @@ public class EventDao {
                     .map(eventDto ->
                             Event.builder()
                                     .clientId(eventDto.getPartitionKey())
-                                    .eventId(StringUtils.remove(eventDto.getSortKey(), DatabaseConstants.EVENT_SORT_KEY))
-                                    .locationId(StringUtils.remove(eventDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                                    .eventId(StringUtils.remove(eventDto.getSortKey(), SortKeyType.EVENT.name()))
+                                    .locationId(StringUtils.remove(eventDto.getLocationId(), SortKeyType.LOCATION.name()))
+                                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                                     .name(eventDto.getName())
                                     .category(eventDto.getCategory())
                                     .description(eventDto.getDescription())
@@ -111,7 +112,7 @@ public class EventDao {
     public void delete(String clientId, String eventId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.EVENT_SORT_KEY, eventId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.EVENT, eventId);
 
             ddbTable.deleteItem(key);
 
@@ -132,9 +133,9 @@ public class EventDao {
             LocalDateTime now = LocalDateTime.now();
             EventDto eventDto = EventDto.builder()
                     .partitionKey(event.getClientId())
-                    .sortKey(DatabaseConstants.EVENT_SORT_KEY + UniqueIdGenerator.generate())
-                    .locationId(DatabaseConstants.LOCATION_SORT_KEY + event.getLocationId())
-                    .organizerId(DatabaseConstants.ORGANIZER_SORT_KEY + event.getOrganizerId())
+                    .sortKey(SortKeyType.EVENT.name() + UniqueIdGenerator.generate())
+                    .locationId(SortKeyType.LOCATION.name() + event.getLocationId())
+                    .organizerId(SortKeyType.ORGANIZER.name() + event.getOrganizerId())
                     .name(event.getName())
                     .category(event.getCategory())
                     .description(event.getDescription())
@@ -149,9 +150,9 @@ public class EventDao {
 
             return Event.builder()
                     .clientId(eventDto.getPartitionKey())
-                    .eventId(StringUtils.remove(eventDto.getSortKey(), DatabaseConstants.EVENT_SORT_KEY))
-                    .locationId(StringUtils.remove(eventDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                    .eventId(StringUtils.remove(eventDto.getSortKey(), SortKeyType.EVENT.name()))
+                    .locationId(StringUtils.remove(eventDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                     .name(eventDto.getName())
                     .category(eventDto.getCategory())
                     .description(eventDto.getDescription())
@@ -182,9 +183,9 @@ public class EventDao {
         try {
             EventDto eventDto = EventDto.builder()
                     .partitionKey(event.getClientId())
-                    .sortKey(DatabaseConstants.EVENT_SORT_KEY + event.getEventId())
-                    .locationId(DatabaseConstants.LOCATION_SORT_KEY + event.getLocationId())
-                    .organizerId(DatabaseConstants.ORGANIZER_SORT_KEY + event.getOrganizerId())
+                    .sortKey(SortKeyType.EVENT.name() + event.getEventId())
+                    .locationId(SortKeyType.LOCATION.name() + event.getLocationId())
+                    .organizerId(SortKeyType.ORGANIZER.name() + event.getOrganizerId())
                     .name(event.getName())
                     .category(event.getCategory())
                     .description(event.getDescription())

@@ -1,6 +1,7 @@
 package com.ebsolutions.dal.daos;
 
 import com.ebsolutions.config.DatabaseConstants;
+import com.ebsolutions.dal.SortKeyType;
 import com.ebsolutions.dal.dtos.LocationDto;
 import com.ebsolutions.dal.utils.KeyBuilder;
 import com.ebsolutions.exceptions.DataProcessingException;
@@ -35,7 +36,7 @@ public class LocationDao {
     public Location read(String clientId, String locationId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.LOCATION_SORT_KEY, locationId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.LOCATION, locationId);
 
             LocationDto locationDto = ddbTable.getItem(key);
 
@@ -43,7 +44,7 @@ public class LocationDao {
                     ? null
                     : Location.builder()
                     .clientId(locationDto.getPartitionKey())
-                    .locationId(StringUtils.remove(locationDto.getSortKey(), DatabaseConstants.LOCATION_SORT_KEY))
+                    .locationId(StringUtils.remove(locationDto.getSortKey(), SortKeyType.LOCATION.name()))
                     .name(locationDto.getName())
                     .createdOn(locationDto.getCreatedOn())
                     .lastUpdatedOn(locationDto.getLastUpdatedOn())
@@ -65,7 +66,7 @@ public class LocationDao {
             List<LocationDto> locationDtos = ddbTable
                     .query(r -> r.queryConditional(
                             sortBeginsWith(s
-                                    -> s.partitionValue(clientId).sortValue(DatabaseConstants.LOCATION_SORT_KEY).build()))
+                                    -> s.partitionValue(clientId).sortValue(SortKeyType.LOCATION.name()).build()))
                     )
                     .items()
                     .stream()
@@ -75,7 +76,7 @@ public class LocationDao {
                     .map(locationDto ->
                             Location.builder()
                                     .clientId(locationDto.getPartitionKey())
-                                    .locationId(StringUtils.remove(locationDto.getSortKey(), DatabaseConstants.LOCATION_SORT_KEY))
+                                    .locationId(StringUtils.remove(locationDto.getSortKey(), SortKeyType.LOCATION.name()))
                                     .name(locationDto.getName())
                                     .createdOn(locationDto.getCreatedOn())
                                     .lastUpdatedOn(locationDto.getLastUpdatedOn())
@@ -96,7 +97,7 @@ public class LocationDao {
     public void delete(String clientId, String locationId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.LOCATION_SORT_KEY, locationId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.LOCATION, locationId);
 
             ddbTable.deleteItem(key);
 
@@ -117,7 +118,7 @@ public class LocationDao {
             LocalDateTime now = LocalDateTime.now();
             LocationDto locationDto = LocationDto.builder()
                     .partitionKey(location.getClientId())
-                    .sortKey(DatabaseConstants.LOCATION_SORT_KEY + UniqueIdGenerator.generate())
+                    .sortKey(SortKeyType.LOCATION.name() + UniqueIdGenerator.generate())
                     .name(location.getName())
                     .createdOn(now)
                     .lastUpdatedOn(now)
@@ -127,7 +128,7 @@ public class LocationDao {
 
             return Location.builder()
                     .clientId(locationDto.getPartitionKey())
-                    .locationId(StringUtils.remove(locationDto.getSortKey(), DatabaseConstants.LOCATION_SORT_KEY))
+                    .locationId(StringUtils.remove(locationDto.getSortKey(), SortKeyType.LOCATION.name()))
                     .name(locationDto.getName())
                     .createdOn(locationDto.getCreatedOn())
                     .lastUpdatedOn(locationDto.getLastUpdatedOn())
@@ -153,7 +154,7 @@ public class LocationDao {
         try {
             LocationDto locationDto = LocationDto.builder()
                     .partitionKey(location.getClientId())
-                    .sortKey(DatabaseConstants.LOCATION_SORT_KEY + location.getLocationId())
+                    .sortKey(SortKeyType.LOCATION.name() + location.getLocationId())
                     .name(location.getName())
                     .createdOn(location.getCreatedOn())
                     .lastUpdatedOn(LocalDateTime.now())

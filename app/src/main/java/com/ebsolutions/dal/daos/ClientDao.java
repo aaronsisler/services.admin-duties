@@ -1,7 +1,9 @@
 package com.ebsolutions.dal.daos;
 
 import com.ebsolutions.config.DatabaseConstants;
+import com.ebsolutions.dal.SortKeyType;
 import com.ebsolutions.dal.dtos.ClientDto;
+import com.ebsolutions.dal.utils.KeyBuilder;
 import com.ebsolutions.exceptions.DataProcessingException;
 import com.ebsolutions.models.Client;
 import com.ebsolutions.models.MetricsStopWatch;
@@ -30,7 +32,7 @@ public class ClientDao {
     public Client read(String clientId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = Key.builder().partitionValue(clientId).sortValue(DatabaseConstants.CLIENT_SORT_KEY).build();
+            Key key = KeyBuilder.build(clientId, SortKeyType.CLIENT);
 
             ClientDto clientDto = ddbTable.getItem(key);
 
@@ -56,7 +58,7 @@ public class ClientDao {
     public void delete(String clientId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = Key.builder().partitionValue(clientId).build();
+            Key key = KeyBuilder.build(clientId, SortKeyType.CLIENT);
 
             ddbTable.deleteItem(key);
         } catch (DynamoDbException dbe) {
@@ -77,7 +79,7 @@ public class ClientDao {
 
             ClientDto clientDto = ClientDto.builder()
                     .partitionKey(UniqueIdGenerator.generate())
-                    .sortKey(DatabaseConstants.CLIENT_SORT_KEY)
+                    .sortKey(SortKeyType.CLIENT.name())
                     .name(client.getName())
                     .createdOn(now)
                     .lastUpdatedOn(now)
@@ -112,7 +114,7 @@ public class ClientDao {
         try {
             ClientDto clientDto = ClientDto.builder()
                     .partitionKey(client.getClientId())
-                    .sortKey(DatabaseConstants.CLIENT_SORT_KEY)
+                    .sortKey(SortKeyType.CLIENT.name())
                     .name(client.getName())
                     .createdOn(client.getCreatedOn())
                     .lastUpdatedOn(LocalDateTime.now())
