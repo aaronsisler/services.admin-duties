@@ -37,11 +37,13 @@ dependencies {
 
     // Third Party
     implementation 'org.apache.commons:commons-lang3:3.13.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     // Testing dependencies
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testImplementation "io.micronaut.test:micronaut-test-spock"
     testImplementation 'io.micronaut:micronaut-http-client'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind'
 }
 
 

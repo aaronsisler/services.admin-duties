@@ -11,9 +11,8 @@ class AdminDutiesApplicationSpec extends Specification {
     @Inject
     EmbeddedApplication<?> application
 
-    void 'test it works'() {
+    void 'Application is running correctly'() {
         expect:
             application.running
     }
-
 }

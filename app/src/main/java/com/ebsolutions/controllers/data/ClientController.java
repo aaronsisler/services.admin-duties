@@ -51,9 +51,8 @@ public class ClientController {
             ) {
                 return badRequest();
             }
-            clientDao.update(client);
 
-            return noContent();
+            return ok(clientDao.update(client));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }
