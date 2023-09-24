@@ -28,7 +28,7 @@ import static software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional.so
 @Slf4j
 @Prototype
 public class EventDao {
-    private DynamoDbTable<EventDto> ddbTable;
+    private final DynamoDbTable<EventDto> ddbTable;
 
     public EventDao(DynamoDbEnhancedClient enhancedClient) {
         this.ddbTable = enhancedClient.table(DatabaseConstants.DATABASE_TABLE_NAME, TableSchema.fromBean(EventDto.class));
@@ -178,7 +178,7 @@ public class EventDao {
      *
      * @param event the object to replace the current database object
      */
-    public void update(Event event) {
+    public Event update(Event event) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             EventDto eventDto = EventDto.builder()
@@ -197,6 +197,21 @@ public class EventDao {
                     .build();
 
             ddbTable.putItem(eventDto);
+
+            return Event.builder()
+                    .clientId(eventDto.getPartitionKey())
+                    .eventId(StringUtils.remove(eventDto.getSortKey(), SortKeyType.EVENT.name()))
+                    .locationId(StringUtils.remove(eventDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
+                    .name(eventDto.getName())
+                    .category(eventDto.getCategory())
+                    .description(eventDto.getDescription())
+                    .dayOfWeek(DayOfWeek.of(eventDto.getDayOfWeek()))
+                    .startTime(eventDto.getStartTime())
+                    .duration(eventDto.getDuration())
+                    .createdOn(eventDto.getCreatedOn())
+                    .lastUpdatedOn(eventDto.getLastUpdatedOn())
+                    .build();
 
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);

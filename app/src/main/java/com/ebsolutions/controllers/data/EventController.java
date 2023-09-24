@@ -72,9 +72,7 @@ public class EventController {
             ) {
                 return badRequest();
             }
-            eventDao.update(event);
-
-            return noContent();
+            return ok(eventDao.update(event));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

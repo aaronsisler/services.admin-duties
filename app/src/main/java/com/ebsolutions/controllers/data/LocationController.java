@@ -69,9 +69,8 @@ public class LocationController {
             ) {
                 return badRequest();
             }
-            locationDao.update(location);
 
-            return noContent();
+            return ok(locationDao.update(location));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

@@ -27,7 +27,7 @@ import static software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional.so
 @Slf4j
 @Prototype
 public class LocationDao {
-    private DynamoDbTable<LocationDto> ddbTable;
+    private final DynamoDbTable<LocationDto> ddbTable;
 
     public LocationDao(DynamoDbEnhancedClient enhancedClient) {
         this.ddbTable = enhancedClient.table(DatabaseConstants.DATABASE_TABLE_NAME, TableSchema.fromBean(LocationDto.class));
@@ -149,7 +149,7 @@ public class LocationDao {
      *
      * @param location the object to replace the current database object
      */
-    public void update(Location location) {
+    public Location update(Location location) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             LocationDto locationDto = LocationDto.builder()
@@ -162,6 +162,13 @@ public class LocationDao {
 
             ddbTable.putItem(locationDto);
 
+            return Location.builder()
+                    .clientId(locationDto.getPartitionKey())
+                    .locationId(StringUtils.remove(locationDto.getSortKey(), SortKeyType.LOCATION.name()))
+                    .name(locationDto.getName())
+                    .createdOn(locationDto.getCreatedOn())
+                    .lastUpdatedOn(locationDto.getLastUpdatedOn())
+                    .build();
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);

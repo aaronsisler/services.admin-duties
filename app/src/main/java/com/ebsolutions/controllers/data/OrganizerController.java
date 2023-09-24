@@ -69,9 +69,7 @@ public class OrganizerController {
             ) {
                 return badRequest();
             }
-            organizerDao.update(organizer);
-
-            return noContent();
+            return ok(organizerDao.update(organizer));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

@@ -72,9 +72,7 @@ public class WorkshopController {
             ) {
                 return badRequest();
             }
-            workshopDao.update(workshop);
-
-            return noContent();
+            return ok(workshopDao.update(workshop));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

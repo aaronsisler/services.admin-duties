@@ -27,7 +27,7 @@ import static software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional.so
 @Slf4j
 @Prototype
 public class WorkshopDao {
-    private DynamoDbTable<WorkshopDto> ddbTable;
+    private final DynamoDbTable<WorkshopDto> ddbTable;
 
     public WorkshopDao(DynamoDbEnhancedClient enhancedClient) {
         this.ddbTable = enhancedClient.table(DatabaseConstants.DATABASE_TABLE_NAME, TableSchema.fromBean(WorkshopDto.class));
@@ -177,7 +177,7 @@ public class WorkshopDao {
      *
      * @param workshop the object to replace the current database object
      */
-    public void update(Workshop workshop) {
+    public Workshop update(Workshop workshop) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             WorkshopDto workshopDto = WorkshopDto.builder()
@@ -197,6 +197,20 @@ public class WorkshopDao {
 
             ddbTable.putItem(workshopDto);
 
+            return Workshop.builder()
+                    .clientId(workshopDto.getPartitionKey())
+                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), SortKeyType.WORKSHOP.name()))
+                    .locationId(StringUtils.remove(workshopDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
+                    .name(workshopDto.getName())
+                    .category(workshopDto.getCategory())
+                    .description(workshopDto.getDescription())
+                    .workshopDate(workshopDto.getWorkshopDate())
+                    .startTime(workshopDto.getStartTime())
+                    .duration(workshopDto.getDuration())
+                    .createdOn(workshopDto.getCreatedOn())
+                    .lastUpdatedOn(workshopDto.getLastUpdatedOn())
+                    .build();
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);

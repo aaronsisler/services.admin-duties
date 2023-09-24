@@ -153,7 +153,7 @@ public class OrganizerDao {
      *
      * @param organizer the object to replace the current database object
      */
-    public void update(Organizer organizer) {
+    public Organizer update(Organizer organizer) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
 
         try {
@@ -167,6 +167,13 @@ public class OrganizerDao {
 
             ddbTable.putItem(organizerDto);
 
+            return Organizer.builder()
+                    .clientId(organizerDto.getPartitionKey())
+                    .organizerId(organizerDto.getSortKey())
+                    .organizerId(StringUtils.remove(organizerDto.getSortKey(), SortKeyType.ORGANIZER.name()))
+                    .createdOn(organizerDto.getCreatedOn())
+                    .lastUpdatedOn(organizerDto.getLastUpdatedOn())
+                    .build();
         } catch (DynamoDbException dbe) {
             log.error("ERROR::{}", this.getClass().getName(), dbe);
             throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), dbe);
