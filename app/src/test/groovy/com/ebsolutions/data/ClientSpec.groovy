@@ -6,12 +6,15 @@ import com.ebsolutions.utils.CopyObjectUtil
 import com.ebsolutions.utils.DateComparisonUtil
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
+import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient
+import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions
 import spock.lang.Specification
 
+import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 @MicronautTest
@@ -73,10 +76,11 @@ class ClientSpec extends Specification {
             updatedClient.setName("New Updated Mock Client")
         when: "a request is made to update the client"
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(clientsUrl), updatedClient)
-            HttpResponse<Client> response = httpClient.toBlocking().exchange(httpRequest, Client)
+            httpClient.toBlocking().exchange(httpRequest, Client)
 
         then: "the correct status code is returned"
-            Assertions.assertEquals(HttpURLConnection.HTTP_BAD_REQUEST, response.code())
+            HttpClientResponseException ex = thrown()
+            ex.status == HttpStatus.BAD_REQUEST
     }
 
     def "Update a Client: Fail given create date is after now"() {
@@ -92,14 +96,15 @@ class ClientSpec extends Specification {
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
         and: "an update is made to the created on date that is invalid"
             Client updatedClient = CopyObjectUtil.client(initClient)
-            // Add an extra day to beyond the test constant's "now"
-            updatedClient.setCreatedOn(TestConstants.createdOn.plus(1, ChronoUnit.DAYS))
+            // Add an extra day to "now" since that is what the controller tests
+            updatedClient.setCreatedOn(LocalDateTime.now().plus(1, ChronoUnit.DAYS))
         when: "a request is made to update the client"
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(clientsUrl), updatedClient)
-            HttpResponse<Client> response = httpClient.toBlocking().exchange(httpRequest, Client)
+            httpClient.toBlocking().exchange(httpRequest, Client)
 
         then: "the correct status code is returned"
-            Assertions.assertEquals(HttpURLConnection.HTTP_BAD_REQUEST, response.code())
+            HttpClientResponseException ex = thrown()
+            ex.status == HttpStatus.BAD_REQUEST
     }
 
     def "Update a Client"() {
