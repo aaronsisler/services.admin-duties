@@ -4,28 +4,28 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "mock-client-id"
+            "S": "get-event-mock-event-client-id"
           },
           "sortKey": {
-            "S": "EVENT#mock-event-1-id"
+            "S": "EVENT-get-event-mock-event-id"
           },
           "locationId": {
-            "S": "LOCATION#mock-location-1-id"
+            "S": "LOCATION-get-event-mock-location-id"
           },
           "organizerId": {
-            "S": "ORGANIZER#mock-organizer-1-id"
+            "S": "ORGANIZER-get-event-mock-organizer-id"
           },
           "name": {
-            "S": "Mock Event Name 1"
+            "S": "Get Mock Event"
           },
           "category": {
-            "S": "Mock Event Category 1"
+            "S": "Get Mock Event Category"
           },
           "description": {
-            "S": "Mock Event Description 1"
+            "S": "Get Mock Event Description"
           },
           "dayOfWeek": {
-            "N": "6"
+            "N": "1"
           },
           "startTime": {
             "S": "08:30:00"
@@ -46,16 +46,58 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "mock-client-id"
+            "S": "get-all-event-mock-event-client-id"
           },
           "sortKey": {
-            "S": "EVENT#mock-event-2-id"
+            "S": "EVENT-get-all-event-mock-event-1-id"
           },
           "locationId": {
-            "S": "LOCATION#mock-location-2-id"
+            "S": "LOCATION-get-all-event-mock-location-1-id"
           },
           "organizerId": {
-            "S": "ORGANIZER#mock-organizer-2-id"
+            "S": "ORGANIZER-get-all-event-mock-organizer-1-id"
+          },
+          "name": {
+            "S": "Mock Event Name 1"
+          },
+          "category": {
+            "S": "Mock Event Category 1"
+          },
+          "description": {
+            "S": "Mock Event Description 1"
+          },
+          "dayOfWeek": {
+            "N": "1"
+          },
+          "startTime": {
+            "S": "08:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "get-all-event-mock-event-client-id"
+          },
+          "sortKey": {
+            "S": "EVENT-get-all-event-mock-event-2-id"
+          },
+          "locationId": {
+            "S": "LOCATION-get-all-event-mock-location-2-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER-get-all-event-mock-organizer-2-id"
           },
           "name": {
             "S": "Mock Event Name 2"
@@ -67,10 +109,94 @@
             "S": "Mock Event Description 2"
           },
           "dayOfWeek": {
-            "N": "2"
+            "N": "1"
           },
           "startTime": {
-            "S": "09:00:00"
+            "S": "08:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "delete-mock-event-client-id"
+          },
+          "sortKey": {
+            "S": "EVENT-delete-event-mock-event-id"
+          },
+          "locationId": {
+            "S": "LOCATION-delete-event-mock-location-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER-delete-event-mock-organizer-id"
+          },
+          "name": {
+            "S": "Delete Mock Event"
+          },
+          "category": {
+            "S": "Delete Mock Event Category"
+          },
+          "description": {
+            "S": "Delete Mock Event Description"
+          },
+          "dayOfWeek": {
+            "N": "1"
+          },
+          "startTime": {
+            "S": "08:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "get-mock-event-client-id"
+          },
+          "sortKey": {
+            "S": "EVENT-get-mock-event-id"
+          },
+          "locationId": {
+            "S": "LOCATION-get-mock-location-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER-get-mock-organizer-id"
+          },
+          "name": {
+            "S": "Mock Event Name 1"
+          },
+          "category": {
+            "S": "Mock Event Category 1"
+          },
+          "description": {
+            "S": "Mock Event Description 1"
+          },
+          "dayOfWeek": {
+            "N": "1"
+          },
+          "startTime": {
+            "S": "08:30:00"
           },
           "duration": {
             "N": "60"

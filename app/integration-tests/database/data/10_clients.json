@@ -4,7 +4,7 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "get-mock-client-id"
+            "S": "get-client-mock-client-id"
           },
           "sortKey": {
             "S": "CLIENT"
@@ -25,7 +25,7 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "delete-mock-client-id"
+            "S": "delete-client-mock-client-id"
           },
           "sortKey": {
             "S": "CLIENT"
@@ -46,7 +46,7 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "update-mock-client-id"
+            "S": "update-client-mock-client-id"
           },
           "sortKey": {
             "S": "CLIENT"

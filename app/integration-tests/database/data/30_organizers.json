@@ -4,10 +4,10 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "get-mock-organizer-client-id"
+            "S": "get-organizer-mock-organizer-client-id"
           },
           "sortKey": {
-            "S": "ORGANIZER-get-mock-organizer-id"
+            "S": "ORGANIZER-get-organizer-mock-organizer-id"
           },
           "name": {
             "S": "Get Mock Organizer"
