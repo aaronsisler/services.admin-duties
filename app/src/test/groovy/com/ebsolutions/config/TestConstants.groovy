@@ -38,6 +38,19 @@ class TestConstants {
     public static String updateOrganizerClientId = "update-organizer-mock-client-id"
     public static String updateOrganizerId = "-update-organizer-mock-organizer-id"
 
+    // Event Constants
+    // Leading Dashes on event ids are to help with the DB Setup
+    public static String getEventClientId = "get-mock-event-client-id"
+    public static String getEventId = "-get-mock-event-id"
+    public static String getAllEventClientId = "get-all-event-mock-client-id"
+    public static String getAllEventIdOne = "-get-all-event-mock-event-1-id"
+    public static String getAllEventIdTwo = "-get-all-event-mock-event-2-id"
+    public static String createEventClientId = "create-event-mock-client-id"
+    public static String deleteEventClientId = "delete-event-mock-client-id"
+    public static String deleteEventId = "-delete-event-mock-event-id"
+    public static String updateEventClientId = "update-event-mock-client-id"
+    public static String updateEventId = "-update-event-mock-organizer-id"
+
     public static LocalDateTime createdOn = LocalDateTime.of(2023, 7, 04, 1, 2, 34)
     public static LocalDateTime lastUpdatedOn = LocalDateTime.of(2023, 7, 04, 12, 34, 56)
 }

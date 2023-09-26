@@ -15,7 +15,6 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
-import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
@@ -51,17 +50,15 @@ public class WorkshopDao {
                     .category(workshopDto.getCategory())
                     .description(workshopDto.getDescription())
                     .workshopDate(workshopDto.getWorkshopDate())
+                    .cost(workshopDto.getCost())
                     .startTime(workshopDto.getStartTime())
                     .duration(workshopDto.getDuration())
                     .createdOn(workshopDto.getCreatedOn())
                     .lastUpdatedOn(workshopDto.getLastUpdatedOn())
                     .build();
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -77,7 +74,7 @@ public class WorkshopDao {
                     )
                     .items()
                     .stream()
-                    .collect(Collectors.toList());
+                    .toList();
 
             return workshopDtos.stream()
                     .map(workshopDto ->
@@ -90,6 +87,7 @@ public class WorkshopDao {
                                     .category(workshopDto.getCategory())
                                     .description(workshopDto.getDescription())
                                     .workshopDate(workshopDto.getWorkshopDate())
+                                    .cost(workshopDto.getCost())
                                     .startTime(workshopDto.getStartTime())
                                     .duration(workshopDto.getDuration())
                                     .createdOn(workshopDto.getCreatedOn())
@@ -97,12 +95,9 @@ public class WorkshopDao {
                                     .build()
                     ).collect(Collectors.toList());
 
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -115,12 +110,9 @@ public class WorkshopDao {
 
             ddbTable.deleteItem(key);
 
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -139,6 +131,7 @@ public class WorkshopDao {
                     .category(workshop.getCategory())
                     .description(workshop.getDescription())
                     .workshopDate(workshop.getWorkshopDate())
+                    .cost(workshop.getCost())
                     .startTime(workshop.getStartTime())
                     .duration(workshop.getDuration())
                     .createdOn(now)
@@ -156,17 +149,15 @@ public class WorkshopDao {
                     .category(workshopDto.getCategory())
                     .description(workshopDto.getDescription())
                     .workshopDate(workshopDto.getWorkshopDate())
+                    .cost(workshopDto.getCost())
                     .startTime(workshopDto.getStartTime())
                     .duration(workshopDto.getDuration())
                     .createdOn(workshopDto.getCreatedOn())
                     .lastUpdatedOn(workshopDto.getLastUpdatedOn())
                     .build();
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -189,6 +180,7 @@ public class WorkshopDao {
                     .category(workshop.getCategory())
                     .description(workshop.getDescription())
                     .workshopDate(workshop.getWorkshopDate())
+                    .cost(workshop.getCost())
                     .startTime(workshop.getStartTime())
                     .duration(workshop.getDuration())
                     .createdOn(workshop.getCreatedOn())
@@ -206,17 +198,15 @@ public class WorkshopDao {
                     .category(workshopDto.getCategory())
                     .description(workshopDto.getDescription())
                     .workshopDate(workshopDto.getWorkshopDate())
+                    .cost(workshopDto.getCost())
                     .startTime(workshopDto.getStartTime())
                     .duration(workshopDto.getDuration())
                     .createdOn(workshopDto.getCreatedOn())
                     .lastUpdatedOn(workshopDto.getLastUpdatedOn())
                     .build();
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }

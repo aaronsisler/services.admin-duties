@@ -1,8 +1,6 @@
 package com.ebsolutions.utils
 
-import com.ebsolutions.models.Client
-import com.ebsolutions.models.Location
-import com.ebsolutions.models.Organizer
+import com.ebsolutions.models.*
 import com.fasterxml.jackson.databind.ObjectMapper
 
 class CopyObjectUtil {
@@ -41,6 +39,43 @@ class CopyObjectUtil {
                 .createdOn(organizer.getCreatedOn())
                 .lastUpdatedOn(organizer.getLastUpdatedOn())
                 .expiryDate(organizer.getExpiryDate())
+                .build()
+    }
+
+    static Event event(Event event) {
+        return Event.builder()
+                .clientId(event.getClientId())
+                .eventId(event.getEventId())
+                .dayOfWeek(event.getDayOfWeek())
+                .locationId(event.getLocationId())
+                .organizerId(event.getOrganizerId())
+                .name(event.getName())
+                .category(event.getCategory())
+                .description(event.getDescription())
+                .startTime(event.getStartTime())
+                .duration(event.getDuration())
+                .createdOn(event.getCreatedOn())
+                .lastUpdatedOn(event.getLastUpdatedOn())
+                .expiryDate(event.getExpiryDate())
+                .build()
+    }
+
+    static Workshop workshop(Workshop workshop) {
+        return Workshop.builder()
+                .clientId(workshop.getClientId())
+                .workshopId(workshop.getWorkshopId())
+                .workshopDate(workshop.getWorkshopDate())
+                .cost(workshop.getCost())
+                .locationId(workshop.getLocationId())
+                .organizerId(workshop.getOrganizerId())
+                .name(workshop.getName())
+                .category(workshop.getCategory())
+                .description(workshop.getDescription())
+                .startTime(workshop.getStartTime())
+                .duration(workshop.getDuration())
+                .createdOn(workshop.getCreatedOn())
+                .lastUpdatedOn(workshop.getLastUpdatedOn())
+                .expiryDate(workshop.getExpiryDate())
                 .build()
     }
 }
