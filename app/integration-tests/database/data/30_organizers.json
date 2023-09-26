@@ -7,7 +7,7 @@
             "S": "get-mock-organizer-client-id"
           },
           "sortKey": {
-            "S": "ORGANIZER-get-mock-location-id"
+            "S": "ORGANIZER-get-mock-organizer-id"
           },
           "name": {
             "S": "Get Mock Organizer"

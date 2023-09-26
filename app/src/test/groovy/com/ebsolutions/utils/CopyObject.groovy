@@ -2,6 +2,7 @@ package com.ebsolutions.utils
 
 import com.ebsolutions.models.Client
 import com.ebsolutions.models.Location
+import com.ebsolutions.models.Organizer
 import com.fasterxml.jackson.databind.ObjectMapper
 
 class CopyObjectUtil {
@@ -29,6 +30,17 @@ class CopyObjectUtil {
                 .createdOn(location.getCreatedOn())
                 .lastUpdatedOn(location.getLastUpdatedOn())
                 .expiryDate(location.getExpiryDate())
+                .build()
+    }
+
+    static Organizer organizer(Organizer organizer) {
+        return Organizer.builder()
+                .clientId(organizer.getClientId())
+                .organizerId(organizer.getOrganizerId())
+                .name(organizer.getName())
+                .createdOn(organizer.getCreatedOn())
+                .lastUpdatedOn(organizer.getLastUpdatedOn())
+                .expiryDate(organizer.getExpiryDate())
                 .build()
     }
 }

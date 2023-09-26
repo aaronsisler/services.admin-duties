@@ -132,8 +132,8 @@ public class OrganizerDao {
 
             return Organizer.builder()
                     .clientId(organizerDto.getPartitionKey())
-                    .organizerId(organizerDto.getSortKey())
                     .organizerId(StringUtils.remove(organizerDto.getSortKey(), SortKeyType.ORGANIZER.name()))
+                    .name(organizerDto.getName())
                     .createdOn(organizerDto.getCreatedOn())
                     .lastUpdatedOn(organizerDto.getLastUpdatedOn())
                     .build();
@@ -169,8 +169,8 @@ public class OrganizerDao {
 
             return Organizer.builder()
                     .clientId(organizerDto.getPartitionKey())
-                    .organizerId(organizerDto.getSortKey())
                     .organizerId(StringUtils.remove(organizerDto.getSortKey(), SortKeyType.ORGANIZER.name()))
+                    .name(organizerDto.getName())
                     .createdOn(organizerDto.getCreatedOn())
                     .lastUpdatedOn(organizerDto.getLastUpdatedOn())
                     .build();

@@ -125,7 +125,7 @@ class LocationSpec extends Specification {
                     TestConstants.nonExistentClientId)
 
             HttpRequest httpRequest = HttpRequest.POST(incorrectUrl, createLocation)
-            HttpResponse<Location> response = httpClient.toBlocking().exchange(httpRequest, Location)
+            httpClient.toBlocking().exchange(httpRequest, Location)
 
         then: "the correct status code is returned"
             HttpClientResponseException ex = thrown()
