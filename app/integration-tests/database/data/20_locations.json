@@ -7,7 +7,7 @@
             "S": "get-mock-location-client-id"
           },
           "sortKey": {
-            "S": "LOCATIONget-mock-location-id"
+            "S": "LOCATION-get-mock-location-id"
           },
           "name": {
             "S": "Get Mock Location"
@@ -28,7 +28,7 @@
             "S": "get-all-location-mock-client-id"
           },
           "sortKey": {
-            "S": "LOCATIONget-all-location-mock-location-1-id"
+            "S": "LOCATION-get-all-location-mock-location-1-id"
           },
           "name": {
             "S": "Get All Mock Location 1"
@@ -49,7 +49,7 @@
             "S": "get-all-location-mock-client-id"
           },
           "sortKey": {
-            "S": "LOCATIONget-all-location-mock-location-2-id"
+            "S": "LOCATION-get-all-location-mock-location-2-id"
           },
           "name": {
             "S": "Get All Mock Location 2"
@@ -70,7 +70,7 @@
             "S": "delete-location-mock-client-id"
           },
           "sortKey": {
-            "S": "LOCATIONdelete-location-mock-location-id"
+            "S": "LOCATION-delete-location-mock-location-id"
           },
           "name": {
             "S": "Delete Mock Location"
@@ -91,7 +91,7 @@
             "S": "update-location-mock-client-id"
           },
           "sortKey": {
-            "S": "LOCATIONupdate-location-mock-location-id"
+            "S": "LOCATION-update-location-mock-location-id"
           },
           "name": {
             "S": "Update Mock Location"

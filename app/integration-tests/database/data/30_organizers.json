@@ -4,13 +4,13 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "mock-client-id"
+            "S": "get-mock-organizer-client-id"
           },
           "sortKey": {
-            "S": "ORGANIZER#mock-organizer-1-id"
+            "S": "ORGANIZER-get-mock-location-id"
           },
           "name": {
-            "S": "Mock Organizer 1"
+            "S": "Get Mock Organizer"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -25,13 +25,76 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "mock-client-id"
+            "S": "get-all-organizer-mock-client-id"
           },
           "sortKey": {
-            "S": "ORGANIZER#mock-organizer-2-id"
+            "S": "ORGANIZER-get-all-organizer-mock-organizer-1-id"
           },
           "name": {
-            "S": "Mock Organizer 2"
+            "S": "Get All Mock Organizer 1"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "get-all-organizer-mock-client-id"
+          },
+          "sortKey": {
+            "S": "ORGANIZER-get-all-organizer-mock-organizer-2-id"
+          },
+          "name": {
+            "S": "Get All Mock Organizer 2"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "delete-organizer-mock-client-id"
+          },
+          "sortKey": {
+            "S": "ORGANIZER-delete-organizer-mock-organizer-id"
+          },
+          "name": {
+            "S": "Delete Mock Organizer"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "update-organizer-mock-client-id"
+          },
+          "sortKey": {
+            "S": "ORGANIZER-update-organizer-mock-organizer-id"
+          },
+          "name": {
+            "S": "Update Mock Organizer"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
