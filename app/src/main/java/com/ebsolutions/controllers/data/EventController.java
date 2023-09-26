@@ -38,18 +38,18 @@ public class EventController {
         }
     }
 
-    @Get(value = "/", produces = MediaType.APPLICATION_JSON)
+    @Get(produces = MediaType.APPLICATION_JSON)
     public HttpResponse<?> getAll(@NotBlank @PathVariable String clientId) {
         try {
             List<Event> events = eventDao.readAll(clientId);
 
-            return events.size() > 0 ? ok(events) : noContent();
+            return !events.isEmpty() ? ok(events) : noContent();
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }
     }
 
-    @Post(value = "/")
+    @Post()
     public HttpResponse<?> post(@NotBlank @PathVariable String clientId, @Valid @Body Event event) {
         try {
             if (!clientId.matches(event.getClientId())
@@ -63,7 +63,7 @@ public class EventController {
         }
     }
 
-    @Put(value = "/")
+    @Put()
     public HttpResponse<?> put(@NotBlank @PathVariable String clientId, @Valid @Body Event event) {
         try {
             if (!clientId.matches(event.getClientId())

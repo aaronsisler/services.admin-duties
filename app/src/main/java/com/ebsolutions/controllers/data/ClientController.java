@@ -34,7 +34,7 @@ public class ClientController {
         }
     }
 
-    @Post(value = "/")
+    @Post()
     public HttpResponse<?> post(@Valid @Body Client client) {
         try {
             return ok(clientDao.create(client));
@@ -43,7 +43,7 @@ public class ClientController {
         }
     }
 
-    @Put(value = "/")
+    @Put()
     public HttpResponse<?> put(@Valid @Body Client client) {
         try {
             if (StringValidator.isBlank(client.getClientId())

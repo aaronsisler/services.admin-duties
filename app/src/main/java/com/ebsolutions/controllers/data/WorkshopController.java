@@ -38,18 +38,18 @@ public class WorkshopController {
         }
     }
 
-    @Get(value = "/", produces = MediaType.APPLICATION_JSON)
+    @Get(produces = MediaType.APPLICATION_JSON)
     public HttpResponse<?> getAll(@NotBlank @PathVariable String clientId) {
         try {
             List<Workshop> workshops = workshopDao.readAll(clientId);
 
-            return workshops.size() > 0 ? ok(workshops) : noContent();
+            return !workshops.isEmpty() ? ok(workshops) : noContent();
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }
     }
 
-    @Post(value = "/")
+    @Post()
     public HttpResponse<?> post(@NotBlank @PathVariable String clientId, @Valid @Body Workshop workshop) {
         try {
             if (!clientId.matches(workshop.getClientId())
@@ -63,7 +63,7 @@ public class WorkshopController {
         }
     }
 
-    @Put(value = "/")
+    @Put()
     public HttpResponse<?> put(@NotBlank @PathVariable String clientId, @Valid @Body Workshop workshop) {
         try {
             if (!clientId.matches(workshop.getClientId())
