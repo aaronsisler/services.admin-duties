@@ -27,7 +27,7 @@ class LocationSpec extends Specification {
 
     private String clientsUrl = TestConstants.adminServiceUrl + "/data/clients"
 
-    def "Get a Location: Given Location does exist"() {
+    def "Get a Location: Given location exists"() {
         given: "A location exists in the database"
             // Data seeded from Database init scripts
         when: "a request is made to the location"
@@ -66,7 +66,7 @@ class LocationSpec extends Specification {
             Assertions.assertEquals(HttpURLConnection.HTTP_NO_CONTENT, response.code())
     }
 
-    def "Get all Locations: Success"() {
+    def "Get all Locations: Locations exist for client"() {
         given: "A set of locations exist in the database for a given client"
             // Data seeded from Database init scripts
         when: "a request is made to retrieve the locations"
@@ -231,7 +231,7 @@ class LocationSpec extends Specification {
             ex.status == HttpStatus.BAD_REQUEST
     }
 
-    def "Update a Location: Fail given create date is after now"() {
+    def "Update a Location: Fails given create date is after now"() {
         given: "A location exists in the database"
             // Verify data seeded from Database init scripts correctly
             String getUrl = MessageFormat.format("{0}/{1}/locations/{2}",

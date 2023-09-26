@@ -24,7 +24,7 @@ class ClientSpec extends Specification {
 
     private String clientsUrl = TestConstants.adminServiceUrl + "/data/clients"
 
-    def "Get a Client: Success"() {
+    def "Get a Client: Given client exists"() {
         given: "A client exists in the database"
             // Data seeded from Database init scripts
         when: "a request is made to retrieve the client"
@@ -41,7 +41,7 @@ class ClientSpec extends Specification {
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(client.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
     }
 
-    def "Get a Client: Fails given client does not exist"() {
+    def "Get a Client: Given client does not exist"() {
         given: "A client does not exist in the database"
             // No data seeded from Database init scripts
         when: "a request is made to retrieve the client"
