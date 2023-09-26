@@ -15,6 +15,8 @@ class TestConstants {
     public static String getLocationClientId = "get-mock-location-client-id"
     public static String getLocationId = "get-mock-location-id"
     public static String getAllLocationClientId = "get-all-location-mock-client-id"
+    public static String getAllLocationIdOne = "get-all-location-mock-location-1-id"
+    public static String getAllLocationIdTwo = "get-all-location-mock-location-2-id"
     public static String createLocationClientId = "create-location-mock-client-id"
     public static String deleteLocationClientId = "delete-location-mock-client-id"
     public static String deleteLocationId = "delete-location-mock-location-id"

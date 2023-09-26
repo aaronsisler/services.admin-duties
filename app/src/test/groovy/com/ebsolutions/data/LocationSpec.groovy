@@ -5,6 +5,7 @@ import com.ebsolutions.models.Client
 import com.ebsolutions.models.Location
 import com.ebsolutions.utils.CopyObjectUtil
 import com.ebsolutions.utils.DateComparisonUtil
+import io.micronaut.core.type.Argument
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
@@ -26,7 +27,7 @@ class LocationSpec extends Specification {
 
     private String clientsUrl = TestConstants.adminServiceUrl + "/data/clients"
 
-    def "Get a Location: Success"() {
+    def "Get a Location: Given Location does exist"() {
         given: "A location exists in the database"
             // Data seeded from Database init scripts
         when: "a request is made to the location"
@@ -50,13 +51,61 @@ class LocationSpec extends Specification {
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(location.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
     }
 
-    def "Get a Location: Fails given Location does not exist"() {
+    def "Get a Location: Given Location does not exist"() {
         given: "A location does not exist in the database"
             // No data seeded from Database init scripts
         when: "a request is made to retrieve the location"
             String incorrectUrl = MessageFormat.format("{0}/{1}/locations/non-existent-location",
                     clientsUrl,
                     TestConstants.getLocationClientId)
+
+            HttpResponse<Location> response = httpClient.toBlocking()
+                    .exchange(incorrectUrl, Location)
+
+        then: "the correct status code is returned"
+            Assertions.assertEquals(HttpURLConnection.HTTP_NO_CONTENT, response.code())
+    }
+
+    def "Get all Locations: Success"() {
+        given: "A set of locations exist in the database for a given client"
+            // Data seeded from Database init scripts
+        when: "a request is made to retrieve the locations"
+            String getUrl = MessageFormat.format("{0}/{1}/locations",
+                    clientsUrl,
+                    TestConstants.getAllLocationClientId)
+            HttpRequest httpRequest = HttpRequest.GET(getUrl)
+
+            HttpResponse<List<Location>> response = httpClient.toBlocking()
+                    .exchange(httpRequest, Argument.listOf(Location.class))
+
+        then: "the correct status code is returned"
+            Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.code())
+
+        and: "the correct locations are returned"
+            List<Location> locations = response.body()
+            Location firstLocation = locations.get(0)
+            Location secondLocation = locations.get(1)
+
+            Assertions.assertEquals(TestConstants.getAllLocationClientId, firstLocation.getClientId())
+            Assertions.assertEquals(TestConstants.getAllLocationIdOne, firstLocation.getLocationId())
+            Assertions.assertEquals("Get All Mock Location 1", firstLocation.getName())
+            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(firstLocation.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(firstLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+
+            Assertions.assertEquals(TestConstants.getAllLocationClientId, secondLocation.getClientId())
+            Assertions.assertEquals(TestConstants.getAllLocationIdTwo, secondLocation.getLocationId())
+            Assertions.assertEquals("Get All Mock Location 2", secondLocation.getName())
+            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(secondLocation.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(secondLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+    }
+
+    def "Get all Locations: No locations exist for client"() {
+        given: "No locations exist in the database for a given client"
+            // No data seeded from Database init scripts
+        when: "a request is made to retrieve the locations"
+            String incorrectUrl = MessageFormat.format("{0}/{1}/locations",
+                    clientsUrl,
+                    TestConstants.nonExistentClientId)
 
             HttpResponse<Location> response = httpClient.toBlocking()
                     .exchange(incorrectUrl, Location)
