@@ -174,9 +174,6 @@ public class OrganizerDao {
                     .createdOn(organizerDto.getCreatedOn())
                     .lastUpdatedOn(organizerDto.getLastUpdatedOn())
                     .build();
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
             throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
