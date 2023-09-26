@@ -24,25 +24,36 @@ class ClientSpec extends Specification {
 
     private String clientsUrl = TestConstants.adminServiceUrl + "/data/clients"
 
-    def "Get a Client"() {
+    def "Get a Client: Success"() {
         given: "A client exists in the database"
             // Data seeded from Database init scripts
-        when: "a request is made to retrieve a single client"
-            HttpResponse<Client> response = httpClient.toBlocking().exchange(clientsUrl + "/" + TestConstants.clientId, Client)
+        when: "a request is made to retrieve the client"
+            HttpResponse<Client> response = httpClient.toBlocking().exchange(clientsUrl + "/" + TestConstants.getClientId, Client)
 
         then: "the correct status code is returned"
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.code())
 
         and: "the correct client is returned"
             Client client = response.body()
-            Assertions.assertEquals(TestConstants.clientId, client.getClientId())
-            Assertions.assertEquals("Mock Client", client.getName())
+            Assertions.assertEquals(TestConstants.getClientId, client.getClientId())
+            Assertions.assertEquals("Get Mock Client", client.getName())
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(client.getCreatedOn(), TestConstants.createdOn))
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(client.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
     }
 
-    def "Create a Client"() {
-        given: "A client valid client"
+    def "Get a Client: Fails given client does not exist"() {
+        given: "A client does not exist in the database"
+            // No data seeded from Database init scripts
+        when: "a request is made to retrieve the client"
+            HttpResponse<Client> response = httpClient.toBlocking()
+                    .exchange(clientsUrl + "/" + TestConstants.nonExistentClientId, Client)
+
+        then: "the correct status code is returned"
+            Assertions.assertEquals(HttpURLConnection.HTTP_NO_CONTENT, response.code())
+    }
+
+    def "Create a Client: Success"() {
+        given: "A valid client"
             Client newClient = Client.builder().name("New Mock Client").build()
         when: "a request is made to create a client"
             HttpRequest httpRequest = HttpRequest.POST(URI.create(clientsUrl), newClient)
@@ -51,7 +62,7 @@ class ClientSpec extends Specification {
         then: "the correct status code is returned"
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.code())
 
-        and: "the correct client is returned"
+        and: "the new client is returned"
             Client client = response.body()
             Assertions.assertNotNull(client.getClientId())
             Assertions.assertEquals("New Mock Client", client.getName())
@@ -59,7 +70,7 @@ class ClientSpec extends Specification {
             Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(client.getLastUpdatedOn()))
     }
 
-    def "Update a Client: Fails given blank Client Id"() {
+    def "Update a Client: Fails given invalid Client Id"() {
         given: "A client exists in the database"
             // Verify data seeded from Database init scripts correctly
             HttpResponse<Client> initResponse = httpClient.toBlocking().exchange(clientsUrl + "/" + TestConstants.updateClientId, Client)
@@ -70,10 +81,11 @@ class ClientSpec extends Specification {
             Assertions.assertEquals("Update Mock Client", initClient.getName())
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+
         and: "an update is made to the client id that is invalid"
             Client updatedClient = CopyObjectUtil.client(initClient)
             updatedClient.setClientId("")
-            updatedClient.setName("New Updated Mock Client")
+
         when: "a request is made to update the client"
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(clientsUrl), updatedClient)
             httpClient.toBlocking().exchange(httpRequest, Client)
@@ -94,10 +106,12 @@ class ClientSpec extends Specification {
             Assertions.assertEquals("Update Mock Client", initClient.getName())
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+
         and: "an update is made to the created on date that is invalid"
             Client updatedClient = CopyObjectUtil.client(initClient)
             // Add an extra day to "now" since that is what the controller tests
             updatedClient.setCreatedOn(LocalDateTime.now().plus(1, ChronoUnit.DAYS))
+
         when: "a request is made to update the client"
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(clientsUrl), updatedClient)
             httpClient.toBlocking().exchange(httpRequest, Client)
@@ -107,7 +121,7 @@ class ClientSpec extends Specification {
             ex.status == HttpStatus.BAD_REQUEST
     }
 
-    def "Update a Client"() {
+    def "Update a Client: Success"() {
         given: "A client exists in the database"
             // Verify data seeded from Database init scripts correctly
             HttpResponse<Client> initResponse = httpClient.toBlocking().exchange(clientsUrl + "/" + TestConstants.updateClientId, Client)
@@ -118,9 +132,11 @@ class ClientSpec extends Specification {
             Assertions.assertEquals("Update Mock Client", initClient.getName())
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+
         and: "an update is made to client"
             Client updatedClient = CopyObjectUtil.client(initClient)
             updatedClient.setName("New Updated Mock Client")
+
         when: "a request is made to update the client"
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(clientsUrl), updatedClient)
             HttpResponse<Client> response = httpClient.toBlocking().exchange(httpRequest, Client)
@@ -128,7 +144,7 @@ class ClientSpec extends Specification {
         then: "the correct status code is returned"
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.code())
 
-        and: "the correct client is updated"
+        and: "the updated client is returned"
             Client client = response.body()
             Assertions.assertNotNull(client.getClientId())
             Assertions.assertEquals("New Updated Mock Client", client.getName())
@@ -147,6 +163,7 @@ class ClientSpec extends Specification {
             Assertions.assertEquals("Delete Mock Client", initClient.getName())
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
             Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+
         when: "a request is made to delete the client"
             HttpRequest httpRequest = HttpRequest.DELETE(URI.create(clientsUrl + "/" + TestConstants.deleteClientId))
             HttpResponse<Client> response = httpClient.toBlocking().exchange(httpRequest, Client)

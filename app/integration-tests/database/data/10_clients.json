@@ -4,13 +4,13 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "mock-client-id"
+            "S": "get-mock-client-id"
           },
           "sortKey": {
             "S": "CLIENT"
           },
           "name": {
-            "S": "Mock Client"
+            "S": "Get Mock Client"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"

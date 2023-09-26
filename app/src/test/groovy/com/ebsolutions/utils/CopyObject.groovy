@@ -1,6 +1,7 @@
 package com.ebsolutions.utils
 
 import com.ebsolutions.models.Client
+import com.ebsolutions.models.Location
 import com.fasterxml.jackson.databind.ObjectMapper
 
 class CopyObjectUtil {
@@ -18,5 +19,16 @@ class CopyObjectUtil {
         ObjectMapper mapper = new ObjectMapper()
         Client newClient = mapper.readValue(mapper.writeValueAsString(client), Client.class)
         return newClient
+    }
+
+    static Location location(Location location) {
+        return Location.builder()
+                .clientId(location.getClientId())
+                .locationId(location.getLocationId())
+                .name(location.getName())
+                .createdOn(location.getCreatedOn())
+                .lastUpdatedOn(location.getLastUpdatedOn())
+                .expiryDate(location.getExpiryDate())
+                .build()
     }
 }
