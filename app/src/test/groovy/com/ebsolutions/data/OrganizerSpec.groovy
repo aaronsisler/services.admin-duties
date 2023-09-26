@@ -21,7 +21,7 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 @MicronautTest
-class LocationSpec extends Specification {
+class OrganizerSpec extends Specification {
     @Inject
     private HttpClient httpClient
 

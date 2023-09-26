@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 
 class TestConstants {
     public static String adminServiceUrl = "http://localhost:8080"
+    public static String clientsUrl = TestConstants.adminServiceUrl + "/data/clients"
 
     // Client Constants
     public static String getClientId = "get-mock-client-id"
