@@ -4,34 +4,31 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "mock-client-id"
+            "S": "get-workshop-mock-client-id"
           },
           "sortKey": {
-            "S": "WORKSHOP#mock-workshop-1-id"
+            "S": "EVENT-get-workshop-mock-workshop-id"
           },
           "locationId": {
-            "S": "LOCATION#mock-location-1-id"
+            "S": "LOCATION-get-workshop-mock-location-id"
           },
           "organizerId": {
-            "S": "ORGANIZER#mock-organizer-1-id"
+            "S": "ORGANIZER-get-workshop-mock-organizer-id"
           },
           "name": {
-            "S": "Mock Workshop Name 1"
+            "S": "Get Mock Workshop Name"
           },
           "category": {
-            "S": "Mock Workshop Category 1"
+            "S": "Get Mock Workshop Category"
           },
           "description": {
-            "S": "Mock Workshop Description 1"
+            "S": "Get Mock Workshop Description"
           },
-          "workshopDate": {
-            "S": "2023-09-28"
+          "dayOfWeek": {
+            "N": "1"
           },
           "startTime": {
             "S": "08:30:00"
-          },
-          "cost": {
-            "N": "2000"
           },
           "duration": {
             "N": "60"
@@ -49,37 +46,160 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "mock-client-id"
+            "S": "get-all-workshop-mock-client-id"
           },
           "sortKey": {
-            "S": "WORKSHOP#mock-workshop-2-id"
+            "S": "EVENT-get-all-workshop-mock-workshop-1-id"
           },
           "locationId": {
-            "S": "LOCATION#mock-location-2-id"
+            "S": "LOCATION-get-all-workshop-mock-location-1-id"
           },
           "organizerId": {
-            "S": "ORGANIZER#mock-organizer-2-id"
+            "S": "ORGANIZER-get-all-workshop-mock-organizer-1-id"
           },
           "name": {
-            "S": "Mock Workshop Name 2"
+            "S": "Get All Mock Workshop Name 1"
           },
           "category": {
-            "S": "Mock Workshop Category 2"
+            "S": "Get All Mock Workshop Category 1"
           },
           "description": {
-            "S": "Mock Workshop Description 2"
+            "S": "Get All Mock Workshop Description 1"
           },
-          "workshopDate": {
-            "S": "2023-09-28"
+          "dayOfWeek": {
+            "N": "1"
           },
           "startTime": {
-            "S": "09:00:00"
-          },
-          "cost": {
-            "N": "2000"
+            "S": "08:30:00"
           },
           "duration": {
             "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "get-all-workshop-mock-client-id"
+          },
+          "sortKey": {
+            "S": "EVENT-get-all-workshop-mock-workshop-2-id"
+          },
+          "locationId": {
+            "S": "LOCATION-get-all-workshop-mock-location-2-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER-get-all-workshop-mock-organizer-2-id"
+          },
+          "name": {
+            "S": "Get All Mock Workshop Name 2"
+          },
+          "category": {
+            "S": "Get All Mock Workshop Category 2"
+          },
+          "description": {
+            "S": "Get All Mock Workshop Description 2"
+          },
+          "dayOfWeek": {
+            "N": "2"
+          },
+          "startTime": {
+            "S": "09:30:00"
+          },
+          "duration": {
+            "N": "75"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "delete-workshop-mock-client-id"
+          },
+          "sortKey": {
+            "S": "EVENT-delete-workshop-mock-workshop-id"
+          },
+          "locationId": {
+            "S": "LOCATION-delete-workshop-mock-location-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER-delete-workshop-mock-organizer-id"
+          },
+          "name": {
+            "S": "Delete Mock Workshop Name"
+          },
+          "category": {
+            "S": "Delete Mock Workshop Category"
+          },
+          "description": {
+            "S": "Delete Mock Workshop Description"
+          },
+          "dayOfWeek": {
+            "N": "3"
+          },
+          "startTime": {
+            "S": "10:30:00"
+          },
+          "duration": {
+            "N": "45"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "update-workshop-mock-client-id"
+          },
+          "sortKey": {
+            "S": "EVENT-update-workshop-mock-workshop-id"
+          },
+          "locationId": {
+            "S": "LOCATION-update-workshop-mock-location-id"
+          },
+          "organizerId": {
+            "S": "ORGANIZER-update-workshop-mock-organizer-id"
+          },
+          "name": {
+            "S": "Update Mock Workshop Name"
+          },
+          "category": {
+            "S": "Update Mock Workshop Category"
+          },
+          "description": {
+            "S": "Update Mock Workshop Description"
+          },
+          "dayOfWeek": {
+            "N": "4"
+          },
+          "startTime": {
+            "S": "11:30:00"
+          },
+          "duration": {
+            "N": "15"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
