@@ -10,7 +10,7 @@
             "S": "CLIENT"
           },
           "name": {
-            "S": "Get Mock Client"
+            "S": "Get Mock Client Name"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -31,7 +31,7 @@
             "S": "CLIENT"
           },
           "name": {
-            "S": "Delete Mock Client"
+            "S": "Delete Mock Client Name"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -52,7 +52,7 @@
             "S": "CLIENT"
           },
           "name": {
-            "S": "Update Mock Client"
+            "S": "Update Mock Client Name"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"

@@ -4,7 +4,7 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "get-event-mock-event-client-id"
+            "S": "get-event-mock-client-id"
           },
           "sortKey": {
             "S": "EVENT-get-event-mock-event-id"
@@ -16,7 +16,7 @@
             "S": "ORGANIZER-get-event-mock-organizer-id"
           },
           "name": {
-            "S": "Get Mock Event"
+            "S": "Get Mock Event Name"
           },
           "category": {
             "S": "Get Mock Event Category"
@@ -46,7 +46,7 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "get-all-event-mock-event-client-id"
+            "S": "get-all-event-mock-client-id"
           },
           "sortKey": {
             "S": "EVENT-get-all-event-mock-event-1-id"
@@ -58,13 +58,13 @@
             "S": "ORGANIZER-get-all-event-mock-organizer-1-id"
           },
           "name": {
-            "S": "Mock Event Name 1"
+            "S": "Get All Mock Event Name 1"
           },
           "category": {
-            "S": "Mock Event Category 1"
+            "S": "Get All Mock Event Category 1"
           },
           "description": {
-            "S": "Mock Event Description 1"
+            "S": "Get All Mock Event Description 1"
           },
           "dayOfWeek": {
             "N": "1"
@@ -88,7 +88,7 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "get-all-event-mock-event-client-id"
+            "S": "get-all-event-mock-client-id"
           },
           "sortKey": {
             "S": "EVENT-get-all-event-mock-event-2-id"
@@ -100,22 +100,22 @@
             "S": "ORGANIZER-get-all-event-mock-organizer-2-id"
           },
           "name": {
-            "S": "Mock Event Name 2"
+            "S": "Get All Mock Event Name 2"
           },
           "category": {
-            "S": "Mock Event Category 2"
+            "S": "Get All Mock Event Category 2"
           },
           "description": {
-            "S": "Mock Event Description 2"
+            "S": "Get All Mock Event Description 2"
           },
           "dayOfWeek": {
-            "N": "1"
+            "N": "2"
           },
           "startTime": {
-            "S": "08:30:00"
+            "S": "09:30:00"
           },
           "duration": {
-            "N": "60"
+            "N": "75"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -130,7 +130,7 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "delete-mock-event-client-id"
+            "S": "delete-event-mock-client-id"
           },
           "sortKey": {
             "S": "EVENT-delete-event-mock-event-id"
@@ -142,7 +142,7 @@
             "S": "ORGANIZER-delete-event-mock-organizer-id"
           },
           "name": {
-            "S": "Delete Mock Event"
+            "S": "Delete Mock Event Name"
           },
           "category": {
             "S": "Delete Mock Event Category"
@@ -151,13 +151,13 @@
             "S": "Delete Mock Event Description"
           },
           "dayOfWeek": {
-            "N": "1"
+            "N": "3"
           },
           "startTime": {
-            "S": "08:30:00"
+            "S": "10:30:00"
           },
           "duration": {
-            "N": "60"
+            "N": "45"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -172,34 +172,34 @@
       "PutRequest": {
         "Item": {
           "partitionKey": {
-            "S": "get-mock-event-client-id"
+            "S": "update-event-mock-client-id"
           },
           "sortKey": {
-            "S": "EVENT-get-mock-event-id"
+            "S": "EVENT-update-event-mock-event-id"
           },
           "locationId": {
-            "S": "LOCATION-get-mock-location-id"
+            "S": "LOCATION-update-event-mock-location-id"
           },
           "organizerId": {
-            "S": "ORGANIZER-get-mock-organizer-id"
+            "S": "ORGANIZER-update-event-mock-organizer-id"
           },
           "name": {
-            "S": "Mock Event Name 1"
+            "S": "Update Mock Event Name"
           },
           "category": {
-            "S": "Mock Event Category 1"
+            "S": "Update Mock Event Category"
           },
           "description": {
-            "S": "Mock Event Description 1"
+            "S": "Update Mock Event Description"
           },
           "dayOfWeek": {
-            "N": "1"
+            "N": "4"
           },
           "startTime": {
-            "S": "08:30:00"
+            "S": "11:30:00"
           },
           "duration": {
-            "N": "60"
+            "N": "15"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"

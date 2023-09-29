@@ -3,7 +3,7 @@ package com.ebsolutions.data
 import com.ebsolutions.config.TestConstants
 import com.ebsolutions.models.Client
 import com.ebsolutions.utils.CopyObjectUtil
-import com.ebsolutions.utils.DateComparisonUtil
+import com.ebsolutions.utils.DateAndTimeComparisonUtil
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
@@ -35,9 +35,9 @@ class ClientSpec extends Specification {
         and: "the correct client is returned"
             Client client = response.body()
             Assertions.assertEquals(TestConstants.getClientId, client.getClientId())
-            Assertions.assertEquals("Get Mock Client", client.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(client.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(client.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Get Mock Client Name", client.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(client.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(client.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
     }
 
     def "Get a Client: Given client does not exist"() {
@@ -53,7 +53,7 @@ class ClientSpec extends Specification {
 
     def "Create a Client: Success"() {
         given: "A valid client"
-            Client newClient = Client.builder().name("New Mock Client").build()
+            Client newClient = Client.builder().name("Create Mock Client Name").build()
         when: "a request is made to create a client"
             HttpRequest httpRequest = HttpRequest.POST(URI.create(TestConstants.clientsUrl), newClient)
             HttpResponse<Client> response = httpClient.toBlocking().exchange(httpRequest, Client)
@@ -64,9 +64,9 @@ class ClientSpec extends Specification {
         and: "the new client is returned"
             Client client = response.body()
             Assertions.assertNotNull(client.getClientId())
-            Assertions.assertEquals("New Mock Client", client.getName())
-            Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(client.getCreatedOn()))
-            Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(client.getLastUpdatedOn()))
+            Assertions.assertEquals("Create Mock Client Name", client.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(client.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(client.getLastUpdatedOn()))
     }
 
     def "Update a Client: Fails given invalid Client Id"() {
@@ -78,9 +78,9 @@ class ClientSpec extends Specification {
 
             Client initClient = initResponse.body()
             Assertions.assertEquals(TestConstants.updateClientId, initClient.getClientId())
-            Assertions.assertEquals("Update Mock Client", initClient.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Client Name", initClient.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to the client id that is invalid"
             Client updatedClient = CopyObjectUtil.client(initClient)
@@ -104,9 +104,9 @@ class ClientSpec extends Specification {
 
             Client initClient = initResponse.body()
             Assertions.assertEquals(TestConstants.updateClientId, initClient.getClientId())
-            Assertions.assertEquals("Update Mock Client", initClient.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Client Name", initClient.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to the created on date that is invalid"
             Client updatedClient = CopyObjectUtil.client(initClient)
@@ -131,13 +131,13 @@ class ClientSpec extends Specification {
 
             Client initClient = initResponse.body()
             Assertions.assertEquals(TestConstants.updateClientId, initClient.getClientId())
-            Assertions.assertEquals("Update Mock Client", initClient.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Client Name", initClient.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to client"
             Client updatedClient = CopyObjectUtil.client(initClient)
-            updatedClient.setName("New Updated Mock Client")
+            updatedClient.setName("New Updated Mock Client Name")
 
         when: "a request is made to update the client"
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(TestConstants.clientsUrl), updatedClient)
@@ -149,9 +149,9 @@ class ClientSpec extends Specification {
         and: "the updated client is returned"
             Client client = response.body()
             Assertions.assertNotNull(client.getClientId())
-            Assertions.assertEquals("New Updated Mock Client", client.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(client.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(client.getLastUpdatedOn()))
+            Assertions.assertEquals("New Updated Mock Client Name", client.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(client.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(client.getLastUpdatedOn()))
     }
 
     def "Delete a Client"() {
@@ -163,9 +163,9 @@ class ClientSpec extends Specification {
 
             Client initClient = initResponse.body()
             Assertions.assertEquals(TestConstants.deleteClientId, initClient.getClientId())
-            Assertions.assertEquals("Delete Mock Client", initClient.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Delete Mock Client Name", initClient.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initClient.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initClient.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         when: "a request is made to delete the client"
             HttpRequest httpRequest = HttpRequest.DELETE(URI.create(TestConstants.clientsUrl + "/" + TestConstants.deleteClientId))

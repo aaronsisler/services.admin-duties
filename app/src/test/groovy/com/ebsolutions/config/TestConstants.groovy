@@ -40,16 +40,28 @@ class TestConstants {
 
     // Event Constants
     // Leading Dashes on event ids are to help with the DB Setup
-    public static String getEventClientId = "get-event-mock-event-client-id"
+    public static String getEventClientId = "get-event-mock-client-id"
     public static String getEventId = "-get-event-mock-event-id"
+    public static String getEventLocationId = "-get-event-mock-location-id"
+    public static String getEventOrganizerId = "-get-event-mock-organizer-id"
     public static String getAllEventClientId = "get-all-event-mock-client-id"
     public static String getAllEventIdOne = "-get-all-event-mock-event-1-id"
+    public static String getAllEventLocationIdOne = "-get-all-event-mock-location-1-id"
+    public static String getAllEventOrganizerIdOne = "-get-all-event-mock-organizer-1-id"
     public static String getAllEventIdTwo = "-get-all-event-mock-event-2-id"
+    public static String getAllEventLocationIdTwo = "-get-all-event-mock-location-2-id"
+    public static String getAllEventOrganizerIdTwo = "-get-all-event-mock-organizer-2-id"
     public static String createEventClientId = "create-event-mock-client-id"
+    public static String createEventLocationId = "-create-event-mock-location-id"
+    public static String createEventOrganizerId = "-create-event-mock-organizer-id"
     public static String deleteEventClientId = "delete-event-mock-client-id"
     public static String deleteEventId = "-delete-event-mock-event-id"
+    public static String deleteEventLocationId = "-delete-event-mock-location-id"
+    public static String deleteEventOrganizerId = "-delete-event-mock-organizer-id"
     public static String updateEventClientId = "update-event-mock-client-id"
-    public static String updateEventId = "-update-event-mock-organizer-id"
+    public static String updateEventId = "-update-event-mock-event-id"
+    public static String updateEventLocationId = "-update-event-mock-location-id"
+    public static String updateEventOrganizerId = "-update-event-mock-organizer-id"
 
     public static LocalDateTime createdOn = LocalDateTime.of(2023, 7, 04, 1, 2, 34)
     public static LocalDateTime lastUpdatedOn = LocalDateTime.of(2023, 7, 04, 12, 34, 56)

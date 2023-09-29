@@ -10,7 +10,7 @@
             "S": "ORGANIZER-get-organizer-mock-organizer-id"
           },
           "name": {
-            "S": "Get Mock Organizer"
+            "S": "Get Mock Organizer Name"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -31,7 +31,7 @@
             "S": "ORGANIZER-get-all-organizer-mock-organizer-1-id"
           },
           "name": {
-            "S": "Get All Mock Organizer 1"
+            "S": "Get All Mock Organizer Name 1"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -52,7 +52,7 @@
             "S": "ORGANIZER-get-all-organizer-mock-organizer-2-id"
           },
           "name": {
-            "S": "Get All Mock Organizer 2"
+            "S": "Get All Mock Organizer Name 2"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -73,7 +73,7 @@
             "S": "ORGANIZER-delete-organizer-mock-organizer-id"
           },
           "name": {
-            "S": "Delete Mock Organizer"
+            "S": "Delete Mock Organizer Name"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -94,7 +94,7 @@
             "S": "ORGANIZER-update-organizer-mock-organizer-id"
           },
           "name": {
-            "S": "Update Mock Organizer"
+            "S": "Update Mock Organizer Name"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"

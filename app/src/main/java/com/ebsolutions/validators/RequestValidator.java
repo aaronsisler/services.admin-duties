@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class RequestValidator {
     public static boolean isEventValid(RequestMethod requestMethod, Event event) {
         return switch (requestMethod) {
-            case POST -> RequestValidator.isPostBaseEventValid(event);
+            case POST -> RequestValidator.isEventValid(event);
             case GET, PUT, DELETE -> true;
         };
     }
@@ -20,17 +20,25 @@ public class RequestValidator {
     }
 
     private static boolean isPostBaseEventValid(BaseEvent baseEvent) {
-        return baseEvent.getDuration() > 0;
+        if (baseEvent.getDuration() <= 0) {
+            return false;
+        }
+
+        return baseEvent.getStartTime() != null;
     }
 
     public static boolean isCsvRequestValid(CsvRequest csvRequest) {
         boolean isYearValid = csvRequest.getYear() >= LocalDate.now().getYear();
         boolean isMonthValid = (1 <= csvRequest.getMonth() && csvRequest.getMonth() <= 12);
 
-        if (!isYearValid || !isMonthValid) {
+        return isYearValid && isMonthValid;
+    }
+
+    private static boolean isEventValid(Event event) {
+        if (!RequestValidator.isPostBaseEventValid(event)) {
             return false;
         }
 
-        return true;
+        return event.getDayOfWeek() != null;
     }
 }

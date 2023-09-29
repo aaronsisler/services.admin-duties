@@ -4,7 +4,7 @@ import com.ebsolutions.config.TestConstants
 import com.ebsolutions.models.Client
 import com.ebsolutions.models.Location
 import com.ebsolutions.utils.CopyObjectUtil
-import com.ebsolutions.utils.DateComparisonUtil
+import com.ebsolutions.utils.DateAndTimeComparisonUtil
 import io.micronaut.core.type.Argument
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
@@ -44,9 +44,9 @@ class LocationSpec extends Specification {
             Location location = response.body()
             Assertions.assertEquals(TestConstants.getLocationClientId, location.getClientId())
             Assertions.assertEquals(TestConstants.getLocationId, location.getLocationId())
-            Assertions.assertEquals("Get Mock Location", location.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(location.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(location.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Get Mock Location Name", location.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(location.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(location.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
     }
 
     def "Get a Location: Given Location does not exist"() {
@@ -86,15 +86,15 @@ class LocationSpec extends Specification {
 
             Assertions.assertEquals(TestConstants.getAllLocationClientId, firstLocation.getClientId())
             Assertions.assertEquals(TestConstants.getAllLocationIdOne, firstLocation.getLocationId())
-            Assertions.assertEquals("Get All Mock Location 1", firstLocation.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(firstLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(firstLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Get All Mock Location Name 1", firstLocation.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(firstLocation.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(firstLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
             Assertions.assertEquals(TestConstants.getAllLocationClientId, secondLocation.getClientId())
             Assertions.assertEquals(TestConstants.getAllLocationIdTwo, secondLocation.getLocationId())
-            Assertions.assertEquals("Get All Mock Location 2", secondLocation.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(secondLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(secondLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Get All Mock Location Name 2", secondLocation.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(secondLocation.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(secondLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
     }
 
     def "Get all Locations: No locations exist for client"() {
@@ -136,7 +136,7 @@ class LocationSpec extends Specification {
         given: "A valid location"
             Location createLocation = Location.builder()
                     .clientId(TestConstants.createLocationClientId)
-                    .name("New Mock Location")
+                    .name("Create Mock Location Name")
                     .build()
 
         when: "a request is made to create a location for the correct client"
@@ -154,9 +154,9 @@ class LocationSpec extends Specification {
             Location location = response.body()
             Assertions.assertEquals(TestConstants.createLocationClientId, location.getClientId())
             Assertions.assertNotNull(location.getLocationId())
-            Assertions.assertEquals("New Mock Location", location.getName())
-            Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(location.getCreatedOn()))
-            Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(location.getLastUpdatedOn()))
+            Assertions.assertEquals("Create Mock Location Name", location.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(location.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(location.getLastUpdatedOn()))
     }
 
     def "Update a Location: Fails given client ids do not match"() {
@@ -173,9 +173,9 @@ class LocationSpec extends Specification {
             Location initLocation = initResponse.body()
             Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
             Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
-            Assertions.assertEquals("Update Mock Location", initLocation.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Location Name", initLocation.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to the client id that is valid"
             Location updatedLocation = CopyObjectUtil.location(initLocation)
@@ -208,9 +208,9 @@ class LocationSpec extends Specification {
             Location initLocation = initResponse.body()
             Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
             Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
-            Assertions.assertEquals("Update Mock Location", initLocation.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Location Name", initLocation.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to the location id that is invalid"
             Location updatedLocation = CopyObjectUtil.location(initLocation)
@@ -243,9 +243,9 @@ class LocationSpec extends Specification {
             Location initLocation = initResponse.body()
             Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
             Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
-            Assertions.assertEquals("Update Mock Location", initLocation.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Location Name", initLocation.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to the created on date that is invalid"
             Location updatedLocation = CopyObjectUtil.location(initLocation)
@@ -280,13 +280,13 @@ class LocationSpec extends Specification {
             Location initLocation = initResponse.body()
             Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
             Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
-            Assertions.assertEquals("Update Mock Location", initLocation.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Location Name", initLocation.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to location"
             Location updatedLocation = CopyObjectUtil.location(initLocation)
-            updatedLocation.setName("New Updated Mock Location")
+            updatedLocation.setName("New Updated Mock Location Name")
 
         when: "a request is made to update the location"
             String updateUrl = MessageFormat.format("{0}/{1}/locations",
@@ -303,9 +303,9 @@ class LocationSpec extends Specification {
             Location location = response.body()
             Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
             Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
-            Assertions.assertEquals("New Updated Mock Location", location.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(location.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(location.getLastUpdatedOn()))
+            Assertions.assertEquals("New Updated Mock Location Name", location.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(location.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(location.getLastUpdatedOn()))
     }
 
     def "Delete a Location"() {
@@ -323,9 +323,9 @@ class LocationSpec extends Specification {
             Location initLocation = initResponse.body()
             Assertions.assertEquals(TestConstants.deleteLocationClientId, initLocation.getClientId())
             Assertions.assertEquals(TestConstants.deleteLocationId, initLocation.getLocationId())
-            Assertions.assertEquals("Delete Mock Location", initLocation.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Delete Mock Location Name", initLocation.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
         when: "a request is made to delete the location"
             String deleteUrl =
                     MessageFormat.format("{0}/{1}/locations/{2}",

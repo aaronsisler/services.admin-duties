@@ -10,7 +10,7 @@
             "S": "LOCATION-get-location-mock-location-id"
           },
           "name": {
-            "S": "Get Mock Location"
+            "S": "Get Mock Location Name"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -31,7 +31,7 @@
             "S": "LOCATION-get-all-location-mock-location-1-id"
           },
           "name": {
-            "S": "Get All Mock Location 1"
+            "S": "Get All Mock Location Name 1"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -52,7 +52,7 @@
             "S": "LOCATION-get-all-location-mock-location-2-id"
           },
           "name": {
-            "S": "Get All Mock Location 2"
+            "S": "Get All Mock Location Name 2"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -73,7 +73,7 @@
             "S": "LOCATION-delete-location-mock-location-id"
           },
           "name": {
-            "S": "Delete Mock Location"
+            "S": "Delete Mock Location Name"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -94,7 +94,7 @@
             "S": "LOCATION-update-location-mock-location-id"
           },
           "name": {
-            "S": "Update Mock Location"
+            "S": "Update Mock Location Name"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"

@@ -4,7 +4,7 @@ import com.ebsolutions.config.TestConstants
 import com.ebsolutions.models.Client
 import com.ebsolutions.models.Organizer
 import com.ebsolutions.utils.CopyObjectUtil
-import com.ebsolutions.utils.DateComparisonUtil
+import com.ebsolutions.utils.DateAndTimeComparisonUtil
 import io.micronaut.core.type.Argument
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
@@ -44,9 +44,9 @@ class OrganizerSpec extends Specification {
             Organizer organizer = response.body()
             Assertions.assertEquals(TestConstants.getOrganizerClientId, organizer.getClientId())
             Assertions.assertEquals(TestConstants.getOrganizerId, organizer.getOrganizerId())
-            Assertions.assertEquals("Get Mock Organizer", organizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(organizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(organizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Get Mock Organizer Name", organizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(organizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(organizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
     }
 
     def "Get an Organizer: An organizer does not exist"() {
@@ -86,15 +86,15 @@ class OrganizerSpec extends Specification {
 
             Assertions.assertEquals(TestConstants.getAllOrganizerClientId, firstOrganizer.getClientId())
             Assertions.assertEquals(TestConstants.getAllOrganizerIdOne, firstOrganizer.getOrganizerId())
-            Assertions.assertEquals("Get All Mock Organizer 1", firstOrganizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(firstOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(firstOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Get All Mock Organizer Name 1", firstOrganizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(firstOrganizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(firstOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
             Assertions.assertEquals(TestConstants.getAllOrganizerClientId, secondOrganizer.getClientId())
             Assertions.assertEquals(TestConstants.getAllOrganizerIdTwo, secondOrganizer.getOrganizerId())
-            Assertions.assertEquals("Get All Mock Organizer 2", secondOrganizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(secondOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(secondOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Get All Mock Organizer Name 2", secondOrganizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(secondOrganizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(secondOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
     }
 
     def "Get all Organizers: No organizers exist for client"() {
@@ -116,7 +116,7 @@ class OrganizerSpec extends Specification {
         given: "A valid organizer"
             Organizer createOrganizer = Organizer.builder()
                     .clientId(TestConstants.createOrganizerClientId)
-                    .name("New Mock Organizer")
+                    .name("Create Mock Organizer Name")
                     .build()
 
         when: "a request is made to create an organizer for the wrong client"
@@ -136,7 +136,7 @@ class OrganizerSpec extends Specification {
         given: "A valid organizer"
             Organizer createOrganizer = Organizer.builder()
                     .clientId(TestConstants.createOrganizerClientId)
-                    .name("New Mock Organizer")
+                    .name("Create Mock Organizer Name")
                     .build()
 
         when: "a request is made to create an organizer for the correct client"
@@ -154,9 +154,9 @@ class OrganizerSpec extends Specification {
             Organizer organizer = response.body()
             Assertions.assertEquals(TestConstants.createOrganizerClientId, organizer.getClientId())
             Assertions.assertNotNull(organizer.getOrganizerId())
-            Assertions.assertEquals("New Mock Organizer", organizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(organizer.getCreatedOn()))
-            Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(organizer.getLastUpdatedOn()))
+            Assertions.assertEquals("Create Mock Organizer Name", organizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(organizer.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(organizer.getLastUpdatedOn()))
     }
 
     def "Update an Organizer: Fails given client ids do not match"() {
@@ -173,9 +173,9 @@ class OrganizerSpec extends Specification {
             Organizer initOrganizer = initResponse.body()
             Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
             Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
-            Assertions.assertEquals("Update Mock Organizer", initOrganizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Organizer Name", initOrganizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to the client id that is valid"
             Organizer updatedOrganizer = CopyObjectUtil.organizer(initOrganizer)
@@ -208,9 +208,9 @@ class OrganizerSpec extends Specification {
             Organizer initOrganizer = initResponse.body()
             Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
             Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
-            Assertions.assertEquals("Update Mock Organizer", initOrganizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Organizer Name", initOrganizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to the organizer id that is invalid"
             Organizer updatedOrganizer = CopyObjectUtil.organizer(initOrganizer)
@@ -243,9 +243,9 @@ class OrganizerSpec extends Specification {
             Organizer initOrganizer = initResponse.body()
             Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
             Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
-            Assertions.assertEquals("Update Mock Organizer", initOrganizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Organizer Name", initOrganizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to the created on date that is invalid"
             Organizer updatedOrganizer = CopyObjectUtil.organizer(initOrganizer)
@@ -280,13 +280,13 @@ class OrganizerSpec extends Specification {
             Organizer initOrganizer = initResponse.body()
             Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
             Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
-            Assertions.assertEquals("Update Mock Organizer", initOrganizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Update Mock Organizer Name", initOrganizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
 
         and: "an update is made to organizer"
             Organizer updatedOrganizer = CopyObjectUtil.organizer(initOrganizer)
-            updatedOrganizer.setName("New Updated Mock Organizer")
+            updatedOrganizer.setName("New Updated Mock Organizer Name")
 
         when: "a request is made to update the organizer"
             String updateUrl = MessageFormat.format("{0}/{1}/organizers",
@@ -303,9 +303,9 @@ class OrganizerSpec extends Specification {
             Organizer organizer = response.body()
             Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
             Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
-            Assertions.assertEquals("New Updated Mock Organizer", organizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(organizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.isDateTimeNow(organizer.getLastUpdatedOn()))
+            Assertions.assertEquals("New Updated Mock Organizer Name", organizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(organizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(organizer.getLastUpdatedOn()))
     }
 
     def "Delete an Organizer"() {
@@ -323,9 +323,9 @@ class OrganizerSpec extends Specification {
             Organizer initOrganizer = initResponse.body()
             Assertions.assertEquals(TestConstants.deleteOrganizerClientId, initOrganizer.getClientId())
             Assertions.assertEquals(TestConstants.deleteOrganizerId, initOrganizer.getOrganizerId())
-            Assertions.assertEquals("Delete Mock Organizer", initOrganizer.getName())
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertEquals("Delete Mock Organizer Name", initOrganizer.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
         when: "a request is made to delete the organizer"
             String deleteUrl =
                     MessageFormat.format("{0}/{1}/organizers/{2}",
