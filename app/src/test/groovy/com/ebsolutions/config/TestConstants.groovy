@@ -63,6 +63,31 @@ class TestConstants {
     public static String updateEventLocationId = "-update-event-mock-location-id"
     public static String updateEventOrganizerId = "-update-event-mock-organizer-id"
 
+    // Workshop Constants
+    // Leading Dashes on workshop ids are to help with the DB Setup
+    public static String getWorkshopClientId = "get-workshop-mock-client-id"
+    public static String getWorkshopId = "-get-workshop-mock-workshop-id"
+    public static String getWorkshopLocationId = "-get-workshop-mock-location-id"
+    public static String getWorkshopOrganizerId = "-get-workshop-mock-organizer-id"
+    public static String getAllWorkshopClientId = "get-all-workshop-mock-client-id"
+    public static String getAllWorkshopIdOne = "-get-all-workshop-mock-workshop-1-id"
+    public static String getAllWorkshopLocationIdOne = "-get-all-workshop-mock-location-1-id"
+    public static String getAllWorkshopOrganizerIdOne = "-get-all-workshop-mock-organizer-1-id"
+    public static String getAllWorkshopIdTwo = "-get-all-workshop-mock-workshop-2-id"
+    public static String getAllWorkshopLocationIdTwo = "-get-all-workshop-mock-location-2-id"
+    public static String getAllWorkshopOrganizerIdTwo = "-get-all-workshop-mock-organizer-2-id"
+    public static String createWorkshopClientId = "create-workshop-mock-client-id"
+    public static String createWorkshopLocationId = "-create-workshop-mock-location-id"
+    public static String createWorkshopOrganizerId = "-create-workshop-mock-organizer-id"
+    public static String deleteWorkshopClientId = "delete-workshop-mock-client-id"
+    public static String deleteWorkshopId = "-delete-workshop-mock-workshop-id"
+    public static String deleteWorkshopLocationId = "-delete-workshop-mock-location-id"
+    public static String deleteWorkshopOrganizerId = "-delete-workshop-mock-organizer-id"
+    public static String updateWorkshopClientId = "update-workshop-mock-client-id"
+    public static String updateWorkshopId = "-update-workshop-mock-workshop-id"
+    public static String updateWorkshopLocationId = "-update-workshop-mock-location-id"
+    public static String updateWorkshopOrganizerId = "-update-workshop-mock-organizer-id"
+
     public static LocalDateTime createdOn = LocalDateTime.of(2023, 7, 04, 1, 2, 34)
     public static LocalDateTime lastUpdatedOn = LocalDateTime.of(2023, 7, 04, 12, 34, 56)
 }

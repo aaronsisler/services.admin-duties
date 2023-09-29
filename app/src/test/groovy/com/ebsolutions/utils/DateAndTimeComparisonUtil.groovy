@@ -1,5 +1,6 @@
 package com.ebsolutions.utils
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
@@ -14,6 +15,10 @@ class DateAndTimeComparisonUtil {
      */
     static boolean isDateTimeNow(LocalDateTime dateTime) {
         return dateTime.until(LocalDateTime.now(), ChronoUnit.SECONDS) < 1
+    }
+
+    static boolean areDatesEqual(String firstDate, LocalDate secondDate) {
+        return LocalDate.parse(firstDate).until(secondDate, ChronoUnit.DAYS) == 0
     }
 
     static boolean areTimesEqual(String firstTime, LocalTime secondTime) {

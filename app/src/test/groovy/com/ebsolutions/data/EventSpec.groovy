@@ -139,7 +139,7 @@ class EventSpec extends Specification {
         given: "A valid event"
             Event createEvent = Event.builder()
                     .clientId(TestConstants.createEventClientId)
-                    .name("New Mock Event")
+                    .name("Create Mock Event")
                     .build()
 
         when: "a request is made to create an event for the wrong client"
