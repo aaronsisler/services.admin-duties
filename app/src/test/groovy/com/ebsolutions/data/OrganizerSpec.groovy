@@ -1,6 +1,7 @@
 package com.ebsolutions.data
 
 import com.ebsolutions.config.TestConstants
+import com.ebsolutions.constants.OrganizerTestConstants
 import com.ebsolutions.models.Client
 import com.ebsolutions.models.Organizer
 import com.ebsolutions.utils.CopyObjectUtil
@@ -31,8 +32,8 @@ class OrganizerSpec extends Specification {
         when: "a request is made to the organizer"
             String getUrl = MessageFormat.format("{0}/{1}/organizers/{2}",
                     TestConstants.clientsUrl,
-                    TestConstants.getOrganizerClientId,
-                    TestConstants.getOrganizerId)
+                    OrganizerTestConstants.getOrganizerClientId,
+                    OrganizerTestConstants.getOrganizerId)
 
             HttpResponse<Organizer> response = httpClient.toBlocking()
                     .exchange(getUrl, Organizer)
@@ -42,11 +43,11 @@ class OrganizerSpec extends Specification {
 
         and: "the correct organizer is returned"
             Organizer organizer = response.body()
-            Assertions.assertEquals(TestConstants.getOrganizerClientId, organizer.getClientId())
-            Assertions.assertEquals(TestConstants.getOrganizerId, organizer.getOrganizerId())
+            Assertions.assertEquals(OrganizerTestConstants.getOrganizerClientId, organizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.getOrganizerId, organizer.getOrganizerId())
             Assertions.assertEquals("Get Mock Organizer Name", organizer.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(organizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(organizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, organizer.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, organizer.getLastUpdatedOn()))
     }
 
     def "Get an Organizer: An organizer does not exist"() {
@@ -55,7 +56,7 @@ class OrganizerSpec extends Specification {
         when: "a request is made to retrieve the organizer"
             String incorrectUrl = MessageFormat.format("{0}/{1}/organizers/non-existent-organizer",
                     TestConstants.clientsUrl,
-                    TestConstants.getOrganizerClientId)
+                    OrganizerTestConstants.getOrganizerClientId)
 
             HttpResponse<Organizer> response = httpClient.toBlocking()
                     .exchange(incorrectUrl, Organizer)
@@ -70,7 +71,7 @@ class OrganizerSpec extends Specification {
         when: "a request is made to retrieve the organizers"
             String getUrl = MessageFormat.format("{0}/{1}/organizers",
                     TestConstants.clientsUrl,
-                    TestConstants.getAllOrganizerClientId)
+                    OrganizerTestConstants.getAllOrganizerClientId)
             HttpRequest httpRequest = HttpRequest.GET(getUrl)
 
             HttpResponse<List<Organizer>> response = httpClient.toBlocking()
@@ -84,17 +85,17 @@ class OrganizerSpec extends Specification {
             Organizer firstOrganizer = organizers.get(0)
             Organizer secondOrganizer = organizers.get(1)
 
-            Assertions.assertEquals(TestConstants.getAllOrganizerClientId, firstOrganizer.getClientId())
-            Assertions.assertEquals(TestConstants.getAllOrganizerIdOne, firstOrganizer.getOrganizerId())
+            Assertions.assertEquals(OrganizerTestConstants.getAllOrganizerClientId, firstOrganizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.getAllOrganizerIdOne, firstOrganizer.getOrganizerId())
             Assertions.assertEquals("Get All Mock Organizer Name 1", firstOrganizer.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(firstOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(firstOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, firstOrganizer.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, firstOrganizer.getLastUpdatedOn()))
 
-            Assertions.assertEquals(TestConstants.getAllOrganizerClientId, secondOrganizer.getClientId())
-            Assertions.assertEquals(TestConstants.getAllOrganizerIdTwo, secondOrganizer.getOrganizerId())
+            Assertions.assertEquals(OrganizerTestConstants.getAllOrganizerClientId, secondOrganizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.getAllOrganizerIdTwo, secondOrganizer.getOrganizerId())
             Assertions.assertEquals("Get All Mock Organizer Name 2", secondOrganizer.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(secondOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(secondOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, secondOrganizer.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, secondOrganizer.getLastUpdatedOn()))
     }
 
     def "Get all Organizers: No organizers exist for client"() {
@@ -115,7 +116,7 @@ class OrganizerSpec extends Specification {
     def "Create an Organizer: Fails given client ids do not match"() {
         given: "A valid organizer"
             Organizer createOrganizer = Organizer.builder()
-                    .clientId(TestConstants.createOrganizerClientId)
+                    .clientId(OrganizerTestConstants.createOrganizerClientId)
                     .name("Create Mock Organizer Name")
                     .build()
 
@@ -135,14 +136,14 @@ class OrganizerSpec extends Specification {
     def "Create an Organizer: Success"() {
         given: "A valid organizer"
             Organizer createOrganizer = Organizer.builder()
-                    .clientId(TestConstants.createOrganizerClientId)
+                    .clientId(OrganizerTestConstants.createOrganizerClientId)
                     .name("Create Mock Organizer Name")
                     .build()
 
         when: "a request is made to create an organizer for the correct client"
             String correctUrl = MessageFormat.format("{0}/{1}/organizers",
                     TestConstants.clientsUrl,
-                    TestConstants.createOrganizerClientId)
+                    OrganizerTestConstants.createOrganizerClientId)
 
             HttpRequest httpRequest = HttpRequest.POST(correctUrl, createOrganizer)
             HttpResponse<Organizer> response = httpClient.toBlocking().exchange(httpRequest, Organizer)
@@ -152,7 +153,7 @@ class OrganizerSpec extends Specification {
 
         and: "the correct organizer is returned"
             Organizer organizer = response.body()
-            Assertions.assertEquals(TestConstants.createOrganizerClientId, organizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.createOrganizerClientId, organizer.getClientId())
             Assertions.assertNotNull(organizer.getOrganizerId())
             Assertions.assertEquals("Create Mock Organizer Name", organizer.getName())
             Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(organizer.getCreatedOn()))
@@ -164,18 +165,18 @@ class OrganizerSpec extends Specification {
             // Verify data seeded from Database init scripts correctly
             String getUrl = MessageFormat.format("{0}/{1}/organizers/{2}",
                     TestConstants.clientsUrl,
-                    TestConstants.updateOrganizerClientId,
-                    TestConstants.updateOrganizerId)
+                    OrganizerTestConstants.updateOrganizerClientId,
+                    OrganizerTestConstants.updateOrganizerId)
 
             HttpResponse<Organizer> initResponse = httpClient.toBlocking().exchange(getUrl, Organizer)
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
 
             Organizer initOrganizer = initResponse.body()
-            Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
-            Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerClientId, initOrganizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
             Assertions.assertEquals("Update Mock Organizer Name", initOrganizer.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initOrganizer.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initOrganizer.getLastUpdatedOn()))
 
         and: "an update is made to the client id that is valid"
             Organizer updatedOrganizer = CopyObjectUtil.organizer(initOrganizer)
@@ -199,18 +200,18 @@ class OrganizerSpec extends Specification {
             // Verify data seeded from Database init scripts correctly
             String getUrl = MessageFormat.format("{0}/{1}/organizers/{2}",
                     TestConstants.clientsUrl,
-                    TestConstants.updateOrganizerClientId,
-                    TestConstants.updateOrganizerId)
+                    OrganizerTestConstants.updateOrganizerClientId,
+                    OrganizerTestConstants.updateOrganizerId)
 
             HttpResponse<Organizer> initResponse = httpClient.toBlocking().exchange(getUrl, Organizer)
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
 
             Organizer initOrganizer = initResponse.body()
-            Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
-            Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerClientId, initOrganizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
             Assertions.assertEquals("Update Mock Organizer Name", initOrganizer.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initOrganizer.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initOrganizer.getLastUpdatedOn()))
 
         and: "an update is made to the organizer id that is invalid"
             Organizer updatedOrganizer = CopyObjectUtil.organizer(initOrganizer)
@@ -219,7 +220,7 @@ class OrganizerSpec extends Specification {
         when: "a request is made to update the organizer"
             String updateUrl = MessageFormat.format("{0}/{1}/organizers",
                     TestConstants.clientsUrl,
-                    TestConstants.updateOrganizerClientId)
+                    OrganizerTestConstants.updateOrganizerClientId)
 
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(updateUrl), updatedOrganizer)
             httpClient.toBlocking().exchange(httpRequest, Client)
@@ -234,18 +235,18 @@ class OrganizerSpec extends Specification {
             // Verify data seeded from Database init scripts correctly
             String getUrl = MessageFormat.format("{0}/{1}/organizers/{2}",
                     TestConstants.clientsUrl,
-                    TestConstants.updateOrganizerClientId,
-                    TestConstants.updateOrganizerId)
+                    OrganizerTestConstants.updateOrganizerClientId,
+                    OrganizerTestConstants.updateOrganizerId)
 
             HttpResponse<Organizer> initResponse = httpClient.toBlocking().exchange(getUrl, Organizer)
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
 
             Organizer initOrganizer = initResponse.body()
-            Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
-            Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerClientId, initOrganizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
             Assertions.assertEquals("Update Mock Organizer Name", initOrganizer.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initOrganizer.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initOrganizer.getLastUpdatedOn()))
 
         and: "an update is made to the created on date that is invalid"
             Organizer updatedOrganizer = CopyObjectUtil.organizer(initOrganizer)
@@ -255,7 +256,7 @@ class OrganizerSpec extends Specification {
         when: "a request is made to update the organizer"
             String updateUrl = MessageFormat.format("{0}/{1}/organizers",
                     TestConstants.clientsUrl,
-                    TestConstants.updateOrganizerClientId)
+                    OrganizerTestConstants.updateOrganizerClientId)
 
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(updateUrl), updatedOrganizer)
             httpClient.toBlocking().exchange(httpRequest, Client)
@@ -271,18 +272,18 @@ class OrganizerSpec extends Specification {
             String correctUrl =
                     MessageFormat.format("{0}/{1}/organizers/{2}",
                             TestConstants.clientsUrl,
-                            TestConstants.updateOrganizerClientId,
-                            TestConstants.updateOrganizerId)
+                            OrganizerTestConstants.updateOrganizerClientId,
+                            OrganizerTestConstants.updateOrganizerId)
 
             HttpResponse<Organizer> initResponse = httpClient.toBlocking().exchange(correctUrl, Organizer)
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
 
             Organizer initOrganizer = initResponse.body()
-            Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
-            Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerClientId, initOrganizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
             Assertions.assertEquals("Update Mock Organizer Name", initOrganizer.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initOrganizer.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initOrganizer.getLastUpdatedOn()))
 
         and: "an update is made to organizer"
             Organizer updatedOrganizer = CopyObjectUtil.organizer(initOrganizer)
@@ -291,7 +292,7 @@ class OrganizerSpec extends Specification {
         when: "a request is made to update the organizer"
             String updateUrl = MessageFormat.format("{0}/{1}/organizers",
                     TestConstants.clientsUrl,
-                    TestConstants.updateOrganizerClientId)
+                    OrganizerTestConstants.updateOrganizerClientId)
 
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(updateUrl), updatedOrganizer)
             HttpResponse<Organizer> response = httpClient.toBlocking().exchange(httpRequest, Organizer)
@@ -301,10 +302,10 @@ class OrganizerSpec extends Specification {
 
         and: "the updated organizer is returned"
             Organizer organizer = response.body()
-            Assertions.assertEquals(TestConstants.updateOrganizerClientId, initOrganizer.getClientId())
-            Assertions.assertEquals(TestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerClientId, initOrganizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.updateOrganizerId, initOrganizer.getOrganizerId())
             Assertions.assertEquals("New Updated Mock Organizer Name", organizer.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(organizer.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, organizer.getCreatedOn()))
             Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(organizer.getLastUpdatedOn()))
     }
 
@@ -314,24 +315,25 @@ class OrganizerSpec extends Specification {
             String getUrl =
                     MessageFormat.format("{0}/{1}/organizers/{2}",
                             TestConstants.clientsUrl,
-                            TestConstants.deleteOrganizerClientId,
-                            TestConstants.deleteOrganizerId)
+                            OrganizerTestConstants.deleteOrganizerClientId,
+                            OrganizerTestConstants.deleteOrganizerId)
 
             HttpResponse<Organizer> initResponse = httpClient.toBlocking().exchange(getUrl, Organizer)
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
 
             Organizer initOrganizer = initResponse.body()
-            Assertions.assertEquals(TestConstants.deleteOrganizerClientId, initOrganizer.getClientId())
-            Assertions.assertEquals(TestConstants.deleteOrganizerId, initOrganizer.getOrganizerId())
+            Assertions.assertEquals(OrganizerTestConstants.deleteOrganizerClientId, initOrganizer.getClientId())
+            Assertions.assertEquals(OrganizerTestConstants.deleteOrganizerId, initOrganizer.getOrganizerId())
             Assertions.assertEquals("Delete Mock Organizer Name", initOrganizer.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initOrganizer.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initOrganizer.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initOrganizer.getLastUpdatedOn()))
+
         when: "a request is made to delete the organizer"
             String deleteUrl =
                     MessageFormat.format("{0}/{1}/organizers/{2}",
                             TestConstants.clientsUrl,
-                            TestConstants.deleteOrganizerClientId,
-                            TestConstants.deleteOrganizerId)
+                            OrganizerTestConstants.deleteOrganizerClientId,
+                            OrganizerTestConstants.deleteOrganizerId)
 
             HttpRequest httpRequest = HttpRequest.DELETE(URI.create(deleteUrl))
             HttpResponse<Organizer> response = httpClient.toBlocking().exchange(httpRequest, Organizer)

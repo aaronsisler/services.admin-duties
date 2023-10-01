@@ -24,14 +24,14 @@
           "description": {
             "S": "Get Mock Event Description"
           },
-          "dayOfWeek": {
-            "N": "1"
-          },
           "startTime": {
             "S": "08:30:00"
           },
           "duration": {
             "N": "60"
+          },
+          "dayOfWeek": {
+            "N": "1"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -66,14 +66,14 @@
           "description": {
             "S": "Get All Mock Event Description 1"
           },
-          "dayOfWeek": {
-            "N": "1"
-          },
           "startTime": {
             "S": "08:30:00"
           },
           "duration": {
             "N": "60"
+          },
+          "dayOfWeek": {
+            "N": "1"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -108,14 +108,14 @@
           "description": {
             "S": "Get All Mock Event Description 2"
           },
-          "dayOfWeek": {
-            "N": "2"
-          },
           "startTime": {
             "S": "09:30:00"
           },
           "duration": {
             "N": "75"
+          },
+          "dayOfWeek": {
+            "N": "2"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -150,14 +150,14 @@
           "description": {
             "S": "Delete Mock Event Description"
           },
-          "dayOfWeek": {
-            "N": "3"
-          },
           "startTime": {
             "S": "10:30:00"
           },
           "duration": {
             "N": "45"
+          },
+          "dayOfWeek": {
+            "N": "3"
           },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
@@ -192,20 +192,23 @@
           "description": {
             "S": "Update Mock Event Description"
           },
-          "dayOfWeek": {
-            "N": "4"
-          },
           "startTime": {
             "S": "11:30:00"
           },
           "duration": {
             "N": "15"
           },
+          "dayOfWeek": {
+            "N": "4"
+          },
           "createdOn": {
             "S": "2023-07-04T01:02:34"
           },
           "lastUpdatedOn": {
             "S": "2023-07-04T12:34:56"
+          },
+          "expiryTime": {
+            "N": "1853884800"
           }
         }
       }

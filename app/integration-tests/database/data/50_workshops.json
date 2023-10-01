@@ -25,10 +25,10 @@
             "S": "Get Mock Workshop Description"
           },
           "workshopDate": {
-            "S": "2023-09-28"
+            "S": "2023-09-18"
           },
           "cost": {
-            "N": "2500"
+            "N": "5500"
           },
           "startTime": {
             "S": "08:30:00"
@@ -70,10 +70,10 @@
             "S": "Get All Mock Workshop Description 1"
           },
           "workshopDate": {
-            "S": "2023-09-28"
+            "S": "2023-09-23"
           },
           "cost": {
-            "N": "2500"
+            "N": "1500"
           },
           "startTime": {
             "S": "08:30:00"
@@ -118,7 +118,7 @@
             "S": "2023-09-28"
           },
           "cost": {
-            "N": "2500"
+            "N": "3500"
           },
           "startTime": {
             "S": "09:30:00"

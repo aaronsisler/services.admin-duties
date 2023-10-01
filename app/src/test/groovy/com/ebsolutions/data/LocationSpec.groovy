@@ -1,6 +1,7 @@
 package com.ebsolutions.data
 
 import com.ebsolutions.config.TestConstants
+import com.ebsolutions.constants.LocationTestConstants
 import com.ebsolutions.models.Client
 import com.ebsolutions.models.Location
 import com.ebsolutions.utils.CopyObjectUtil
@@ -31,8 +32,8 @@ class LocationSpec extends Specification {
         when: "a request is made to the location"
             String getUrl = MessageFormat.format("{0}/{1}/locations/{2}",
                     TestConstants.clientsUrl,
-                    TestConstants.getLocationClientId,
-                    TestConstants.getLocationId)
+                    LocationTestConstants.getLocationClientId,
+                    LocationTestConstants.getLocationId)
 
             HttpResponse<Location> response = httpClient.toBlocking()
                     .exchange(getUrl, Location)
@@ -42,8 +43,8 @@ class LocationSpec extends Specification {
 
         and: "the correct location is returned"
             Location location = response.body()
-            Assertions.assertEquals(TestConstants.getLocationClientId, location.getClientId())
-            Assertions.assertEquals(TestConstants.getLocationId, location.getLocationId())
+            Assertions.assertEquals(LocationTestConstants.getLocationClientId, location.getClientId())
+            Assertions.assertEquals(LocationTestConstants.getLocationId, location.getLocationId())
             Assertions.assertEquals("Get Mock Location Name", location.getName())
             Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(location.getCreatedOn(), TestConstants.createdOn))
             Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(location.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
@@ -55,7 +56,7 @@ class LocationSpec extends Specification {
         when: "a request is made to retrieve the location"
             String incorrectUrl = MessageFormat.format("{0}/{1}/locations/non-existent-location",
                     TestConstants.clientsUrl,
-                    TestConstants.getLocationClientId)
+                    LocationTestConstants.getLocationClientId)
 
             HttpResponse<Location> response = httpClient.toBlocking()
                     .exchange(incorrectUrl, Location)
@@ -70,7 +71,7 @@ class LocationSpec extends Specification {
         when: "a request is made to retrieve the locations"
             String getUrl = MessageFormat.format("{0}/{1}/locations",
                     TestConstants.clientsUrl,
-                    TestConstants.getAllLocationClientId)
+                    LocationTestConstants.getAllLocationClientId)
             HttpRequest httpRequest = HttpRequest.GET(getUrl)
 
             HttpResponse<List<Location>> response = httpClient.toBlocking()
@@ -84,17 +85,17 @@ class LocationSpec extends Specification {
             Location firstLocation = locations.get(0)
             Location secondLocation = locations.get(1)
 
-            Assertions.assertEquals(TestConstants.getAllLocationClientId, firstLocation.getClientId())
-            Assertions.assertEquals(TestConstants.getAllLocationIdOne, firstLocation.getLocationId())
+            Assertions.assertEquals(LocationTestConstants.getAllLocationClientId, firstLocation.getClientId())
+            Assertions.assertEquals(LocationTestConstants.getAllLocationIdOne, firstLocation.getLocationId())
             Assertions.assertEquals("Get All Mock Location Name 1", firstLocation.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(firstLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(firstLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, firstLocation.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, firstLocation.getLastUpdatedOn()))
 
-            Assertions.assertEquals(TestConstants.getAllLocationClientId, secondLocation.getClientId())
-            Assertions.assertEquals(TestConstants.getAllLocationIdTwo, secondLocation.getLocationId())
+            Assertions.assertEquals(LocationTestConstants.getAllLocationClientId, secondLocation.getClientId())
+            Assertions.assertEquals(LocationTestConstants.getAllLocationIdTwo, secondLocation.getLocationId())
             Assertions.assertEquals("Get All Mock Location Name 2", secondLocation.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(secondLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(secondLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, secondLocation.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, secondLocation.getLastUpdatedOn()))
     }
 
     def "Get all Locations: No locations exist for client"() {
@@ -112,10 +113,46 @@ class LocationSpec extends Specification {
             Assertions.assertEquals(HttpURLConnection.HTTP_NO_CONTENT, response.code())
     }
 
+    def "Delete a Location"() {
+        given: "A location exists in the database"
+            // Verify data seeded from Database init scripts correctly
+            String getUrl =
+                    MessageFormat.format("{0}/{1}/locations/{2}",
+                            TestConstants.clientsUrl,
+                            LocationTestConstants.deleteLocationClientId,
+                            LocationTestConstants.deleteLocationId)
+
+            HttpResponse<Location> initResponse = httpClient.toBlocking().exchange(getUrl, Location)
+            Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
+
+            Location initLocation = initResponse.body()
+            Assertions.assertEquals(LocationTestConstants.deleteLocationClientId, initLocation.getClientId())
+            Assertions.assertEquals(LocationTestConstants.deleteLocationId, initLocation.getLocationId())
+            Assertions.assertEquals("Delete Mock Location Name", initLocation.getName())
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initLocation.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initLocation.getLastUpdatedOn()))
+        when: "a request is made to delete the location"
+            String deleteUrl =
+                    MessageFormat.format("{0}/{1}/locations/{2}",
+                            TestConstants.clientsUrl,
+                            LocationTestConstants.deleteLocationClientId,
+                            LocationTestConstants.deleteLocationId)
+
+            HttpRequest httpRequest = HttpRequest.DELETE(URI.create(deleteUrl))
+            HttpResponse<Location> response = httpClient.toBlocking().exchange(httpRequest, Location)
+
+        then: "the correct status code is returned"
+            Assertions.assertEquals(HttpURLConnection.HTTP_NO_CONTENT, response.code())
+
+        and: "the location no longer exists in the database"
+            HttpResponse<Location> verifyDeletionResponse = httpClient.toBlocking().exchange(getUrl, Location)
+            Assertions.assertEquals(HttpURLConnection.HTTP_NO_CONTENT, verifyDeletionResponse.code())
+    }
+
     def "Create a Location: Fails given client ids do not match"() {
         given: "A valid location"
             Location createLocation = Location.builder()
-                    .clientId(TestConstants.createLocationClientId)
+                    .clientId(LocationTestConstants.createLocationClientId)
                     .name("New Mock Location")
                     .build()
 
@@ -135,14 +172,14 @@ class LocationSpec extends Specification {
     def "Create a Location: Success"() {
         given: "A valid location"
             Location createLocation = Location.builder()
-                    .clientId(TestConstants.createLocationClientId)
+                    .clientId(LocationTestConstants.createLocationClientId)
                     .name("Create Mock Location Name")
                     .build()
 
         when: "a request is made to create a location for the correct client"
             String correctUrl = MessageFormat.format("{0}/{1}/locations",
                     TestConstants.clientsUrl,
-                    TestConstants.createLocationClientId)
+                    LocationTestConstants.createLocationClientId)
 
             HttpRequest httpRequest = HttpRequest.POST(correctUrl, createLocation)
             HttpResponse<Location> response = httpClient.toBlocking().exchange(httpRequest, Location)
@@ -152,7 +189,7 @@ class LocationSpec extends Specification {
 
         and: "the correct location is returned"
             Location location = response.body()
-            Assertions.assertEquals(TestConstants.createLocationClientId, location.getClientId())
+            Assertions.assertEquals(LocationTestConstants.createLocationClientId, location.getClientId())
             Assertions.assertNotNull(location.getLocationId())
             Assertions.assertEquals("Create Mock Location Name", location.getName())
             Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(location.getCreatedOn()))
@@ -164,18 +201,18 @@ class LocationSpec extends Specification {
             // Verify data seeded from Database init scripts correctly
             String getUrl = MessageFormat.format("{0}/{1}/locations/{2}",
                     TestConstants.clientsUrl,
-                    TestConstants.updateLocationClientId,
-                    TestConstants.updateLocationId)
+                    LocationTestConstants.updateLocationClientId,
+                    LocationTestConstants.updateLocationId)
 
             HttpResponse<Location> initResponse = httpClient.toBlocking().exchange(getUrl, Location)
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
 
             Location initLocation = initResponse.body()
-            Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
-            Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationClientId, initLocation.getClientId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationId, initLocation.getLocationId())
             Assertions.assertEquals("Update Mock Location Name", initLocation.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initLocation.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initLocation.getLastUpdatedOn()))
 
         and: "an update is made to the client id that is valid"
             Location updatedLocation = CopyObjectUtil.location(initLocation)
@@ -199,18 +236,18 @@ class LocationSpec extends Specification {
             // Verify data seeded from Database init scripts correctly
             String getUrl = MessageFormat.format("{0}/{1}/locations/{2}",
                     TestConstants.clientsUrl,
-                    TestConstants.updateLocationClientId,
-                    TestConstants.updateLocationId)
+                    LocationTestConstants.updateLocationClientId,
+                    LocationTestConstants.updateLocationId)
 
             HttpResponse<Location> initResponse = httpClient.toBlocking().exchange(getUrl, Location)
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
 
             Location initLocation = initResponse.body()
-            Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
-            Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationClientId, initLocation.getClientId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationId, initLocation.getLocationId())
             Assertions.assertEquals("Update Mock Location Name", initLocation.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initLocation.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initLocation.getLastUpdatedOn()))
 
         and: "an update is made to the location id that is invalid"
             Location updatedLocation = CopyObjectUtil.location(initLocation)
@@ -219,7 +256,7 @@ class LocationSpec extends Specification {
         when: "a request is made to update the location"
             String updateUrl = MessageFormat.format("{0}/{1}/locations",
                     TestConstants.clientsUrl,
-                    TestConstants.updateLocationClientId)
+                    LocationTestConstants.updateLocationClientId)
 
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(updateUrl), updatedLocation)
             httpClient.toBlocking().exchange(httpRequest, Client)
@@ -234,18 +271,18 @@ class LocationSpec extends Specification {
             // Verify data seeded from Database init scripts correctly
             String getUrl = MessageFormat.format("{0}/{1}/locations/{2}",
                     TestConstants.clientsUrl,
-                    TestConstants.updateLocationClientId,
-                    TestConstants.updateLocationId)
+                    LocationTestConstants.updateLocationClientId,
+                    LocationTestConstants.updateLocationId)
 
             HttpResponse<Location> initResponse = httpClient.toBlocking().exchange(getUrl, Location)
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
 
             Location initLocation = initResponse.body()
-            Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
-            Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationClientId, initLocation.getClientId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationId, initLocation.getLocationId())
             Assertions.assertEquals("Update Mock Location Name", initLocation.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initLocation.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initLocation.getLastUpdatedOn()))
 
         and: "an update is made to the created on date that is invalid"
             Location updatedLocation = CopyObjectUtil.location(initLocation)
@@ -255,7 +292,7 @@ class LocationSpec extends Specification {
         when: "a request is made to update the location"
             String updateUrl = MessageFormat.format("{0}/{1}/locations",
                     TestConstants.clientsUrl,
-                    TestConstants.updateLocationClientId)
+                    LocationTestConstants.updateLocationClientId)
 
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(updateUrl), updatedLocation)
             httpClient.toBlocking().exchange(httpRequest, Client)
@@ -271,18 +308,18 @@ class LocationSpec extends Specification {
             String correctUrl =
                     MessageFormat.format("{0}/{1}/locations/{2}",
                             TestConstants.clientsUrl,
-                            TestConstants.updateLocationClientId,
-                            TestConstants.updateLocationId)
+                            LocationTestConstants.updateLocationClientId,
+                            LocationTestConstants.updateLocationId)
 
             HttpResponse<Location> initResponse = httpClient.toBlocking().exchange(correctUrl, Location)
             Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
 
             Location initLocation = initResponse.body()
-            Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
-            Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationClientId, initLocation.getClientId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationId, initLocation.getLocationId())
             Assertions.assertEquals("Update Mock Location Name", initLocation.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initLocation.getCreatedOn()))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.lastUpdatedOn, initLocation.getLastUpdatedOn()))
 
         and: "an update is made to location"
             Location updatedLocation = CopyObjectUtil.location(initLocation)
@@ -291,7 +328,7 @@ class LocationSpec extends Specification {
         when: "a request is made to update the location"
             String updateUrl = MessageFormat.format("{0}/{1}/locations",
                     TestConstants.clientsUrl,
-                    TestConstants.updateLocationClientId)
+                    LocationTestConstants.updateLocationClientId)
 
             HttpRequest httpRequest = HttpRequest.PUT(URI.create(updateUrl), updatedLocation)
             HttpResponse<Location> response = httpClient.toBlocking().exchange(httpRequest, Location)
@@ -301,46 +338,12 @@ class LocationSpec extends Specification {
 
         and: "the updated location is returned"
             Location location = response.body()
-            Assertions.assertEquals(TestConstants.updateLocationClientId, initLocation.getClientId())
-            Assertions.assertEquals(TestConstants.updateLocationId, initLocation.getLocationId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationClientId, initLocation.getClientId())
+            Assertions.assertEquals(LocationTestConstants.updateLocationId, initLocation.getLocationId())
             Assertions.assertEquals("New Updated Mock Location Name", location.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(location.getCreatedOn(), TestConstants.createdOn))
+            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(TestConstants.createdOn, initLocation.getCreatedOn()))
             Assertions.assertTrue(DateAndTimeComparisonUtil.isDateTimeNow(location.getLastUpdatedOn()))
     }
 
-    def "Delete a Location"() {
-        given: "A location exists in the database"
-            // Verify data seeded from Database init scripts correctly
-            String getUrl =
-                    MessageFormat.format("{0}/{1}/locations/{2}",
-                            TestConstants.clientsUrl,
-                            TestConstants.deleteLocationClientId,
-                            TestConstants.deleteLocationId)
 
-            HttpResponse<Location> initResponse = httpClient.toBlocking().exchange(getUrl, Location)
-            Assertions.assertEquals(HttpURLConnection.HTTP_OK, initResponse.code())
-
-            Location initLocation = initResponse.body()
-            Assertions.assertEquals(TestConstants.deleteLocationClientId, initLocation.getClientId())
-            Assertions.assertEquals(TestConstants.deleteLocationId, initLocation.getLocationId())
-            Assertions.assertEquals("Delete Mock Location Name", initLocation.getName())
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getCreatedOn(), TestConstants.createdOn))
-            Assertions.assertTrue(DateAndTimeComparisonUtil.areDateTimesEqual(initLocation.getLastUpdatedOn(), TestConstants.lastUpdatedOn))
-        when: "a request is made to delete the location"
-            String deleteUrl =
-                    MessageFormat.format("{0}/{1}/locations/{2}",
-                            TestConstants.clientsUrl,
-                            TestConstants.deleteLocationClientId,
-                            TestConstants.deleteLocationId)
-
-            HttpRequest httpRequest = HttpRequest.DELETE(URI.create(deleteUrl))
-            HttpResponse<Location> response = httpClient.toBlocking().exchange(httpRequest, Location)
-
-        then: "the correct status code is returned"
-            Assertions.assertEquals(HttpURLConnection.HTTP_NO_CONTENT, response.code())
-
-        and: "the location no longer exists in the database"
-            HttpResponse<Location> verifyDeletionResponse = httpClient.toBlocking().exchange(getUrl, Location)
-            Assertions.assertEquals(HttpURLConnection.HTTP_NO_CONTENT, verifyDeletionResponse.code())
-    }
 }

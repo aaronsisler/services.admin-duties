@@ -8,7 +8,6 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -27,15 +26,16 @@ public class DatabaseDto {
     @Getter(onMethod_ = @DynamoDbSortKey)
     private String sortKey;
 
-    /**
-     * Date that record is no longer active
-     * i.e. should not be considered for items past expiryDate
-     */
-    private LocalDate expiryDate;
-
     @NonNull
     private LocalDateTime createdOn;
 
     @NonNull
     private LocalDateTime lastUpdatedOn;
+
+    /**
+     * Date that record is no longer to remain in database
+     * Must be in epoch seconds
+     * i.e. should not be considered for items past expiryTime
+     */
+    private long expiryTime;
 }

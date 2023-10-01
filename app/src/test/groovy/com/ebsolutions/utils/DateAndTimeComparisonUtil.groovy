@@ -6,22 +6,22 @@ import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 
 class DateAndTimeComparisonUtil {
-    static boolean areDateTimesEqual(LocalDateTime firstDate, LocalDateTime secondDate) {
-        return firstDate.until(secondDate, ChronoUnit.SECONDS) == 0
+    static boolean areDateTimesEqual(LocalDateTime expectedDate, LocalDateTime testResult) {
+        return expectedDate.until(testResult, ChronoUnit.SECONDS) == 0
     }
 
     /**
      * Check that dateTime is close to now (within 1 second for testing purposes)
      */
-    static boolean isDateTimeNow(LocalDateTime dateTime) {
-        return dateTime.until(LocalDateTime.now(), ChronoUnit.SECONDS) < 1
+    static boolean isDateTimeNow(LocalDateTime testResult) {
+        return testResult.until(LocalDateTime.now(), ChronoUnit.SECONDS) < 1
     }
 
-    static boolean areDatesEqual(String firstDate, LocalDate secondDate) {
-        return LocalDate.parse(firstDate).until(secondDate, ChronoUnit.DAYS) == 0
+    static boolean areDatesEqual(String expectedDate, LocalDate testResult) {
+        return LocalDate.parse(expectedDate).until(testResult, ChronoUnit.DAYS) == 0
     }
 
-    static boolean areTimesEqual(String firstTime, LocalTime secondTime) {
-        return LocalTime.parse(firstTime).until(secondTime, ChronoUnit.SECONDS) == 0
+    static boolean areTimesEqual(LocalTime expectedTime, LocalTime testResult) {
+        return expectedTime.until(testResult, ChronoUnit.SECONDS) == 0
     }
 }

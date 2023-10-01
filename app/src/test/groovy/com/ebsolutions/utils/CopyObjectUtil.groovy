@@ -1,7 +1,6 @@
 package com.ebsolutions.utils
 
 import com.ebsolutions.models.*
-import com.fasterxml.jackson.databind.ObjectMapper
 
 class CopyObjectUtil {
     static Client client(Client client) {
@@ -10,15 +9,14 @@ class CopyObjectUtil {
                 .name(client.getName())
                 .createdOn(client.getCreatedOn())
                 .lastUpdatedOn(client.getLastUpdatedOn())
-                .expiryDate(client.getExpiryDate())
                 .build()
     }
 
-    static Client json_client(Client client) {
-        ObjectMapper mapper = new ObjectMapper()
-        Client newClient = mapper.readValue(mapper.writeValueAsString(client), Client.class)
-        return newClient
-    }
+//    static Client json_client(Client client) {
+//        ObjectMapper mapper = new ObjectMapper()
+//        Client newClient = mapper.readValue(mapper.writeValueAsString(client), Client.class)
+//        return newClient
+//    }
 
     static Location location(Location location) {
         return Location.builder()
@@ -27,7 +25,6 @@ class CopyObjectUtil {
                 .name(location.getName())
                 .createdOn(location.getCreatedOn())
                 .lastUpdatedOn(location.getLastUpdatedOn())
-                .expiryDate(location.getExpiryDate())
                 .build()
     }
 
@@ -38,7 +35,6 @@ class CopyObjectUtil {
                 .name(organizer.getName())
                 .createdOn(organizer.getCreatedOn())
                 .lastUpdatedOn(organizer.getLastUpdatedOn())
-                .expiryDate(organizer.getExpiryDate())
                 .build()
     }
 
@@ -56,7 +52,6 @@ class CopyObjectUtil {
                 .duration(event.getDuration())
                 .createdOn(event.getCreatedOn())
                 .lastUpdatedOn(event.getLastUpdatedOn())
-                .expiryDate(event.getExpiryDate())
                 .build()
     }
 
@@ -75,7 +70,6 @@ class CopyObjectUtil {
                 .duration(workshop.getDuration())
                 .createdOn(workshop.getCreatedOn())
                 .lastUpdatedOn(workshop.getLastUpdatedOn())
-                .expiryDate(workshop.getExpiryDate())
                 .build()
     }
 }
