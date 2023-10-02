@@ -1,6 +1,7 @@
 package com.ebsolutions.dal.daos;
 
 import com.ebsolutions.config.DatabaseConstants;
+import com.ebsolutions.dal.SortKeyType;
 import com.ebsolutions.dal.dtos.EventDto;
 import com.ebsolutions.dal.utils.KeyBuilder;
 import com.ebsolutions.exceptions.DataProcessingException;
@@ -14,7 +15,6 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
-import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 import java.text.MessageFormat;
 import java.time.DayOfWeek;
@@ -27,7 +27,7 @@ import static software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional.so
 @Slf4j
 @Prototype
 public class EventDao {
-    private DynamoDbTable<EventDto> ddbTable;
+    private final DynamoDbTable<EventDto> ddbTable;
 
     public EventDao(DynamoDbEnhancedClient enhancedClient) {
         this.ddbTable = enhancedClient.table(DatabaseConstants.DATABASE_TABLE_NAME, TableSchema.fromBean(EventDto.class));
@@ -36,7 +36,7 @@ public class EventDao {
     public Event read(String clientId, String eventId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.EVENT_SORT_KEY, eventId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.EVENT, eventId);
 
             EventDto eventDto = ddbTable.getItem(key);
 
@@ -44,9 +44,9 @@ public class EventDao {
                     ? null
                     : Event.builder()
                     .clientId(eventDto.getPartitionKey())
-                    .eventId(StringUtils.remove(eventDto.getSortKey(), DatabaseConstants.EVENT_SORT_KEY))
-                    .locationId(StringUtils.remove(eventDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                    .eventId(StringUtils.remove(eventDto.getSortKey(), SortKeyType.EVENT.name()))
+                    .locationId(StringUtils.remove(eventDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                     .name(eventDto.getName())
                     .category(eventDto.getCategory())
                     .description(eventDto.getDescription())
@@ -56,12 +56,9 @@ public class EventDao {
                     .createdOn(eventDto.getCreatedOn())
                     .lastUpdatedOn(eventDto.getLastUpdatedOn())
                     .build();
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -73,19 +70,19 @@ public class EventDao {
             List<EventDto> eventDtos = ddbTable
                     .query(r -> r.queryConditional(
                             sortBeginsWith(s
-                                    -> s.partitionValue(clientId).sortValue(DatabaseConstants.EVENT_SORT_KEY).build()))
+                                    -> s.partitionValue(clientId).sortValue(SortKeyType.EVENT.name()).build()))
                     )
                     .items()
                     .stream()
-                    .collect(Collectors.toList());
+                    .toList();
 
             return eventDtos.stream()
                     .map(eventDto ->
                             Event.builder()
                                     .clientId(eventDto.getPartitionKey())
-                                    .eventId(StringUtils.remove(eventDto.getSortKey(), DatabaseConstants.EVENT_SORT_KEY))
-                                    .locationId(StringUtils.remove(eventDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                                    .eventId(StringUtils.remove(eventDto.getSortKey(), SortKeyType.EVENT.name()))
+                                    .locationId(StringUtils.remove(eventDto.getLocationId(), SortKeyType.LOCATION.name()))
+                                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                                     .name(eventDto.getName())
                                     .category(eventDto.getCategory())
                                     .description(eventDto.getDescription())
@@ -97,12 +94,9 @@ public class EventDao {
                                     .build()
                     ).collect(Collectors.toList());
 
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -111,16 +105,13 @@ public class EventDao {
     public void delete(String clientId, String eventId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.EVENT_SORT_KEY, eventId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.EVENT, eventId);
 
             ddbTable.deleteItem(key);
 
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -132,9 +123,9 @@ public class EventDao {
             LocalDateTime now = LocalDateTime.now();
             EventDto eventDto = EventDto.builder()
                     .partitionKey(event.getClientId())
-                    .sortKey(DatabaseConstants.EVENT_SORT_KEY + UniqueIdGenerator.generate())
-                    .locationId(DatabaseConstants.LOCATION_SORT_KEY + event.getLocationId())
-                    .organizerId(DatabaseConstants.ORGANIZER_SORT_KEY + event.getOrganizerId())
+                    .sortKey(SortKeyType.EVENT.name() + UniqueIdGenerator.generate())
+                    .locationId(SortKeyType.LOCATION.name() + event.getLocationId())
+                    .organizerId(SortKeyType.ORGANIZER.name() + event.getOrganizerId())
                     .name(event.getName())
                     .category(event.getCategory())
                     .description(event.getDescription())
@@ -149,9 +140,9 @@ public class EventDao {
 
             return Event.builder()
                     .clientId(eventDto.getPartitionKey())
-                    .eventId(StringUtils.remove(eventDto.getSortKey(), DatabaseConstants.EVENT_SORT_KEY))
-                    .locationId(StringUtils.remove(eventDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                    .eventId(StringUtils.remove(eventDto.getSortKey(), SortKeyType.EVENT.name()))
+                    .locationId(StringUtils.remove(eventDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                     .name(eventDto.getName())
                     .category(eventDto.getCategory())
                     .description(eventDto.getDescription())
@@ -161,12 +152,9 @@ public class EventDao {
                     .createdOn(eventDto.getCreatedOn())
                     .lastUpdatedOn(eventDto.getLastUpdatedOn())
                     .build();
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -177,14 +165,14 @@ public class EventDao {
      *
      * @param event the object to replace the current database object
      */
-    public void update(Event event) {
+    public Event update(Event event) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             EventDto eventDto = EventDto.builder()
                     .partitionKey(event.getClientId())
-                    .sortKey(DatabaseConstants.EVENT_SORT_KEY + event.getEventId())
-                    .locationId(DatabaseConstants.LOCATION_SORT_KEY + event.getLocationId())
-                    .organizerId(DatabaseConstants.ORGANIZER_SORT_KEY + event.getOrganizerId())
+                    .sortKey(SortKeyType.EVENT.name() + event.getEventId())
+                    .locationId(SortKeyType.LOCATION.name() + event.getLocationId())
+                    .organizerId(SortKeyType.ORGANIZER.name() + event.getOrganizerId())
                     .name(event.getName())
                     .category(event.getCategory())
                     .description(event.getDescription())
@@ -197,12 +185,24 @@ public class EventDao {
 
             ddbTable.putItem(eventDto);
 
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
+            return Event.builder()
+                    .clientId(eventDto.getPartitionKey())
+                    .eventId(StringUtils.remove(eventDto.getSortKey(), SortKeyType.EVENT.name()))
+                    .locationId(StringUtils.remove(eventDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(eventDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
+                    .name(eventDto.getName())
+                    .category(eventDto.getCategory())
+                    .description(eventDto.getDescription())
+                    .dayOfWeek(DayOfWeek.of(eventDto.getDayOfWeek()))
+                    .startTime(eventDto.getStartTime())
+                    .duration(eventDto.getDuration())
+                    .createdOn(eventDto.getCreatedOn())
+                    .lastUpdatedOn(eventDto.getLastUpdatedOn())
+                    .build();
+
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }

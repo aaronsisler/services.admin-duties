@@ -1,0 +1,67 @@
+{
+  "SERVICES_ADMIN_DUTIES_TESTS": [
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "get-client-mock-client-id"
+          },
+          "sortKey": {
+            "S": "CLIENT"
+          },
+          "name": {
+            "S": "Get Mock Client Name"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "delete-client-mock-client-id"
+          },
+          "sortKey": {
+            "S": "CLIENT"
+          },
+          "name": {
+            "S": "Delete Mock Client Name"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "update-client-mock-client-id"
+          },
+          "sortKey": {
+            "S": "CLIENT"
+          },
+          "name": {
+            "S": "Update Mock Client Name"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    }
+  ]
+}

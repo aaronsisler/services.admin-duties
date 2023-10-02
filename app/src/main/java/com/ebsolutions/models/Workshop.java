@@ -18,4 +18,8 @@ import java.time.LocalDate;
 public class Workshop extends BaseEvent {
     private String workshopId;
     private LocalDate workshopDate;
+    /**
+     * Value in pennies
+     */
+    private short cost;
 }

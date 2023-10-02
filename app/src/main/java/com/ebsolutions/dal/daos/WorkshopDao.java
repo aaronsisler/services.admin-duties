@@ -1,6 +1,7 @@
 package com.ebsolutions.dal.daos;
 
 import com.ebsolutions.config.DatabaseConstants;
+import com.ebsolutions.dal.SortKeyType;
 import com.ebsolutions.dal.dtos.WorkshopDto;
 import com.ebsolutions.dal.utils.KeyBuilder;
 import com.ebsolutions.exceptions.DataProcessingException;
@@ -14,7 +15,6 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
-import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
@@ -26,7 +26,7 @@ import static software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional.so
 @Slf4j
 @Prototype
 public class WorkshopDao {
-    private DynamoDbTable<WorkshopDto> ddbTable;
+    private final DynamoDbTable<WorkshopDto> ddbTable;
 
     public WorkshopDao(DynamoDbEnhancedClient enhancedClient) {
         this.ddbTable = enhancedClient.table(DatabaseConstants.DATABASE_TABLE_NAME, TableSchema.fromBean(WorkshopDto.class));
@@ -35,7 +35,7 @@ public class WorkshopDao {
     public Workshop read(String clientId, String workshopId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.WORKSHOP_SORT_KEY, workshopId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.WORKSHOP, workshopId);
 
             WorkshopDto workshopDto = ddbTable.getItem(key);
 
@@ -43,24 +43,22 @@ public class WorkshopDao {
                     ? null
                     : Workshop.builder()
                     .clientId(workshopDto.getPartitionKey())
-                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), DatabaseConstants.WORKSHOP_SORT_KEY))
-                    .locationId(StringUtils.remove(workshopDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), SortKeyType.WORKSHOP.name()))
+                    .locationId(StringUtils.remove(workshopDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                     .name(workshopDto.getName())
                     .category(workshopDto.getCategory())
                     .description(workshopDto.getDescription())
                     .workshopDate(workshopDto.getWorkshopDate())
+                    .cost(workshopDto.getCost())
                     .startTime(workshopDto.getStartTime())
                     .duration(workshopDto.getDuration())
                     .createdOn(workshopDto.getCreatedOn())
                     .lastUpdatedOn(workshopDto.getLastUpdatedOn())
                     .build();
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -72,23 +70,24 @@ public class WorkshopDao {
             List<WorkshopDto> workshopDtos = ddbTable
                     .query(r -> r.queryConditional(
                             sortBeginsWith(s
-                                    -> s.partitionValue(clientId).sortValue(DatabaseConstants.WORKSHOP_SORT_KEY).build()))
+                                    -> s.partitionValue(clientId).sortValue(SortKeyType.WORKSHOP.name()).build()))
                     )
                     .items()
                     .stream()
-                    .collect(Collectors.toList());
+                    .toList();
 
             return workshopDtos.stream()
                     .map(workshopDto ->
                             Workshop.builder()
                                     .clientId(workshopDto.getPartitionKey())
-                                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), DatabaseConstants.WORKSHOP_SORT_KEY))
-                                    .locationId(StringUtils.remove(workshopDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), SortKeyType.WORKSHOP.name()))
+                                    .locationId(StringUtils.remove(workshopDto.getLocationId(), SortKeyType.LOCATION.name()))
+                                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                                     .name(workshopDto.getName())
                                     .category(workshopDto.getCategory())
                                     .description(workshopDto.getDescription())
                                     .workshopDate(workshopDto.getWorkshopDate())
+                                    .cost(workshopDto.getCost())
                                     .startTime(workshopDto.getStartTime())
                                     .duration(workshopDto.getDuration())
                                     .createdOn(workshopDto.getCreatedOn())
@@ -96,12 +95,9 @@ public class WorkshopDao {
                                     .build()
                     ).collect(Collectors.toList());
 
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -110,16 +106,13 @@ public class WorkshopDao {
     public void delete(String clientId, String workshopId) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
-            Key key = KeyBuilder.build(clientId, DatabaseConstants.WORKSHOP_SORT_KEY, workshopId);
+            Key key = KeyBuilder.build(clientId, SortKeyType.WORKSHOP, workshopId);
 
             ddbTable.deleteItem(key);
 
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -131,13 +124,14 @@ public class WorkshopDao {
             LocalDateTime now = LocalDateTime.now();
             WorkshopDto workshopDto = WorkshopDto.builder()
                     .partitionKey(workshop.getClientId())
-                    .sortKey(DatabaseConstants.WORKSHOP_SORT_KEY + UniqueIdGenerator.generate())
-                    .locationId(DatabaseConstants.LOCATION_SORT_KEY + workshop.getLocationId())
-                    .organizerId(DatabaseConstants.ORGANIZER_SORT_KEY + workshop.getOrganizerId())
+                    .sortKey(SortKeyType.WORKSHOP.name() + UniqueIdGenerator.generate())
+                    .locationId(SortKeyType.LOCATION.name() + workshop.getLocationId())
+                    .organizerId(SortKeyType.ORGANIZER.name() + workshop.getOrganizerId())
                     .name(workshop.getName())
                     .category(workshop.getCategory())
                     .description(workshop.getDescription())
                     .workshopDate(workshop.getWorkshopDate())
+                    .cost(workshop.getCost())
                     .startTime(workshop.getStartTime())
                     .duration(workshop.getDuration())
                     .createdOn(now)
@@ -148,24 +142,22 @@ public class WorkshopDao {
 
             return Workshop.builder()
                     .clientId(workshopDto.getPartitionKey())
-                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), DatabaseConstants.WORKSHOP_SORT_KEY))
-                    .locationId(StringUtils.remove(workshopDto.getLocationId(), DatabaseConstants.LOCATION_SORT_KEY))
-                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), DatabaseConstants.ORGANIZER_SORT_KEY))
+                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), SortKeyType.WORKSHOP.name()))
+                    .locationId(StringUtils.remove(workshopDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
                     .name(workshopDto.getName())
                     .category(workshopDto.getCategory())
                     .description(workshopDto.getDescription())
                     .workshopDate(workshopDto.getWorkshopDate())
+                    .cost(workshopDto.getCost())
                     .startTime(workshopDto.getStartTime())
                     .duration(workshopDto.getDuration())
                     .createdOn(workshopDto.getCreatedOn())
                     .lastUpdatedOn(workshopDto.getLastUpdatedOn())
                     .build();
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }
@@ -176,18 +168,19 @@ public class WorkshopDao {
      *
      * @param workshop the object to replace the current database object
      */
-    public void update(Workshop workshop) {
+    public Workshop update(Workshop workshop) {
         MetricsStopWatch metricsStopWatch = new MetricsStopWatch();
         try {
             WorkshopDto workshopDto = WorkshopDto.builder()
                     .partitionKey(workshop.getClientId())
-                    .sortKey(DatabaseConstants.WORKSHOP_SORT_KEY + workshop.getWorkshopId())
-                    .locationId(DatabaseConstants.LOCATION_SORT_KEY + workshop.getLocationId())
-                    .organizerId(DatabaseConstants.ORGANIZER_SORT_KEY + workshop.getOrganizerId())
+                    .sortKey(SortKeyType.WORKSHOP.name() + workshop.getWorkshopId())
+                    .locationId(SortKeyType.LOCATION.name() + workshop.getLocationId())
+                    .organizerId(SortKeyType.ORGANIZER.name() + workshop.getOrganizerId())
                     .name(workshop.getName())
                     .category(workshop.getCategory())
                     .description(workshop.getDescription())
                     .workshopDate(workshop.getWorkshopDate())
+                    .cost(workshop.getCost())
                     .startTime(workshop.getStartTime())
                     .duration(workshop.getDuration())
                     .createdOn(workshop.getCreatedOn())
@@ -196,12 +189,24 @@ public class WorkshopDao {
 
             ddbTable.putItem(workshopDto);
 
-        } catch (DynamoDbException dbe) {
-            log.error("ERROR::{}", this.getClass().getName(), dbe);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), dbe);
+            return Workshop.builder()
+                    .clientId(workshopDto.getPartitionKey())
+                    .workshopId(StringUtils.remove(workshopDto.getSortKey(), SortKeyType.WORKSHOP.name()))
+                    .locationId(StringUtils.remove(workshopDto.getLocationId(), SortKeyType.LOCATION.name()))
+                    .organizerId(StringUtils.remove(workshopDto.getOrganizerId(), SortKeyType.ORGANIZER.name()))
+                    .name(workshopDto.getName())
+                    .category(workshopDto.getCategory())
+                    .description(workshopDto.getDescription())
+                    .workshopDate(workshopDto.getWorkshopDate())
+                    .cost(workshopDto.getCost())
+                    .startTime(workshopDto.getStartTime())
+                    .duration(workshopDto.getDuration())
+                    .createdOn(workshopDto.getCreatedOn())
+                    .lastUpdatedOn(workshopDto.getLastUpdatedOn())
+                    .build();
         } catch (Exception e) {
             log.error("ERROR::{}", this.getClass().getName(), e);
-            throw new DataProcessingException("Error in {}".formatted(this.getClass().getName()), e);
+            throw new DataProcessingException(MessageFormat.format("Error in {0}", this.getClass().getName()), e);
         } finally {
             metricsStopWatch.logElapsedTime(MessageFormat.format("{0}::{1}", this.getClass().getName(), "read"));
         }

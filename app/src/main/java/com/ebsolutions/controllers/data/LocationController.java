@@ -36,18 +36,18 @@ public class LocationController {
         }
     }
 
-    @Get(value = "/", produces = MediaType.APPLICATION_JSON)
+    @Get(produces = MediaType.APPLICATION_JSON)
     public HttpResponse<?> getAll(@NotBlank @PathVariable String clientId) {
         try {
             List<Location> locations = locationDao.readAll(clientId);
 
-            return locations.size() > 0 ? ok(locations) : noContent();
+            return !locations.isEmpty() ? ok(locations) : noContent();
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }
     }
 
-    @Post(value = "/")
+    @Post()
     public HttpResponse<?> post(@NotBlank @PathVariable String clientId, @Valid @Body Location location) {
         try {
             if (!clientId.matches(location.getClientId())) {
@@ -60,7 +60,7 @@ public class LocationController {
         }
     }
 
-    @Put(value = "/")
+    @Put()
     public HttpResponse<?> put(@NotBlank @PathVariable String clientId, @Valid @Body Location location) {
         try {
             if (!clientId.matches(location.getClientId())
@@ -69,9 +69,8 @@ public class LocationController {
             ) {
                 return badRequest();
             }
-            locationDao.update(location);
 
-            return noContent();
+            return ok(locationDao.update(location));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

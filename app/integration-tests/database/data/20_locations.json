@@ -1,0 +1,109 @@
+{
+  "SERVICES_ADMIN_DUTIES_TESTS": [
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "get-location-mock-location-client-id"
+          },
+          "sortKey": {
+            "S": "LOCATION-get-location-mock-location-id"
+          },
+          "name": {
+            "S": "Get Mock Location Name"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "get-all-location-mock-client-id"
+          },
+          "sortKey": {
+            "S": "LOCATION-get-all-location-mock-location-1-id"
+          },
+          "name": {
+            "S": "Get All Mock Location Name 1"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "get-all-location-mock-client-id"
+          },
+          "sortKey": {
+            "S": "LOCATION-get-all-location-mock-location-2-id"
+          },
+          "name": {
+            "S": "Get All Mock Location Name 2"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "delete-location-mock-client-id"
+          },
+          "sortKey": {
+            "S": "LOCATION-delete-location-mock-location-id"
+          },
+          "name": {
+            "S": "Delete Mock Location Name"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "update-location-mock-client-id"
+          },
+          "sortKey": {
+            "S": "LOCATION-update-location-mock-location-id"
+          },
+          "name": {
+            "S": "Update Mock Location Name"
+          },
+          "createdOn": {
+            "S": "2023-07-04T01:02:34"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-04T12:34:56"
+          }
+        }
+      }
+    }
+  ]
+}

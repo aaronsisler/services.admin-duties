@@ -34,7 +34,7 @@ public class ClientController {
         }
     }
 
-    @Post(value = "/")
+    @Post()
     public HttpResponse<?> post(@Valid @Body Client client) {
         try {
             return ok(clientDao.create(client));
@@ -43,7 +43,7 @@ public class ClientController {
         }
     }
 
-    @Put(value = "/")
+    @Put()
     public HttpResponse<?> put(@Valid @Body Client client) {
         try {
             if (StringValidator.isBlank(client.getClientId())
@@ -51,9 +51,8 @@ public class ClientController {
             ) {
                 return badRequest();
             }
-            clientDao.update(client);
 
-            return noContent();
+            return ok(clientDao.update(client));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

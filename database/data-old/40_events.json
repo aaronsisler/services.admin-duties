@@ -1,0 +1,508 @@
+{
+  "SERVICES_ADMIN_DUTIES_BETA": [
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#yoga-for-everybody"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Yoga for everybody"
+          },
+          "category": {
+            "S": "Yoga"
+          },
+          "description": {
+            "S": "Our Saturday class is suitable for all yoga levels and for all ages. Come move, stretch, balance, relax and have fun."
+          },
+          "dayOfWeek": {
+            "N": "6"
+          },
+          "startTime": {
+            "S": "08:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#ability-full-body-fitness-cardio-strength-class"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Ability full body fitness cardio strength class"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "This class is for people who want to have fun as they work out. Emphasis is on conditioning. Move to the rhythm of the music as you use dumbbells that are appropriate for your physical condition and drumsticks to add the beat of your conditioning."
+          },
+          "dayOfWeek": {
+            "N": "2"
+          },
+          "startTime": {
+            "S": "09:00:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#evening-flow-and-restore"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Evening flow and restore"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "These classes start with vinyasa flow and end with a relaxing restorative or stretching sequence. Great way to end your day!"
+          },
+          "dayOfWeek": {
+            "N": "1"
+          },
+          "startTime": {
+            "S": "19:00:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#mens-yoga"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Men's yoga"
+          },
+          "category": {
+            "S": "Yoga"
+          },
+          "description": {
+            "S": "Come create community. Work on your flexibility, balance within the comfort of your mens yoga class. great class for those starting out and who want to keep healthy during the winter months."
+          },
+          "dayOfWeek": {
+            "N": "4"
+          },
+          "startTime": {
+            "S": "10:00:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#chair-yoga"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Chair yoga"
+          },
+          "category": {
+            "S": "Yoga"
+          },
+          "description": {
+            "S": "Whether you are new to yoga or a seasoned yogi, Can touch your toes or barely reach them, this class is for you. Asanas are done in standing or in a chair. Balance and Breath work are incorporated with every class."
+          },
+          "dayOfWeek": {
+            "N": "1"
+          },
+          "startTime": {
+            "S": "10:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#foundational-yoga"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Foundational yoga"
+          },
+          "category": {
+            "S": "Yoga"
+          },
+          "description": {
+            "S": "Foundational yoga is a perfect class for those that want to slow down and experience yoga poses (asana) within their body. Connect with your breath and your body. Come away with a sense of peace. Feel centered throughout your day."
+          },
+          "dayOfWeek": {
+            "N": "3"
+          },
+          "startTime": {
+            "S": "09:00:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#yin-yoga"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Yin yoga"
+          },
+          "category": {
+            "S": "Yoga"
+          },
+          "description": {
+            "S": "Yin Yoga is a practice that is suitable for anyone who wants to go deeper into their stretch and soft tissue. Works on the meridian system to help balance out health and well being while going deeper into your own practice."
+          },
+          "dayOfWeek": {
+            "N": "2"
+          },
+          "startTime": {
+            "S": "17:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#vinyasa-for-everybody"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Vinyasa for everybody"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "Vinyasa is a class where you connect pose to pose through breath and movement. Allowing the natural heat of your body to rise. This allows the muscles to lengthen and strengthen, promotes detoxification, and increases your natural immunity."
+          },
+          "dayOfWeek": {
+            "N": "3"
+          },
+          "startTime": {
+            "S": "18:00:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#wellness-book-club"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Wellness book club"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "Gather with Body Kinect Community and discuss wellness. Books vary month to month. Recommend having book but not a necessity. Reach out to find out about our current read!"
+          },
+          "dayOfWeek": {
+            "N": "1"
+          },
+          "startTime": {
+            "S": "15:00:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#earlybird-flow"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": ""
+          },
+          "name": {
+            "S": "Earlybird Flow"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "Start your day off connecting to you. Inhale, Exhale let this moment be about you. Shrug off the body stiffness as you flow to your own rhythm. You will leave feeling energized and be ready for your day and week."
+          },
+          "dayOfWeek": {
+            "N": "5"
+          },
+          "startTime": {
+            "S": "07:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#fitness-friday"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#maci-keaton"
+          },
+          "name": {
+            "S": "Fitness Friday"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "This is a conditioning class, blends yoga, strength training with your own body weight, bands and or light weights. We will work on balance and functional training. All can be done from a chair as needed."
+          },
+          "dayOfWeek": {
+            "N": "5"
+          },
+          "startTime": {
+            "S": "10:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#mixedfit"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#guest-instructor"
+          },
+          "name": {
+            "S": "Mixedfit"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "Mixedfit is a people inspired fitness program that combines dance movements with body weight toning. Mixedfit is an exhilarating fun fitness program."
+          },
+          "dayOfWeek": {
+            "N": "5"
+          },
+          "startTime": {
+            "S": "10:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    }
+  ]
+}

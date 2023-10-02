@@ -1,0 +1,184 @@
+{
+  "SERVICES_ADMIN_DUTIES_BETA": [
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "WORKSHOP#restorative-journey-workshop"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#guest-instructor"
+          },
+          "name": {
+            "S": "Restorative Journey Workshop"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": ""
+          },
+          "workshopDate": {
+            "S": "2023-08-17"
+          },
+          "startTime": {
+            "S": "11:00:00"
+          },
+          "duration": {
+            "N": "90"
+          },
+          "cost": {
+            "N": "2000"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "WORKSHOP#restorative-journey-sound-yoga-workshop"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#guest-instructor"
+          },
+          "name": {
+            "S": "Restorative Journal Sound Yoga Workshop"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "This class is all about restoration of your body, mind and soul. You will be positioned in relaxing restorative poses as you sink into your suppurative space and breath. This class is all about you! Journal work and sound will be included for your enjoyment and to deepen your experience and connection with self."
+          },
+          "workshopDate": {
+            "S": "2023-09-28"
+          },
+          "startTime": {
+            "S": "11:00:00"
+          },
+          "duration": {
+            "N": "90"
+          },
+          "cost": {
+            "N": "2000"
+          },
+          "createdOn": {
+            "S": "2023-09-09T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-09-09T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "WORKSHOP#core-align-demo-20230913"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#tami-richards"
+          },
+          "name": {
+            "S": "Core Align Demo"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "Core Align is a whole body workout. Core Align uses movement to teach core and pelvic stability while you strengthen and lengthen deep fascial systems integrated in your body. It changes the way your body reads itself and creates symmetry and ease of movement. You need to try it to believe it!"
+          },
+          "workshopDate": {
+            "S": "2023-09-13"
+          },
+          "startTime": {
+            "S": "11:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "cost": {
+            "N": "2000"
+          },
+          "createdOn": {
+            "S": "2023-09-09T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-09-09T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "WORKSHOP#core-align-demo-20230914"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#tami-richards"
+          },
+          "name": {
+            "S": "Core Align Demo"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "Core Align is a whole body workout. Core Align uses movement to teach core and pelvic stability while you strengthen and lengthen deep fascial systems integrated in your body. It changes the way your body reads itself and creates symmetry and ease of movement. You need to try it to believe it!"
+          },
+          "workshopDate": {
+            "S": "2023-09-14"
+          },
+          "startTime": {
+            "S": "18:00:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "cost": {
+            "N": "2000"
+          },
+          "createdOn": {
+            "S": "2023-09-09T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-09-09T07:31:21"
+          }
+        }
+      }
+    }
+  ]
+}

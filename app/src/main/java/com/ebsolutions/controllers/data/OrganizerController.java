@@ -36,18 +36,18 @@ public class OrganizerController {
         }
     }
 
-    @Get(value = "/", produces = MediaType.APPLICATION_JSON)
+    @Get(produces = MediaType.APPLICATION_JSON)
     public HttpResponse<?> getAll(@NotBlank @PathVariable String clientId) {
         try {
             List<Organizer> organizers = organizerDao.readAll(clientId);
 
-            return organizers.size() > 0 ? ok(organizers) : noContent();
+            return !organizers.isEmpty() ? ok(organizers) : noContent();
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }
     }
 
-    @Post(value = "/")
+    @Post()
     public HttpResponse<?> post(@NotBlank @PathVariable String clientId, @Valid @Body Organizer organizer) {
         try {
             if (!clientId.matches(organizer.getClientId())) {
@@ -60,7 +60,7 @@ public class OrganizerController {
         }
     }
 
-    @Put(value = "/")
+    @Put()
     public HttpResponse<?> put(@NotBlank @PathVariable String clientId, @Valid @Body Organizer organizer) {
         try {
             if (!clientId.matches(organizer.getClientId())
@@ -69,9 +69,7 @@ public class OrganizerController {
             ) {
                 return badRequest();
             }
-            organizerDao.update(organizer);
-
-            return noContent();
+            return ok(organizerDao.update(organizer));
         } catch (DataProcessingException dbe) {
             return serverError(dbe);
         }

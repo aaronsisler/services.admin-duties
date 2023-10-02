@@ -44,6 +44,7 @@ public class OrchestrationService {
     public void createCsv(CsvRequest csvRequest) throws IOException {
 
         this.client = this.clientDao.read(csvRequest.getClientId());
+        log.info("Here");
         if (this.client == null) {
             log.error("ERROR::{}", this.getClass().getName());
             throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()));
