@@ -17,8 +17,8 @@ class DateAndTimeComparisonUtil {
         return testResult.until(LocalDateTime.now(), ChronoUnit.SECONDS) < 1
     }
 
-    static boolean areDatesEqual(String expectedDate, LocalDate testResult) {
-        return LocalDate.parse(expectedDate).until(testResult, ChronoUnit.DAYS) == 0
+    static boolean areDatesEqual(LocalDate expectedDate, LocalDate testResult) {
+        return expectedDate.until(testResult, ChronoUnit.DAYS) == 0
     }
 
     static boolean areTimesEqual(LocalTime expectedTime, LocalTime testResult) {
