@@ -1,0 +1,172 @@
+{
+  "SERVICES_ADMIN_DUTIES_BETA": [
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "ORGANIZER#tami-richards"
+          },
+          "name": {
+            "S": "Tami Richards"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "ORGANIZER#ryin-santana"
+          },
+          "name": {
+            "S": "Ryin Santana"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "ORGANIZER#hope-ashby"
+          },
+          "name": {
+            "S": "Hope Ashby"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "ORGANIZER#toni-midgett"
+          },
+          "name": {
+            "S": "Toni Midgett"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "ORGANIZER#terri-balog"
+          },
+          "name": {
+            "S": "Terri Balog"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "ORGANIZER#alyssa-archer"
+          },
+          "name": {
+            "S": "Alyssa Archer"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "ORGANIZER#maci-keaton"
+          },
+          "name": {
+            "S": "Maci Keaton"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "ORGANIZER#guest-instructor"
+          },
+          "name": {
+            "S": "Guest Instructor"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    }
+  ]
+}

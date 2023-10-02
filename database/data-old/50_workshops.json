@@ -179,48 +179,6 @@
           }
         }
       }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "partitionKey": {
-            "S": "body-kinect-wellness"
-          },
-          "sortKey": {
-            "S": "WORKSHOP#wellness-book-club"
-          },
-          "locationId": {
-            "S": "LOCATION#body-kinect-wellness-center"
-          },
-          "organizerId": {
-            "S": ""
-          },
-          "name": {
-            "S": "Wellness book club"
-          },
-          "category": {
-            "S": "Wellness Center"
-          },
-          "description": {
-            "S": "Gather with Body Kinect Community and discuss wellness. Books vary month to month. Recommend having book but not a necessity. Reach out to find out about our current read!"
-          },
-          "workshopDate": {
-            "S": "2023-10-09"
-          },
-          "startTime": {
-            "S": "16:00:00"
-          },
-          "duration": {
-            "N": "60"
-          },
-          "createdOn": {
-            "S": "2023-07-26T07:31:21"
-          },
-          "lastUpdatedOn": {
-            "S": "2023-07-26T07:31:21"
-          }
-        }
-      }
     }
   ]
 }

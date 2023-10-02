@@ -1,0 +1,25 @@
+{
+  "SERVICES_ADMIN_DUTIES_BETA": [
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "CLIENT"
+          },
+          "name": {
+            "S": "Body Kinect Wellness"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    }
+  ]
+}
