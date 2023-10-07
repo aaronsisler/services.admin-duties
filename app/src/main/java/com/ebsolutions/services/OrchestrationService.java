@@ -26,11 +26,11 @@ public class OrchestrationService {
     private final CsvDao csvDao;
     private final List<CalendarEvent> calendarEvents = new ArrayList<>();
     private Client client;
-    private Map<DayOfWeek, ArrayList<Event>> dayOfWeekEventListMap = new HashMap<>();
+    private final Map<DayOfWeek, ArrayList<Event>> dayOfWeekEventListMap = new HashMap<>();
     private List<Location> locations;
     private List<Organizer> organizers;
     private List<Event> events;
-    private MetricsStopWatch metricsStopWatch = new MetricsStopWatch(false);
+    private final MetricsStopWatch metricsStopWatch = new MetricsStopWatch(false);
 
     public OrchestrationService(ClientDao clientDao, OrganizerDao organizerDao, LocationDao locationDao, EventDao eventDao, CsvDao csvDao) {
         this.clientDao = clientDao;
@@ -44,7 +44,7 @@ public class OrchestrationService {
     public void createCsv(CsvRequest csvRequest) throws IOException {
 
         this.client = this.clientDao.read(csvRequest.getClientId());
-        log.info("Here");
+
         if (this.client == null) {
             log.error("ERROR::{}", this.getClass().getName());
             throw new CsvGenerationException(MessageFormat.format("Error in {0}", this.getClass().getName()));

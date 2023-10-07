@@ -24,7 +24,7 @@ public class CsvController {
         this.orchestrationService = orchestrationService;
     }
 
-    @Post(value = "/")
+    @Post()
     public HttpResponse<?> postCsv(@Valid @Body CsvRequest csvRequest) {
         try {
             if (!RequestValidator.isCsvRequestValid(csvRequest)) {
@@ -33,7 +33,6 @@ public class CsvController {
 
             String trackingId = UniqueIdGenerator.generate();
             csvRequest.setTrackingId(trackingId);
-
 
             this.orchestrationService.createCsv(csvRequest);
 

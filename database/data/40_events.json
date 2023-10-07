@@ -49,91 +49,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#ability-full-body-fitness-cardio-strength-class"
-          },
-          "locationId": {
-            "S": "LOCATION#body-kinect-wellness-center"
-          },
-          "organizerId": {
-            "S": ""
-          },
-          "name": {
-            "S": "Ability full body fitness cardio strength class"
-          },
-          "category": {
-            "S": "Wellness Center"
-          },
-          "description": {
-            "S": "This class is for people who want to have fun as they work out. Emphasis is on conditioning. Move to the rhythm of the music as you use dumbbells that are appropriate for your physical condition and drumsticks to add the beat of your conditioning."
-          },
-          "dayOfWeek": {
-            "N": "2"
-          },
-          "startTime": {
-            "S": "09:00:00"
-          },
-          "duration": {
-            "N": "60"
-          },
-          "createdOn": {
-            "S": "2023-07-26T07:31:21"
-          },
-          "lastUpdatedOn": {
-            "S": "2023-07-26T07:31:21"
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "partitionKey": {
-            "S": "body-kinect-wellness"
-          },
-          "sortKey": {
-            "S": "EVENT#ability-full-body-fitness-cardio-strength-class"
-          },
-          "locationId": {
-            "S": "LOCATION#body-kinect-wellness-center"
-          },
-          "organizerId": {
-            "S": ""
-          },
-          "name": {
-            "S": "Ability full body fitness cardio strength class"
-          },
-          "category": {
-            "S": "Wellness Center"
-          },
-          "description": {
-            "S": "This class is for people who want to have fun as they work out. Emphasis is on conditioning. Move to the rhythm of the music as you use dumbbells that are appropriate for your physical condition and drumsticks to add the beat of your conditioning."
-          },
-          "dayOfWeek": {
-            "N": "4"
-          },
-          "startTime": {
-            "S": "09:00:00"
-          },
-          "duration": {
-            "N": "60"
-          },
-          "createdOn": {
-            "S": "2023-07-26T07:31:21"
-          },
-          "lastUpdatedOn": {
-            "S": "2023-07-26T07:31:21"
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "partitionKey": {
-            "S": "body-kinect-wellness"
-          },
-          "sortKey": {
-            "S": "EVENT#chair-yoga"
+            "S": "EVENT#chair-yoga-day-of-week-1"
           },
           "locationId": {
             "S": "LOCATION#body-kinect-wellness-center"
@@ -175,7 +91,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#chair-yoga"
+            "S": "EVENT#chair-yoga-day-of-week-3"
           },
           "locationId": {
             "S": "LOCATION#body-kinect-wellness-center"
@@ -259,7 +175,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#vinyasa-for-everybody"
+            "S": "EVENT#vinyasa-for-everybody-day-of-week-1"
           },
           "locationId": {
             "S": "LOCATION#body-kinect-wellness-center"
@@ -301,7 +217,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#vinyasa-for-everybody"
+            "S": "EVENT#vinyasa-for-everybody-day-of-week-3"
           },
           "locationId": {
             "S": "LOCATION#body-kinect-wellness-center"
