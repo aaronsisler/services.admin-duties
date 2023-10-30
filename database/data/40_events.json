@@ -7,49 +7,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#yoga-for-everybody"
-          },
-          "locationId": {
-            "S": "LOCATION#body-kinect-wellness-center"
-          },
-          "organizerId": {
-            "S": ""
-          },
-          "name": {
-            "S": "Yoga for everybody"
-          },
-          "category": {
-            "S": "Yoga"
-          },
-          "description": {
-            "S": "Our Saturday class is suitable for all yoga levels and for all ages. Come move, stretch, balance, relax and have fun."
-          },
-          "dayOfWeek": {
-            "N": "6"
-          },
-          "startTime": {
-            "S": "08:30:00"
-          },
-          "duration": {
-            "N": "60"
-          },
-          "createdOn": {
-            "S": "2023-07-26T07:31:21"
-          },
-          "lastUpdatedOn": {
-            "S": "2023-07-26T07:31:21"
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "partitionKey": {
-            "S": "body-kinect-wellness"
-          },
-          "sortKey": {
-            "S": "EVENT#chair-yoga-day-of-week-1"
+            "S": "EVENT#chair-yoga-1"
           },
           "locationId": {
             "S": "LOCATION#body-kinect-wellness-center"
@@ -91,7 +49,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#chair-yoga-day-of-week-3"
+            "S": "EVENT#vinyasa-for-everybody"
           },
           "locationId": {
             "S": "LOCATION#body-kinect-wellness-center"
@@ -100,19 +58,61 @@
             "S": ""
           },
           "name": {
-            "S": "Chair yoga"
+            "S": "Vinyasa for everybody"
           },
           "category": {
-            "S": "Yoga"
+            "S": "Wellness Center"
           },
           "description": {
-            "S": "Whether you are new to yoga or a seasoned yogi, Can touch your toes or barely reach them, this class is for you. Asanas are done in standing or in a chair. Balance and Breath work are incorporated with every class."
+            "S": "Vinyasa is a class where you connect pose to pose through breath and movement. Allowing the natural heat of your body to rise. This allows the muscles to lengthen and strengthen, promotes detoxification, and increases your natural immunity."
           },
           "dayOfWeek": {
-            "N": "3"
+            "N": "1"
           },
           "startTime": {
-            "S": "10:30:00"
+            "S": "17:30:00"
+          },
+          "duration": {
+            "N": "60"
+          },
+          "createdOn": {
+            "S": "2023-07-26T07:31:21"
+          },
+          "lastUpdatedOn": {
+            "S": "2023-07-26T07:31:21"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "partitionKey": {
+            "S": "body-kinect-wellness"
+          },
+          "sortKey": {
+            "S": "EVENT#mixedfit"
+          },
+          "locationId": {
+            "S": "LOCATION#body-kinect-wellness-center"
+          },
+          "organizerId": {
+            "S": "ORGANIZER#guest-instructor"
+          },
+          "name": {
+            "S": "Mixedfit"
+          },
+          "category": {
+            "S": "Wellness Center"
+          },
+          "description": {
+            "S": "Mixedfit is a people inspired fitness program that combines dance movements with body weight toning. Mixedfit is an exhilarating fun fitness program."
+          },
+          "dayOfWeek": {
+            "N": "2"
+          },
+          "startTime": {
+            "S": "18:00:00"
           },
           "duration": {
             "N": "60"
@@ -175,7 +175,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#vinyasa-for-everybody-day-of-week-1"
+            "S": "EVENT#chair-yoga-2"
           },
           "locationId": {
             "S": "LOCATION#body-kinect-wellness-center"
@@ -184,19 +184,19 @@
             "S": ""
           },
           "name": {
-            "S": "Vinyasa for everybody"
+            "S": "Chair yoga"
           },
           "category": {
-            "S": "Wellness Center"
+            "S": "Yoga"
           },
           "description": {
-            "S": "Vinyasa is a class where you connect pose to pose through breath and movement. Allowing the natural heat of your body to rise. This allows the muscles to lengthen and strengthen, promotes detoxification, and increases your natural immunity."
+            "S": "Whether you are new to yoga or a seasoned yogi, Can touch your toes or barely reach them, this class is for you. Asanas are done in standing or in a chair. Balance and Breath work are incorporated with every class."
           },
           "dayOfWeek": {
-            "N": "1"
+            "N": "3"
           },
           "startTime": {
-            "S": "17:30:00"
+            "S": "10:30:00"
           },
           "duration": {
             "N": "60"
@@ -217,7 +217,7 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#vinyasa-for-everybody-day-of-week-3"
+            "S": "EVENT#yin-yoga"
           },
           "locationId": {
             "S": "LOCATION#body-kinect-wellness-center"
@@ -226,61 +226,19 @@
             "S": ""
           },
           "name": {
-            "S": "Vinyasa for everybody"
+            "S": "Yin yoga"
           },
           "category": {
-            "S": "Wellness Center"
+            "S": "Yoga"
           },
           "description": {
-            "S": "Vinyasa is a class where you connect pose to pose through breath and movement. Allowing the natural heat of your body to rise. This allows the muscles to lengthen and strengthen, promotes detoxification, and increases your natural immunity."
+            "S": "Yin Yoga is a practice that is suitable for anyone who wants to go deeper into their stretch and soft tissue. Works on the meridian system to help balance out health and well being while going deeper into your own practice."
           },
           "dayOfWeek": {
             "N": "3"
           },
           "startTime": {
             "S": "18:00:00"
-          },
-          "duration": {
-            "N": "60"
-          },
-          "createdOn": {
-            "S": "2023-07-26T07:31:21"
-          },
-          "lastUpdatedOn": {
-            "S": "2023-07-26T07:31:21"
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "partitionKey": {
-            "S": "body-kinect-wellness"
-          },
-          "sortKey": {
-            "S": "EVENT#earlybird-flow"
-          },
-          "locationId": {
-            "S": "LOCATION#body-kinect-wellness-center"
-          },
-          "organizerId": {
-            "S": ""
-          },
-          "name": {
-            "S": "Earlybird Flow"
-          },
-          "category": {
-            "S": "Wellness Center"
-          },
-          "description": {
-            "S": "Start your day off connecting to you. Inhale, Exhale let this moment be about you. Shrug off the body stiffness as you flow to your own rhythm. You will leave feeling energized and be ready for your day and week."
-          },
-          "dayOfWeek": {
-            "N": "1"
-          },
-          "startTime": {
-            "S": "08:00:00"
           },
           "duration": {
             "N": "60"
@@ -343,28 +301,28 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#mixedfit"
+            "S": "EVENT#yoga-for-everybody"
           },
           "locationId": {
             "S": "LOCATION#body-kinect-wellness-center"
           },
           "organizerId": {
-            "S": "ORGANIZER#guest-instructor"
+            "S": ""
           },
           "name": {
-            "S": "Mixedfit"
+            "S": "Yoga for everybody"
           },
           "category": {
-            "S": "Wellness Center"
+            "S": "Yoga"
           },
           "description": {
-            "S": "Mixedfit is a people inspired fitness program that combines dance movements with body weight toning. Mixedfit is an exhilarating fun fitness program."
+            "S": "Our Saturday class is suitable for all yoga levels and for all ages. Come move, stretch, balance, relax and have fun."
           },
           "dayOfWeek": {
-            "N": "2"
+            "N": "6"
           },
           "startTime": {
-            "S": "18:00:00"
+            "S": "08:30:00"
           },
           "duration": {
             "N": "60"
