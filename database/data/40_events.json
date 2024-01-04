@@ -91,48 +91,6 @@
             "S": "body-kinect-wellness"
           },
           "sortKey": {
-            "S": "EVENT#mixedfit"
-          },
-          "locationId": {
-            "S": "LOCATION#body-kinect-wellness-center"
-          },
-          "organizerId": {
-            "S": "ORGANIZER#guest-instructor"
-          },
-          "name": {
-            "S": "Mixedfit"
-          },
-          "category": {
-            "S": "Wellness Center"
-          },
-          "description": {
-            "S": "Mixedfit is a people inspired fitness program that combines dance movements with body weight toning. Mixedfit is an exhilarating fun fitness program."
-          },
-          "dayOfWeek": {
-            "N": "2"
-          },
-          "startTime": {
-            "S": "18:00:00"
-          },
-          "duration": {
-            "N": "60"
-          },
-          "createdOn": {
-            "S": "2023-07-26T07:31:21"
-          },
-          "lastUpdatedOn": {
-            "S": "2023-07-26T07:31:21"
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "partitionKey": {
-            "S": "body-kinect-wellness"
-          },
-          "sortKey": {
             "S": "EVENT#foundational-yoga"
           },
           "locationId": {
@@ -238,49 +196,7 @@
             "N": "3"
           },
           "startTime": {
-            "S": "18:00:00"
-          },
-          "duration": {
-            "N": "60"
-          },
-          "createdOn": {
-            "S": "2023-07-26T07:31:21"
-          },
-          "lastUpdatedOn": {
-            "S": "2023-07-26T07:31:21"
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "partitionKey": {
-            "S": "body-kinect-wellness"
-          },
-          "sortKey": {
-            "S": "EVENT#fitness-friday"
-          },
-          "locationId": {
-            "S": "LOCATION#body-kinect-wellness-center"
-          },
-          "organizerId": {
-            "S": "ORGANIZER#maci-keaton"
-          },
-          "name": {
-            "S": "Fitness Friday"
-          },
-          "category": {
-            "S": "Wellness Center"
-          },
-          "description": {
-            "S": "This is a conditioning class, blends yoga, strength training with your own body weight, bands and or light weights. We will work on balance and functional training. All can be done from a chair as needed."
-          },
-          "dayOfWeek": {
-            "N": "5"
-          },
-          "startTime": {
-            "S": "10:30:00"
+            "S": "18:15:00"
           },
           "duration": {
             "N": "60"
